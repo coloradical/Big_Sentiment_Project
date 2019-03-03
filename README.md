@@ -5,13 +5,13 @@ Story board: https://www.pivotaltracker.com/n/projects/2313877
 
 Team Members:
 
-  ♥‿♥       Kamal Chaturvedi
+            ♥‿♥       Kamal Chaturvedi
 
-  \ (•◡•) / Megan Byers
+            \ (•◡•) / Megan Byers
 
-  ¯\(°_o)/¯ Michael Chifala
+            ¯\(°_o)/¯ Michael Chifala
 
-  ಠ~ಠ       Nishank Sharma
+            ಠ~ಠ       Nishank Sharma
 
-  (▀̿Ĺ̯▀̿ ̿)    Yash Sapra
+            (▀̿Ĺ̯▀̿ ̿)    Yash Sapra
 
