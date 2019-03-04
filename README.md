@@ -11,7 +11,7 @@ Team Members:
 
             ¯\(°_o)/¯ Michael Chifala
 
-            ಠ~ಠ       Nishank Sharma
+            ＼(^-^)／  Nishank Sharma
 
             (▀̿Ĺ̯▀̿ ̿)    Yash Sapra
 
