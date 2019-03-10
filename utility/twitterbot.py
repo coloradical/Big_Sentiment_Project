@@ -10,7 +10,7 @@ import pprint
 import publisher
 from datetime import datetime
 
-PUBLISH_TO_PUBSUB = False
+PUBLISH_TO_PUBSUB = True
 
 def encrypt(key, plaintext):
   cipher = XOR.new(key)
@@ -68,10 +68,10 @@ def getcities():
 
 def gettrends(loc):
     tags=[]
-    n=0
+    n=1
     print("Using API Creds:"+str(n))
     auth = getauth(n)
-    for i in range(len(loc)):
+    for i in range(5):
         url = "https://api.twitter.com/1.1/trends/place.json?id="+str(loc[i])
         r = requests.get(url, auth=auth)
         if((i+1)%75==0):
@@ -89,25 +89,27 @@ def gettrends(loc):
 
 
     print("Waiting for 15 mins")
-    time.sleep(900)
+    # time.sleep(900)
     stags = set(tags)
     tags = list(stags)
     return tags
 
 def gettweets(tags):
 
-    n=0
+    n=1
     print("Using API Creds:"+str(n))
     auth = getauth(n)
 
     for i in range(len(tags)):
-
-        field ={}
+        print('i:',i)
         q= tags[i].replace('#','')
 
-        url="https://api.twitter.com/1.1/search/tweets.json?q="+q+"&result_type=popular&lang=en"
+        url="https://api.twitter.com/1.1/search/tweets.json?q="+q+"&lang=en"
         r = requests.get(url, auth=auth)
-        print("r:",r)
+        code = int(r.status_code)
+
+        print('r:',r)
+
         if((i+1)%75==0):
             if(n<6):
                 n+=1
@@ -119,22 +121,27 @@ def gettweets(tags):
                 auth = getauth(0)
                 n=0
 
-        response = r.json()['statuses']
-        print("Got"+str(len(response))+" tweets for hashtag: "+ q)
-        ntweets = 0
-        for j in range(len(response)):
+        if(code>=200 and code<=299):
+            response = r.json()['statuses']
+            print("Got"+str(len(response))+" tweets for hashtag: "+ q)
+            ntweets = 0
+            for j in range(len(response)):
+                field ={}
+                field['city']= response[j]['user']['location']
+                dt = datetime.strptime(response[j]['created_at'],'%a %b %d %X %z %Y')
+                field['date']= dt.strftime('%Y-%M-%dT%-H:%m:%s')
+                field['tweet']= response[j]['text']
+                field['hashtag']= q
+                field['t_id']= "t_".join(str(response[j]['id']))
+                field['source']= 'twitter'
 
-            field['city']= response[j]['user']['location']
-            dt = datetime.strptime(response[j]['created_at'],'%a %b %d %X %z %Y')
-            field['date']= dt.strftime('%Y-%M-%dT%-H:%m:%s')
-            field['tweet']= response[j]['text']
-            field['hashtag']= q
-            field['t_id']= "t_".join(str(response[j]['id']))
-            field['source']= 'twitter'
-
-            requests.post('http://34.73.60.209:9200/hi_yash/_doc/',  json = str(field))
-            ntweets+=1
-        print("Posted"+str(ntweets)+" to kibana")
+                re = requests.post('http://34.73.60.209:9200/hi_yash/_doc/',  json = field)
+                # print("response code:",re)
+                ntweets+=1
+                print("Posted"+str(ntweets)+" to elastic search")
+        else:
+            print("response:",r.text)
+            print("response code:",r.status_code)
 
 def main():
     print("Getting Cities")
@@ -142,10 +149,11 @@ def main():
     print("Got "+str(len(locations))+" cities")
     print("Getting Hashtags")
     tags = gettrends(locations)
+    tagsexport = {'trends':tags}
     print("Got "+str(len(tags))+" hashtags")
     print("Getting Hashtags")
     if PUBLISH_TO_PUBSUB:
-        publisher.publish_message_to_pubsub_topic(tags)
+        publisher.publish_message_to_pubsub_topic(tagsexport)
 
     print("Getting tweets")
     gettweets(tags)
