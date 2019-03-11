@@ -83,7 +83,7 @@ export class HomePage extends React.PureComponent {
             </CenteredSection>
           </div>
           <TopicInfo topicInfo={this.props.topicInfo}/>
-          <CustomVisuals topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type']: []}/>
+          <CustomVisuals topicName={this.props.topicInfo['name']?this.props.topicInfo['name']:''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type']: []}/>
         </div>
       </article>
     );

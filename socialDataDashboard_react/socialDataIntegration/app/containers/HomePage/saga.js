@@ -10,10 +10,10 @@ import request from 'utils/request';
 import { makeSelectTopic } from './selectors';
 
 /**
- * Github repos request/response handler
+ * Google EmotionAPI request/response handler
  */
 export function* getRepos() {
-  // Select username from store
+  // Select topic
   const username = yield select(makeSelectTopic());
   console.log(username);
   const requestURL = `https://kgsearch.googleapis.com/v1/entities:search?query=${username}&key=AIzaSyBmPgLJOQ3MmR0HWS8XbbNndlU_PooeAF8&limit=1&indent=True`;
@@ -30,7 +30,7 @@ export function* getRepos() {
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* githubData() {
+export default function* homePageSaga() {
   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution

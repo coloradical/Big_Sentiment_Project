@@ -11,6 +11,6 @@ export const scope = 'app.containers.EventDashboard';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'This is the EventDashboard container!',
+    defaultMessage: 'Dashboard for Event',
   },
 });
