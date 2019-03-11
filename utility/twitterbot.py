@@ -72,7 +72,7 @@ def gettrends(loc):
     n=0
     print("Using API Creds:"+str(n))
     auth = getauth(n)
-    for i in range(5):
+    for i in range(len(loc)):
         url = "https://api.twitter.com/1.1/trends/place.json?id="+str(loc[i])
         r = requests.get(url, auth=auth)
         if((i+1)%75==0):
@@ -88,11 +88,19 @@ def gettrends(loc):
         for j in range(len(r.json()[0]['trends'])):
             tags.append(r.json()[0]['trends'][j]['name'])
 
+    stags = set(tags)
+    tags = list(stags)
+    
+    #converting tags to a dictonary to send to redditbot
+    tagsexport = {'trends':tags}
+    print("Got "+str(len(tags))+" hashtags")
+    print("Pushing Hashtags to redditbot")
+    if PUBLISH_TO_PUBSUB:
+        publisher.publish_message_to_pubsub_topic(tagsexport)
 
     print("Waiting for 15 mins")
     time.sleep(900)
-    stags = set(tags)
-    tags = list(stags)
+
     return tags
 
 
@@ -131,15 +139,13 @@ def gettweets(tags):
                 field ={}
                 field['city']= response[j]['user']['location']
                 dt = datetime.strptime(response[j]['created_at'],'%a %b %d %X %z %Y')
-                # field['post_date']= datetime.isoformat(dt)
-                field['post_date']= datetime.isoformat(datetime.utcnow())
-                # print(field['post_date'])
+                field['post_date']= datetime.isoformat(dt)
                 field['title']= response[j]['text']
                 field['hashtag']= q
                 field['source']= 'twitter'
                 field['author']= response[j]['user']['screen_name']
                 field['upvotes'] = response[j]['retweet_count']
-                #  = response[j]['quoted_status']['entities']['media']['media_url']
+
                 try:
                     field['media_url']= response[j]['entities']['media'][0]['media_url']
                 except Exception as e:
@@ -147,9 +153,6 @@ def gettweets(tags):
                     pass
 
                 id = "t_"+ str(response[j]['id'])
-
-
-                # print("json sent to elastic:",field)
 
                 re=requests.post('http://34.73.60.209:9200/hi_yash2/_doc/'+id,  json = field)
                 ntweets+=1
@@ -167,13 +170,6 @@ def main():
 
     print("Getting Hashtags")
     tags = gettrends(locations)
-
-    #converting tags to a dictonary to send to redditbot
-    tagsexport = {'trends':tags}
-    print("Got "+str(len(tags))+" hashtags")
-    print("Posting Hashtags to pubsub")
-    if PUBLISH_TO_PUBSUB:
-        publisher.publish_message_to_pubsub_topic(tagsexport)
 
     print("Getting tweets")
     gettweets(tags)
