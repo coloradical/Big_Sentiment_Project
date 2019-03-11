@@ -32,11 +32,11 @@ export class PlaceDashboard extends React.PureComponent {
         </Helmet>
         <div className="row">
           <div className="col">
-            <H1>Plotting basic Pie chart</H1>
+            <H1>Dashboard for Place</H1>
           </div>
-          <div className="col">
+          {/* <div className="col">
           <PieChart/>
-          </div>
+          </div> */}
         </div>
       </div>
     );
