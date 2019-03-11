@@ -9,6 +9,7 @@ import { DEFAULT_ACTION } from './constants';
 
 export const initialState = fromJS({
   topicType: '',
+  topicName: '',
 });
 
 function customVisualsReducer(state = initialState, action) {

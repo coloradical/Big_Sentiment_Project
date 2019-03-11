@@ -34,7 +34,7 @@ export class CustomVisuals extends React.PureComponent {
         } else if(typeArray[i] == PLACE){
           return <PlaceDashboard />;
         } else if(typeArray[i] == PERSON){
-          return <PersonDashboard />;
+          return <PersonDashboard name={this.props.topicName}/>;
         }
       }
     }
@@ -53,6 +53,7 @@ export class CustomVisuals extends React.PureComponent {
 
 CustomVisuals.propTypes = {
   topicType: PropTypes.array,
+  topicName: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
