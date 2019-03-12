@@ -12,6 +12,7 @@ from datetime import datetime
 
 PUBLISH_TO_PUBSUB = True
 key = sys.argv[1]
+ES_INDEX='trending'
 
 def encrypt(key, plaintext):
   cipher = XOR.new(key)
@@ -74,6 +75,7 @@ def gettrends(loc):
     auth = getauth(n)
     for i in range(len(loc)):
         url = "https://api.twitter.com/1.1/trends/place.json?id="+str(loc[i])
+        print("Trying: " + url)
         r = requests.get(url, auth=auth)
         if((i+1)%75==0):
             if(n<6):
@@ -87,7 +89,7 @@ def gettrends(loc):
                 n=0
         for j in range(len(r.json()[0]['trends'])):
             tags.append(r.json()[0]['trends'][j]['name'])
-
+        print("Received {} responses for location: {}".format(len(r.json()[0]['trends']), loc[i]))
     stags = set(tags)
     tags = list(stags)
     
@@ -149,13 +151,15 @@ def gettweets(tags):
                 try:
                     field['media_url']= response[j]['entities']['media'][0]['media_url']
                 except Exception as e:
-                    field['media_url']=''
                     pass
 
                 id = "t_"+ str(response[j]['id'])
 
-                re=requests.post('http://34.73.60.209:9200/hi_yash2/_doc/'+id,  json = field)
-                ntweets+=1
+                re=requests.post('http://34.73.60.209:9200/' + ES_INDEX + '/_doc/'+id,  json = field)
+                if(re.status_code >= 200 and re.status_code <= 299):
+                    print("Error posting to Elastic search: "+ re.text)
+                else:
+                    ntweets+=1
             print("Posted "+str(ntweets)+" to elastic search")
 
         else:  #error
@@ -164,6 +168,7 @@ def gettweets(tags):
             print("response code:",r.status_code)
 
 def main():
+    print("Statrting Service at: " + str(datetime.now()))
     print("Getting Cities")
     locations = getcities()
     print("Got "+str(len(locations))+" cities")
