@@ -39,10 +39,10 @@ def getauth(n):
         auth
     except NameError:
         #Twitter API Creds
-        API_KEY = [b'HVkjFCYvLlM3Fjo5USo/HwAxIikgBQA2IQ==',b'BCEtMxoLMzkDAAYpKhojT0MwUAARDyNWIA==',b'DVwcFw4TLCMPETojKw4gTgMnCgMvKBYgAg==',b'OzpWEQwdNwccACEcKg4EFAANKlA6UDUyCg==',b'HBEyMT9WLBY/MgErUwsWACQjMVIGMxIkWA==',b'HQARIQUCMS0gC0JeLzcfSzk5Mg8lLBUGHA==', b'LAlXC1gqJiACKiQgMC4hMhEwFVsqExY4DA==']
-        API_SECRET= [b'LgYrDzgmKhkrMwItHD0rKUAcFAkvKAc1WiEjWjQgMR1NUBEvMzIpDywxRDkiATctARk=',b'AlgUVxsGFTIKNBYQHShETyImUFNQIxIYIwQYIDc6Rz0+LS0DUVE0IDojLBspIiABFzw=',b'Hl8JUBoXF1kPFEISMj8TSxU+EQYjKggoXyE2CwsLFjwcUQglDDADO1k0QQRQAzsINxw=',b'JSAJIC4ENyYHJRoxVRYqIDoOAylZNAYXFyUeJVQ1ATg8AxEOLiAwMRZfQx8SAyccQg4=',b'HQISJysuBSQ7Ch8lPTciIQ4BDyA+LQ5YCg0bIQYDPQ02PAEzAygaNxleMDwRBEQvLAQ=',b'OytUGzAmUAg/DkM4IQMqPABQFiwxMDI4Gh8AWAsLHws5BlFTLBU1NRYfIVsJGiM8PBA=',b'BAEpIV5WElc8LAYSVgEqNyFeNFIeDFIqKS0SDDBfNRMDIAw4LgBXLSwPAFoiHEVPGTg=']
-        ACCESS_TOKEN = [b'Q1xWVlhQW1NWXkZeU1lETkFbSBpfPyBZIikSHxQGCjwkPxwlBiQ3FQQKOyU8HDETITI=',b'Q1xWVlhQW1NWXkZeU1lETkFbSAkfAFQpKwMmHTEJMCM6XxAlJ1YWKD0xAjIBHjo2LQQ=',b'Q1xWVlhQW1NWXkZeU1lETkFbSCc6AzYDGT0eWi4LRx8iIiMuJVU3WQ00QwkHCjs4Pik=',b'Q1xWVlhQW1NWXkZeU1lETkFbSFo9IAY1PAEZBzc1OhMSJT1TWFFaGwQCIy4UCCI8Bhw=',b'Q1xWVlhQW1NWXkZeU1lETkFbSC0RMQ9ZPS1BXxccPghFCzYwDzcoWChVEhkvKzY7TSE=',b'Q1xWVlhQW1NWXkZeU1lETkFbSDgONQ83XAUCDQ4iCx0jWSYBCh1VJAcLQgpcLSchFSY=',b'Q1xWVlhQW1NWXkZeU1lETkFbSFMKNlsSIhc2LwBYKjoYCyIJOzUTIA9XMCpSKhcqOBs=']
-        ACCESS_TOKEN_SECRET = [b'PxgSMScJKzc9JTtaPV8KMDY8BCMTUipUOFctJFAWBD0CWDRVAwoIKT9TOToX',b'RwdUFS40OwgbKjolIDY+KUYwCBsqADMrXx0sB1I6NUo+OzYlAColUyM/QxkH',b'BVw/KgElFVA7NhUcDQNBEBknCDQLLzBQBi8XC1YCERsbLlQQXRUtBDwiQxIL',b'GiYXBl4AFwsfPRxeUiE8Szw6PVsRKTMVXxMxOVA5FjtHIhEEGw0NLgICHw0S',b'LQUpE19WDCkADzUGKRoDIy1aUikzECcMFgIYHwsrQCo9XBwOHlASBxpQGxot',b'BRwqKhApJwIFDhggBFsTDTAeBiwDLggQIikNEFM6N08OPCkNCBYxIzwAQy0z',b'LRInCzgSUShcEhc5FDxEHUElKgkeUxQNPwo9KlRaJEAlABAMD1AHUDY9HA0X']
+        API_KEY = [b'HVkjFCYvLlM3Fjo5USo/HwAxIikgBQA2IQ==',b'BCEtMxoLMzkDAAYpKhojT0MwUAARDyNWIA==',b'DVwcFw4TLCMPETojKw4gTgMnCgMvKBYgAg==',b'OzpWEQwdNwccACEcKg4EFAANKlA6UDUyCg==',b'HBEyMT9WLBY/MgErUwsWACQjMVIGMxIkWA==',b'HQARIQUCMS0gC0JeLzcfSzk5Mg8lLBUGHA==', b'LAlXC1gqJiACKiQgMC4hMhEwFVsqExY4DA==',b'Rx4PKTtRBgglV0cJLScTEzcJHSArJDZVJw==']
+        API_SECRET= [b'LgYrDzgmKhkrMwItHD0rKUAcFAkvKAc1WiEjWjQgMR1NUBEvMzIpDywxRDkiATctARk=',b'AlgUVxsGFTIKNBYQHShETyImUFNQIxIYIwQYIDc6Rz0+LS0DUVE0IDojLBspIiABFzw=',b'Hl8JUBoXF1kPFEISMj8TSxU+EQYjKggoXyE2CwsLFjwcUQglDDADO1k0QQRQAzsINxw=',b'JSAJIC4ENyYHJRoxVRYqIDoOAylZNAYXFyUeJVQ1ATg8AxEOLiAwMRZfQx8SAyccQg4=',b'HQISJysuBSQ7Ch8lPTciIQ4BDyA+LQ5YCg0bIQYDPQ02PAEzAygaNxleMDwRBEQvLAQ=',b'OytUGzAmUAg/DkM4IQMqPABQFiwxMDI4Gh8AWAsLHws5BlFTLBU1NRYfIVsJGiM8PBA=',b'BAEpIV5WElc8LAYSVgEqNyFeNFIeDFIqKS0SDDBfNRMDIAw4LgBXLSwPAFoiHEVPGTg=',b'Ol80DgoKUS48AxcDCys0KTcyNwkYFCgzWSFGIwNZFUhCEDcDDiY6FRggGg8XLTEuOzw=']
+        ACCESS_TOKEN = [b'Q1xWVlhQW1NWXkZeU1lETkFbSBpfPyBZIikSHxQGCjwkPxwlBiQ3FQQKOyU8HDETITI=',b'Q1xWVlhQW1NWXkZeU1lETkFbSAkfAFQpKwMmHTEJMCM6XxAlJ1YWKD0xAjIBHjo2LQQ=',b'Q1xWVlhQW1NWXkZeU1lETkFbSCc6AzYDGT0eWi4LRx8iIiMuJVU3WQ00QwkHCjs4Pik=',b'Q1xWVlhQW1NWXkZeU1lETkFbSFo9IAY1PAEZBzc1OhMSJT1TWFFaGwQCIy4UCCI8Bhw=',b'Q1xWVlhQW1NWXkZeU1lETkFbSC0RMQ9ZPS1BXxccPghFCzYwDzcoWChVEhkvKzY7TSE=',b'Q1xWVlhQW1NWXkZeU1lETkFbSDgONQ83XAUCDQ4iCx0jWSYBCh1VJAcLQgpcLSchFSY=',b'Q1xWVlhQW1NWXkZeU1lETkFbSFMKNlsSIhc2LwBYKjoYCyIJOzUTIA9XMCpSKhcqOBs=',b'Q1xWVlhQW1NWXkZeU1lETkFbSAEzVDANHzczAQ4pIAw5Ow81HzUpIyggGCApOB0wLho=']
+        ACCESS_TOKEN_SECRET = [b'PxgSMScJKzc9JTtaPV8KMDY8BCMTUipUOFctJFAWBD0CWDRVAwoIKT9TOToX',b'RwdUFS40OwgbKjolIDY+KUYwCBsqADMrXx0sB1I6NUo+OzYlAColUyM/QxkH',b'BVw/KgElFVA7NhUcDQNBEBknCDQLLzBQBi8XC1YCERsbLlQQXRUtBDwiQxIL',b'GiYXBl4AFwsfPRxeUiE8Szw6PVsRKTMVXxMxOVA5FjtHIhEEGw0NLgICHw0S',b'LQUpE19WDCkADzUGKRoDIy1aUikzECcMFgIYHwsrQCo9XBwOHlASBxpQGxot',b'BRwqKhApJwIFDhggBFsTDTAeBiwDLggQIikNEFM6N08OPCkNCBYxIzwAQy0z',b'LRInCzgSUShcEhc5FDxEHUElKgkeUxQNPwo9KlRaJEAlABAMD1AHUDY9HA0X',b'AD1SJlk1ElE/MANfCAMcIBkiVidZXzcyJFENHCoqFhcWOwgUHVJSJxcUQls2']
 
         decAPI_KEY = decodekeys(key,API_KEY)
         decAPI_SECRET = decodekeys(key,API_SECRET)
@@ -58,12 +58,24 @@ def getauth(n):
 
 def getcities():
     url = "https://api.twitter.com/1.1/trends/available.json"
-    auth = getauth(0)
-    r = requests.get(url, auth=auth)
-    #Getting Cities
-    locations = []
-    for i in range(len(r.json())):
-        locations.append(r.json()[i]['woeid'])
+    auth = getauth(7)
+    try:
+        r = requests.get(url, auth=auth, timeout=120)
+    except:
+        print('Error in request: '+ url)
+        print('Exiting')
+
+    code = int(r.status_code)
+    if(code>=200 and code<=299):
+        #Getting Cities
+        locations = []
+        for i in range(len(r.json())):
+            locations.append(r.json()[i]['woeid'])
+
+    else:  #error
+        print("error in getting gettweets")
+        print("response:",r.text)
+        print("response code:",r.status_code)
 
     return locations
 
@@ -75,8 +87,17 @@ def gettrends(loc):
     auth = getauth(n)
     for i in range(len(loc)):
         url = "https://api.twitter.com/1.1/trends/place.json?id="+str(loc[i])
+
         print("Trying: " + url)
-        r = requests.get(url, auth=auth)
+        try:
+            r = requests.get(url, auth=auth, timeout=120)
+        except:
+            if r.status_code:
+                print ("HTTP {} Error with request {}".format(r.status_code, url))
+            else:
+                print ("Timeout Error with request {}".format(url))
+                pass
+
         if((i+1)%75==0):
             if(n<6):
                 n+=1
@@ -89,14 +110,13 @@ def gettrends(loc):
                 n=0
         for j in range(len(r.json()[0]['trends'])):
             tags.append(r.json()[0]['trends'][j]['name'])
-        print("Received {} responses for location: {}".format(len(r.json()[0]['trends']), loc[i]))
-    stags = set(tags)
-    tags = list(stags)
-    
+    print("Received {} responses for location: {}".format(len(r.json()[0]['trends']), loc[i]))
+    tags = list(set(tags))
+
     #converting tags to a dictonary to send to redditbot
     tagsexport = {'trends':tags}
-    print("Got "+str(len(tags))+" hashtags")
-    print("Pushing Hashtags to redditbot")
+    print("Got {} hashtags".format(str(len(tags))))
+    print("Pushing {} hashtags to redditbot".format(len(tags)))
     if PUBLISH_TO_PUBSUB:
         publisher.publish_message_to_pubsub_topic(tagsexport)
 
@@ -117,7 +137,16 @@ def gettweets(tags):
         q= tags[i].replace('#','')
 
         url="https://api.twitter.com/1.1/search/tweets.json?q="+q+"&lang=en"
-        r = requests.get(url, auth=auth)
+
+        try:
+            r = requests.get(url, auth=auth, timeout=120)
+        except:
+            if r.status_code:
+                print ("HTTP {} Error with request {}".format(r.status_code, url))
+            else:
+                print ("Timeout Error with request {}".format(url))
+                pass
+
         code = int(r.status_code)
 
 
