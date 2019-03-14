@@ -4,6 +4,8 @@ DockerHub Production Image : https://hub.docker.com/r/kamal15leo/socialdatadashb
 
 Important Commands 
 
+>   Do ensure that you install the latest version of Node, before running npm commands
+    https://nodejs.org/en/download/
 >   npm install
 
 Installs all required dependencies from package.json to be usable by our code base
