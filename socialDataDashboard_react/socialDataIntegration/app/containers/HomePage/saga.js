@@ -30,11 +30,7 @@ export function* getTwitterData() {
   // Select topic
   const query = yield select(makeSelectTopic());
   let requestHeader = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true',
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Methods': 'GET, POST',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     'Authorization': 'OAuth oauth_consumer_key="3vjKR6diK03aHHajCaxBBCT4I",oauth_token="743417928926666753-cZ3RlqPGikFRuMSjWvRKBFGlHLWoIZr",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1552762656",oauth_nonce="vh99menFTRO",oauth_version="1.0",oauth_signature="AOUSzVOLaj%2F7lTFRMr3cq%2FvG%2FFs%3D"'
   }
   console.log(query);
