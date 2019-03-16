@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-image: url(${bgImage});
+    background-color: White;
     background-size: 100% 100%;
     min-height: 100%;
     min-width: 100%;

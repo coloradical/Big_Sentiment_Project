@@ -15,6 +15,6 @@ export default defineMessages({
   startProjectMessage: {
     id: `${scope}.start_project.message`,
     defaultMessage:
-      'Search your favorite topic',
+      'Search your favorite topic mf',
   },
 });

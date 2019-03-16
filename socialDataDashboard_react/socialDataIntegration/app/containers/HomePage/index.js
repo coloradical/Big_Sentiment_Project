@@ -16,7 +16,7 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import H1 from 'components/H1';
 import CenteredSection from './CenteredSection';
-import Input from './Input';
+// import Input from './Input';
 import messages from './messages';
 import { changeTopic, searchTopic } from './actions';
 import {
@@ -28,6 +28,8 @@ import reducer from './reducer';
 import { CustomVisuals } from '../CustomVisuals';
 import saga from './saga';
 import TopicInfo from '../../components/TopicInfo';
+import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
@@ -61,7 +63,7 @@ export class HomePage extends React.PureComponent {
           <title>Dashboard</title>
           <meta
             name="description"
-            content="Social Data Integration Dashboard"
+            content="Socia Data Integration Dashboard"
           />
         </Helmet>
         <div className="container-fluid">
@@ -70,20 +72,28 @@ export class HomePage extends React.PureComponent {
               <H1>
                 <FormattedMessage {...messages.startProjectHeader} />
               </H1>
-              <label htmlFor="topic" style={{width: '60%'}}>
-                <Input
-                  id="topic"
-                  type="text"
-                  placeholder={messages.startProjectMessage.defaultMessage}
-                  value={this.props.topic}
-                  onKeyDown={this.keyPress}
-                  onChange={this.props.onChangeTopic}
-                />
+              <label htmlFor="topic" style={{ width: '60%' }}>
+
+              <TextField
+          id="outlined-full-width"
+          label="Search"
+          style={{ margin: 8 }}
+          placeholder="Search your favourite hashtags"
+          helperText="Press any key to search"
+          fullWidth
+          margin="normal"
+          variant="outlined"
+          onKeyDown={this.keyPress}
+          onChange={this.props.onChangeTopic}
+          InputLabelProps={{
+            shrink: true,
+          }}/>
+                
               </label>
             </CenteredSection>
           </div>
-          <TopicInfo topicInfo={this.props.topicInfo}/>
-          <CustomVisuals topicName={this.props.topicInfo['name']?this.props.topicInfo['name']:''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type']: []}/>
+          <TopicInfo topicInfo={this.props.topicInfo} />
+          <CustomVisuals topicName={this.props.topicInfo['name'] ? this.props.topicInfo['name'] : ''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : []} />
         </div>
       </article>
     );
