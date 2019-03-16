@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import bgImage from './images/darkBackground.jpg';
 const GlobalStyle = createGlobalStyle`
   html,
   body {
@@ -16,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-image: url(${bgImage});
+    background-color: White;
     background-size: 100% 100%;
     min-height: 100%;
     min-width: 100%;

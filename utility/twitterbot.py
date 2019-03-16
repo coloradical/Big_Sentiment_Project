@@ -86,17 +86,22 @@ def gettrends(loc):
     print("Using API Creds:"+str(n))
     auth = getauth(n)
     for i in range(len(loc)):
-        url = "https://api.twitter.com/1.1/trends/place.json?id="+str(loc[i])
+        url = "https://api.twitter.com/1.1/trends/place.json?id={}&lang=en".format(str(loc[i]))
+        str(loc[i])
 
         print("Trying: " + url)
+        r = requests.Response()
         try:
             r = requests.get(url, auth=auth, timeout=120)
         except:
             if r.status_code:
                 print ("HTTP {} Error with request {}".format(r.status_code, url))
             else:
+
+
                 print ("Timeout Error with request {}".format(url))
                 pass
+        print(r)
 
         if((i+1)%75==0):
             if(n<6):
@@ -137,6 +142,8 @@ def gettweets(tags):
         q= tags[i].replace('#','')
 
         url="https://api.twitter.com/1.1/search/tweets.json?q="+q+"&lang=en"
+
+        r = requests.Response()
 
         try:
             r = requests.get(url, auth=auth, timeout=120)

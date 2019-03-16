@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_TOPIC,SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR} from './constants';
+import { CHANGE_TOPIC,SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, RESET_STATE,SEARCH_TWITTER} from './constants';
 
 /**
  * Changes the input field of the form
@@ -37,6 +37,17 @@ export function searchTopic(topic) {
   }
 }
 
+export function TwittProfile(topic) {
+  return {
+    type: SEARCH_TWITTER,
+    topic,
+  }
+}
+export function resetHomePageState(){
+  return {
+    type: RESET_STATE,
+  }
+}
 /**
  * Dispatched when the repositories are loaded by the request saga
  *
