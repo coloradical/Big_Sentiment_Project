@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import bgImage from './images/darkBackground.jpg';
 const GlobalStyle = createGlobalStyle`
   html,
   body {

@@ -11,19 +11,20 @@
  */
 import { fromJS } from 'immutable';
 
-import { CHANGE_TOPIC, SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
+import { CHANGE_TOPIC, SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, RESET_STATE } from './constants';
 
+var topicInfoInitialState = {
+  image: null,
+  description: '',
+  detailedDescription: null,
+  name: ''
+};
 // The initial state of the App
 export const initialState = fromJS({
   topic: '',
   loading: false,
   error: false,
-  topicInfo: {
-    image: null,
-    description: '',
-    detailedDescription: null,
-    name: ''
-  },
+  topicInfo: topicInfoInitialState,
 });
 
 function homeReducer(state = initialState, action) {
@@ -33,7 +34,11 @@ function homeReducer(state = initialState, action) {
     case SEARCH_TOPIC:
       return state
         .set('loading', true)
-        .set('error', false)
+        .set('error', false);
+    case RESET_STATE:
+      return state
+      .set('topicInfo', topicInfoInitialState)
+      .set('topic','');
     case LOAD_REPOS_SUCCESS:
       return state
         .set('loading', false)

@@ -42,7 +42,8 @@
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "prettify": "prettier --write"
+    "prettify": "prettier --write",
+    "fg-loadcss": "npm install fg-loadcss --save"
   },
   "lint-staged": {
     "*.js": [
@@ -69,6 +70,7 @@
     "d3": "^5.9.1",
     "d3-tip": "^0.9.1",
     "express": "4.16.4",
+    "fg-loadcss": "^2.1.0",
     "fontfaceobserver": "2.0.13",
     "history": "4.7.2",
     "hoist-non-react-statics": "3.0.1",
