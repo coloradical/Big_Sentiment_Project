@@ -28,11 +28,7 @@ export function* getTopicData(action) {
     }
   };
   let requestHeader = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true',
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Methods': 'GET, POST',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
   }
   try {
     // Call our request helper (see 'utils/request')
