@@ -33,6 +33,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import WorldCard from '../../components/WorldCard';
 import FontAwesome from '../../components/Homebutton';
+import Search from '../Search';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
@@ -92,7 +93,7 @@ export class HomePage extends React.PureComponent {
               </H1>
               <label htmlFor="topic" style={{ width: '60%' }}>
 
-              <TextField
+           <TextField
           id="outlined-full-width"
           label="Search"
           style={{ margin: 8 }}
@@ -107,6 +108,7 @@ export class HomePage extends React.PureComponent {
           InputLabelProps={{
             shrink: true,
           }}/>
+          <Search></Search>
                 
               </label>
             </CenteredSection>
