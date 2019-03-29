@@ -33,9 +33,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import WorldCard from '../../components/WorldCard';
 import FontAwesome from '../../components/Homebutton';
-import Search from '../Search';
 import PersonCard from '../../components/PersonCard';
-import HeadTweet from '../../components/HeadTweet';
 
 
 /* eslint-disable react/prefer-stateless-function */
