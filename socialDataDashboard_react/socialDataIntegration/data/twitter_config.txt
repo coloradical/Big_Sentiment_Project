@@ -1,0 +1,6 @@
+{
+       "consumerKey": "5YuXZWYPYnsKNB35Ocz6KVazT",
+       "consumerSecret": "mfHQgcc0F83LVfM6P9yd9zTKnzwyKMne0RStam3Jf6hTG5RtGv",
+       "accessToken": "7743417928926666753-zml5G2Fh6KIc90XoP2EqPsycRu3oqTT",
+       "accessTokenSecret": "93nwm2u7JNpmxLPqCQbazzSbTq4EkXv87wa0M1i6RGKP0"
+}
