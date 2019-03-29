@@ -33,6 +33,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import WorldCard from '../../components/WorldCard';
 import FontAwesome from '../../components/Homebutton';
+import MapViewV1 from '../../components/MapViewV1';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
@@ -88,7 +89,7 @@ export class HomePage extends React.PureComponent {
           <div className="row">
             <CenteredSection>
               <H1>
-                <FormattedMessage {...messages.startProjectHeader} />
+               Hello
               </H1>
               <label htmlFor="topic" style={{ width: '60%' }}>
 
@@ -117,7 +118,7 @@ export class HomePage extends React.PureComponent {
           
         </div>
        
-       { this.props.topicInfo['name'] ?  console.log("No data"): <div><center><WorldCard/></center></div>}
+       { this.props.topicInfo['name'] ?  console.log("No data"): <div><center><MapViewV1/></center></div>}
        
 
          
