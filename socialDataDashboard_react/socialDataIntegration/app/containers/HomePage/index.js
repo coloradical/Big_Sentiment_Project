@@ -35,6 +35,9 @@ import WorldCard from '../../components/WorldCard';
 import FontAwesome from '../../components/Homebutton';
 import MapViewV1 from '../../components/MapViewV1';
 import Search from '../Search';
+import PersonCard from '../../components/PersonCard';
+import HeadTweet from '../../components/HeadTweet';
+
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
@@ -109,12 +112,14 @@ export class HomePage extends React.PureComponent {
           InputLabelProps={{
             shrink: true,
           }}/>
-          <Search></Search>
+          {/* <Search></Search> */}
                 
               </label>
             </CenteredSection>
           </div>
-          { this.props.topicInfo['name'] ? <TopicInfo topicInfo={this.props.topicInfo} />: console.log("No data")}
+          {/* { this.props.topicInfo['name'] ? <TopicInfo topicInfo={this.props.topicInfo} />: console.log("No data")} */}
+          { this.props.topicInfo['name'] ? <PersonCard topicInfo={this.props.topicInfo} />: console.log("No data")}
+        
           <CustomVisuals topicName={this.props.topicInfo['name'] ? this.props.topicInfo['name'] : ''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : []} />
 
           
