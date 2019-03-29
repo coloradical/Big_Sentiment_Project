@@ -2,6 +2,8 @@ Social Data Integration Dashboard
 
 DockerHub Production Image : https://hub.docker.com/r/kamal15leo/socialdatadashboard
 
+Install npm (Also installs Node): brew install npm
+
 Important Commands 
 
 >   Do ensure that you install the latest version of Node, before running npm commands
