@@ -36,7 +36,7 @@ import FontAwesome from '../../components/Homebutton';
 import MapViewV1 from '../../components/MapViewV1';
 import Search from '../Search';
 import PersonCard from '../../components/PersonCard';
-import HeadTweet from '../../components/HeadTweet';
+import TopicPalette from "../../components/TopicPalette";
 
 
 /* eslint-disable react/prefer-stateless-function */
@@ -125,7 +125,7 @@ export class HomePage extends React.PureComponent {
           
         </div>
        
-       { this.props.topicInfo['name'] ?  console.log("No data"): <div><center><MapViewV1/></center></div>}
+       { this.props.topicInfo['name'] ?  console.log("No data"): <div><TopicPalette/><center><MapViewV1/></center></div>}
        
 
          
