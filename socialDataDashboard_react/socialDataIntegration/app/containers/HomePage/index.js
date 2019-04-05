@@ -36,7 +36,10 @@ import FontAwesome from '../../components/Homebutton';
 import MapViewV1 from '../../components/MapViewV1';
 import Search from '../Search';
 import PersonCard from '../../components/PersonCard';
+<<<<<<< HEAD
 import TopicPalette from "../../components/TopicPalette";
+=======
+>>>>>>> 1be1e1f1bea0a7bda7b3e24742db1fc82cb32b63
 
 
 /* eslint-disable react/prefer-stateless-function */
