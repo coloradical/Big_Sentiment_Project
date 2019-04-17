@@ -14,7 +14,7 @@ import { compose } from 'redux';
 import { EVENT, PERSON, PLACE } from './topicTypeDefinition';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import {makeSelectCustomVisuals,makeSelectTopicType} from './selectors';
+import { makeSelectCustomVisuals, makeSelectTopicType } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import EventDashboard from '../EventDashboard';
@@ -25,16 +25,16 @@ import { changeTopicType } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class CustomVisuals extends React.PureComponent {
-  loadRespectiveDashboard(){
-    if(this.props.topicType.length > 0){
+  loadRespectiveDashboard() {
+    if (this.props.topicType.length > 0) {
       var typeArray = this.props.topicType;
-      for(var i=0;i<typeArray.length;i++){
-        if(typeArray[i] == EVENT){
+      for (var i = 0; i < typeArray.length; i++) {
+        if (typeArray[i] == EVENT) {
           return <EventDashboard />;
-        } else if(typeArray[i] == PLACE){
+        } else if (typeArray[i] == PLACE) {
           return <PlaceDashboard />;
-        } else if(typeArray[i] == PERSON){
-          return <PersonDashboard name={this.props.topicName}/>;
+        } else if (typeArray[i] == PERSON) {
+          return <PersonDashboard topicInfo={this.props.topicInfo} />;
         }
       }
     }
@@ -43,7 +43,10 @@ export class CustomVisuals extends React.PureComponent {
   render() {
     console.log(this.props.topicType);
     return (
-      <div className="row" style={{ marginTop: '2em',backgroundColor: 'white'}}>
+      <div
+        className="row"
+        style={{ marginTop: '2em', backgroundColor: 'white' }}
+      >
         {/* <p>{this.props.topicType.length > 0 ? this.props.topicType: ''}</p> */}
         {this.loadRespectiveDashboard()}
       </div>
@@ -54,6 +57,7 @@ export class CustomVisuals extends React.PureComponent {
 CustomVisuals.propTypes = {
   topicType: PropTypes.array,
   topicName: PropTypes.string,
+  topicInfo: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

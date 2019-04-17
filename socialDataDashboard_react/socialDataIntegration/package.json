@@ -43,7 +43,8 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "fg-loadcss": "npm install fg-loadcss --save"
+    "fg-loadcss": "npm install fg-loadcss --save",
+    "recharts": "npm install recharts"
   },
   "lint-staged": {
     "*.js": [
@@ -66,6 +67,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "chalk": "^2.4.1",
+    "chart.js": "^2.8.0",
     "compression": "1.7.3",
     "connected-react-router": "4.5.0",
     "cross-env": "5.2.0",
@@ -74,6 +76,7 @@
     "express": "4.16.4",
     "fg-loadcss": "^2.1.0",
     "fontfaceobserver": "2.0.13",
+    "google-trends-api": "^4.9.0",
     "history": "4.7.2",
     "hoist-non-react-statics": "3.0.1",
     "immutable": "3.8.2",
@@ -88,10 +91,13 @@
     "react-autosuggest": "^9.4.3",
     "react-dom": "16.6.0",
     "react-helmet": "5.2.0",
+    "react-iframe": "^1.7.11",
     "react-intl": "2.7.2",
     "react-redux": "5.0.7",
     "react-router-dom": "4.3.1",
     "react-simple-maps": "^0.12.1",
+    "react-vis": "^1.11.6",
+    "recharts": "^1.5.0",
     "redux": "4.0.1",
     "redux-immutable": "4.0.0",
     "redux-saga": "0.16.2",
@@ -99,7 +105,8 @@
     "sanitize.css": "4.1.0",
     "save": "^2.3.3",
     "styled-components": "4.0.2",
-    "warning": "4.0.2"
+    "warning": "4.0.2",
+    "widget-google-trends": "0.0.1"
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",

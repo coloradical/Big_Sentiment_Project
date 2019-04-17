@@ -20,7 +20,8 @@ import CenteredSection from './CenteredSection';
 import messages from './messages';
 import { changeTopic, searchTopic, resetHomePageState } from './actions';
 import {
-  makeSelectTopic, makeSelectTopicInfo,
+  makeSelectTopic,
+  makeSelectTopicInfo,
   makeSelectLoading,
   makeSelectError,
 } from './selectors';
@@ -36,9 +37,7 @@ import FontAwesome from '../../components/Homebutton';
 import MapViewV1 from '../../components/MapViewV1';
 import Search from '../Search';
 import PersonCard from '../../components/PersonCard';
-import TopicPalette from "../../components/TopicPalette";
-
-
+import TopicPalette from '../../components/TopicPalette';
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
@@ -49,7 +48,6 @@ export class HomePage extends React.PureComponent {
     // if (this.props.username && this.props.username.trim().length > 0) {
     //   this.props.onSubmitForm();
     // }
-    
   }
   constructor(props) {
     super(props);
@@ -58,7 +56,6 @@ export class HomePage extends React.PureComponent {
   keyPress(e) {
     if (e.keyCode == 13) {
       this.props.onSearchTopic(this.props.topic);
-      this.props.onTwittProfile(this.props.topic)
     }
   }
   render() {
@@ -82,85 +79,81 @@ export class HomePage extends React.PureComponent {
       <article>
         <Helmet>
           <title>Dashboard</title>
-          <meta
-            name="description"
-            content="Socia Data Integration Dashboard"
-          />
+          <meta name="description" content="Socia Data Integration Dashboard" />
         </Helmet>
         <div className="container-fluid">
           <div className="row">
-            <Button color="primary" onClick={this.props.resetProps}><FontAwesome/></Button>
+            <Button color="primary" onClick={this.props.resetProps}>
+              <FontAwesome />
+            </Button>
           </div>
           <div className="row">
             <CenteredSection>
-              <H1>
-               Hello
-              </H1>
+              <H1>Hello</H1>
               <label htmlFor="topic" style={{ width: '60%' }}>
-
-           <TextField
-          id="outlined-full-width"
-          label="Search"
-          style={{ margin: 8 }}
-          placeholder="Search your favourite hashtags"
-          helperText="Press any key to search"
-          fullWidth
-          margin="normal"
-          variant="outlined"
-          onKeyDown={this.keyPress}
-          value={this.props.topic}
-          onChange={this.props.onChangeTopic}
-          InputLabelProps={{
-            shrink: true,
-          }}/>
-          {/* <Search></Search> */}
-                
+                <TextField
+                  id="outlined-full-width"
+                  label="Search"
+                  style={{ margin: 8 }}
+                  placeholder="Search your favourite hashtags"
+                  helperText="Press any key to search"
+                  fullWidth
+                  margin="normal"
+                  variant="outlined"
+                  onKeyDown={this.keyPress}
+                  value={this.props.topic}
+                  onChange={this.props.onChangeTopic}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                {/* <Search></Search> */}
               </label>
             </CenteredSection>
           </div>
-          {/* { this.props.topicInfo['name'] ? <TopicInfo topicInfo={this.props.topicInfo} />: console.log("No data")} */}
-          { this.props.topicInfo['name'] ? <PersonCard topicInfo={this.props.topicInfo} />: console.log("No data")}
-        
-          <CustomVisuals topicName={this.props.topicInfo['name'] ? this.props.topicInfo['name'] : ''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : []} />
 
-          
+          <CustomVisuals
+            topicName={
+              this.props.topicInfo['name'] ? this.props.topicInfo['name'] : ''
+            }
+            topicType={
+              this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : []
+            }
+            topicInfo={this.props.topicInfo}
+          />
         </div>
-       
-       { this.props.topicInfo['name'] ?  console.log("No data"): <div><TopicPalette/><center><MapViewV1/></center></div>}
-       
 
-         
-
+        {this.props.topicInfo['name'] ? (
+          console.log('No data')
+        ) : (
+          <div>
+            <center>
+              <MapViewV1 />
+            </center>
+          </div>
+        )}
       </article>
-      
     );
-    
-    
   }
 }
-
-
-
 
 HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   topicInfo: PropTypes.object,
-  twittinfo :PropTypes.object,
   // onSubmitForm: PropTypes.func,
   topic: PropTypes.string,
   onChangeTopic: PropTypes.func,
   onSearchTopic: PropTypes.func,
   resetProps: PropTypes.func,
-  onTwittProfile : PropTypes.func,
+  onTwittProfile: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     onSearchTopic: topic => dispatch(searchTopic(topic)),
     onChangeTopic: evt => dispatch(changeTopic(evt.target.value)),
-    onTwittProfile: topic => dispatch(TwittProfile(topic)),
-    resetProps: val => dispatch(resetHomePageState()), 
+    resetProps: val => dispatch(resetHomePageState()),
     // onSubmitForm: evt => {
     //   if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     //   dispatch(loadRepos());
@@ -188,4 +181,3 @@ export default compose(
   withSaga,
   withConnect,
 )(HomePage);
-
