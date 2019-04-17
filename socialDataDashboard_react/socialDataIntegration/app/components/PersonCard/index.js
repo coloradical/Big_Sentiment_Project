@@ -77,7 +77,7 @@ function PersonCard(props) {
 
 
       <Grid item sm={12}>
-      <Typography variant="h4" align="center" gutterBottom><i class="fab fa-twitter"></i></Typography>
+      <Typography variant="h4" align="center" gutterBottom><i className="fab fa-twitter"></i></Typography>
       <Typography variant="overline" align="center" gutterBottom>"No one is born hating another person because of the color of his skin or his background or his religion..."</Typography>
        
         </Grid>

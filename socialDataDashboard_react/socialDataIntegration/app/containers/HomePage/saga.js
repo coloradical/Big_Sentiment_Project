@@ -3,8 +3,8 @@
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { SEARCH_TOPIC, SEARCH_TWITTER } from './constants';
-import { reposLoaded, repoLoadingError } from './actions';
+import { SEARCH_TOPIC, SEARCH_TWITTER, CHANGE_TOPIC } from './constants';
+import { reposLoaded, repoLoadingError, putFuzzyResults } from './actions';
 
 import request from 'utils/request';
 import { makeSelectTopic } from './selectors';
@@ -26,6 +26,7 @@ export function* getRepos() {
     yield put(repoLoadingError(err));
   }
 }
+
 export function* getTwitterData() {
   // Select topic
   const query = yield select(makeSelectTopic());
@@ -48,7 +49,44 @@ export function* getTwitterData() {
     yield put(repoLoadingError(err));
   }
 }
-
+export function* getFuzzySearchResults(action) {
+  const topic = action.name;
+  console.log(topic);
+  const requestURL = `http://34.73.60.209:9200/trending_suggestion/_search?pretty`;
+  let requestBody = {
+    "suggest": {
+      "hashtag" : {
+        "regex" : `.*${topic.replace(' ', '.*')}.*`,
+        "completion" : { 
+          "field" : "suggest", 
+          "size":10, 
+          "skip_duplicates": true
+        }
+      }
+    }
+  };
+  let requestHeader = {
+    'Content-Type': 'application/json',
+  }
+  try {
+    // Call our request helper (see 'utils/request')
+    const response = yield call(request, requestURL,{
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: requestHeader
+    });
+    console.log(response.suggest.hashtag[0].options);
+    if(response.suggest.hashtag[0].options.length > 0){
+      let fuzzyResults = response.suggest.hashtag[0].options;
+      fuzzyResults = fuzzyResults.map((item) => item.text);
+      console.log(fuzzyResults);
+      yield put(putFuzzyResults(fuzzyResults));
+    }
+  } catch (err) {
+    console.error(err);
+    //yield put(repoLoadingError(err));
+  }
+}
 
 /**
  * Root saga manages watcher lifecycle
@@ -60,4 +98,5 @@ export default function* homePageSaga() {
   // It will be cancelled automatically on component unmount
   yield takeLatest(SEARCH_TOPIC, getRepos);
   yield takeLatest(SEARCH_TWITTER, getTwitterData);
+  yield takeLatest(CHANGE_TOPIC, getFuzzySearchResults);
 }

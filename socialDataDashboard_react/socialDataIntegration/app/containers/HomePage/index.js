@@ -19,11 +19,13 @@ import H2 from 'components/H2';
 import CenteredSection from './CenteredSection';
 // import Input from './Input';
 import messages from './messages';
-import { changeTopic, searchTopic, resetHomePageState } from './actions';
+import Suggestions from '../../components/Suggestions';
+import { changeTopic, searchTopic, resetHomePageState, selectTopic } from './actions';
 import {
   makeSelectTopic, makeSelectTopicInfo,
   makeSelectLoading,
   makeSelectError,
+  makeSelectFuzzyResults,
 } from './selectors';
 import reducer from './reducer';
 import { CustomVisuals } from '../CustomVisuals';
@@ -35,7 +37,6 @@ import Button from '@material-ui/core/Button';
 import WorldCard from '../../components/WorldCard';
 import FontAwesome from '../../components/Homebutton';
 import MapViewV1 from '../../components/MapViewV1';
-import Search from '../Search';
 import PersonCard from '../../components/PersonCard';
 import TopicPalette from "../../components/TopicPalette";
 import Particles from 'react-particles-js';
@@ -58,12 +59,18 @@ export class HomePage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.keyPress = this.keyPress.bind(this);
+    this.onSelectFuzzySearchTopic = this.onSelectFuzzySearchTopic.bind(this);
   }
   keyPress(e) {
     if (e.keyCode == 13) {
       this.props.onSearchTopic(this.props.topic);
       this.props.onTwittProfile(this.props.topic)
     }
+  }
+  onSelectFuzzySearchTopic(topic) {
+    this.props.onSelectFuzzyTopic(topic);
+    this.props.onSearchTopic(topic);
+    // this.props.onTwittProfile(topic)
   }
   render() {
     const { loading, error, topicInfo } = this.props;
@@ -115,15 +122,15 @@ export class HomePage extends React.PureComponent {
           fullWidth
           margin="normal"
           variant="outlined"
+          autoComplete="Off"
           onKeyDown={this.keyPress}
           value={this.props.topic}
           onChange={this.props.onChangeTopic}
           InputLabelProps={{
           shrink: true,
           }}/>
-          {/* <Search></Search> */}
-                
-              </label>
+          <Suggestions onSuggestionSelection={this.onSelectFuzzySearchTopic} results={this.props.fuzzySearchResults} />
+          </label>
             </CenteredSection>
           </div>
           
@@ -144,7 +151,7 @@ export class HomePage extends React.PureComponent {
          <ParticlesBackground/> 
          <H2> A sentiment analyzer for Tweets, analyzing and presenting the World's true opinions on people, places and things. </H2>
          
-            <SimpleGlobe id="globe"/ >
+            <SimpleGlobe id="globe"/>
             
 
             
@@ -179,13 +186,16 @@ HomePage.propTypes = {
   onSearchTopic: PropTypes.func,
   resetProps: PropTypes.func,
   onTwittProfile : PropTypes.func,
+  fuzzySearchResults : PropTypes.array,
+  onSelectFuzzyTopic: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     onSearchTopic: topic => dispatch(searchTopic(topic)),
+    onSelectFuzzyTopic: topic => dispatch(selectTopic(topic)),
     onChangeTopic: evt => dispatch(changeTopic(evt.target.value)),
-    onTwittProfile: topic => dispatch(TwittProfile(topic)),
+    // onTwittProfile: topic => dispatch(TwittProfile(topic)),
     resetProps: val => dispatch(resetHomePageState()), 
     // onSubmitForm: evt => {
     //   if (evt !== undefined && evt.preventDefault) evt.preventDefault();
@@ -199,6 +209,7 @@ const mapStateToProps = createStructuredSelector({
   topic: makeSelectTopic(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  fuzzySearchResults: makeSelectFuzzyResults(),
 });
 
 const withConnect = connect(
