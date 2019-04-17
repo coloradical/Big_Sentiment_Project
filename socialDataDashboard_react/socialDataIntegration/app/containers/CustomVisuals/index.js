@@ -43,7 +43,7 @@ export class CustomVisuals extends React.PureComponent {
   render() {
     console.log(this.props.topicType);
     return (
-      <div className="row" style={{ marginTop: '2em',backgroundColor: 'white'}}>
+      <div className="row">
         {/* <p>{this.props.topicType.length > 0 ? this.props.topicType: ''}</p> */}
         {this.loadRespectiveDashboard()}
       </div>

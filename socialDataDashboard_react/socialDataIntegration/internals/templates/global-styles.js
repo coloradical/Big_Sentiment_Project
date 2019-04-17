@@ -9,10 +9,14 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: white;
+    padding: 3em;
+    text-align: center;
+
   }
 
   body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   #app {
@@ -21,11 +25,35 @@ const GlobalStyle = createGlobalStyle`
     min-width: 100%;
   }
 
-  p,
-  label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
-  }
+  // #particles canvas {
+  //   position: relative;
+  //   left:0;
+  //   top:0;
+  //   width:100%;
+  //   height:80%;
+  //   z-index: 0;
+  // }
+
+  // #globe {
+  //   position: absolute;
+  //   z-index: 2;
+  // }
+
+
+  // p,
+  // label {
+  //   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  //   line-height: 1.5em;
+  //   color: rgba(0, 0, 0, 0.54);
+  // }
+
+  // #outlined-full-width {
+  //   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  //   text-align: center;
+  //   z-index: 1;
+  
+  // }
+
 `;
 
 export default GlobalStyle;

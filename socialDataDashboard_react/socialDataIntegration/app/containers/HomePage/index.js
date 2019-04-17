@@ -15,6 +15,7 @@ import logo from '../../images/map.jpg';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import H1 from 'components/H1';
+import H2 from 'components/H2';
 import CenteredSection from './CenteredSection';
 // import Input from './Input';
 import messages from './messages';
@@ -37,6 +38,9 @@ import MapViewV1 from '../../components/MapViewV1';
 import Search from '../Search';
 import PersonCard from '../../components/PersonCard';
 import TopicPalette from "../../components/TopicPalette";
+import Particles from 'react-particles-js';
+import SimpleGlobe from "../../components/SimpleGlobe";
+import ParticlesBackground from "../../components/ParticlesBackground";
 
 
 
@@ -79,31 +83,35 @@ export class HomePage extends React.PureComponent {
     };
 
     return (
-      <article>
+      
+      <article >
+        {/* <center><H1>Global Opinions</H1></center> */}
         <Helmet>
-          <title>Dashboard</title>
+          <title>Twitter Sentiment Processor</title>
           <meta
-            name="description"
-            content="Socia Data Integration Dashboard"
+            name="Tweet Sentiment Processor"
+            content="Disillusion: Social Media Sentiment Processor"
           />
         </Helmet>
-        <div className="container-fluid">
-          <div className="row">
+        
+        <div className="container-fluid" >
+          <div className="row" >
             <Button color="primary" onClick={this.props.resetProps}><FontAwesome/></Button>
+            
           </div>
           <div className="row">
-            <CenteredSection>
-              <H1>
-               Hello
-              </H1>
-              <label htmlFor="topic" style={{ width: '60%' }}>
+         
+
+            <CenteredSection >
+            {/* <center><H1> Global Sentiment </H1></center> */}
+            
+              <label htmlFor="topic" style={{ width: '70%' }}>
 
            <TextField
           id="outlined-full-width"
-          label="Search"
-          style={{ margin: 8 }}
-          placeholder="Search your favourite hashtags"
-          helperText="Press any key to search"
+          style={{ margin: 8, backgroundColor: 'rgba(1, 4, 76, 1)'}}
+          placeholder= "Search your favorite hashtags"
+          // helperText="Press any key to search"
           fullWidth
           margin="normal"
           variant="outlined"
@@ -111,25 +119,43 @@ export class HomePage extends React.PureComponent {
           value={this.props.topic}
           onChange={this.props.onChangeTopic}
           InputLabelProps={{
-            shrink: true,
+          shrink: true,
           }}/>
           {/* <Search></Search> */}
                 
               </label>
             </CenteredSection>
           </div>
+          
           {/* { this.props.topicInfo['name'] ? <TopicInfo topicInfo={this.props.topicInfo} />: console.log("No data")} */}
           { this.props.topicInfo['name'] ? <PersonCard topicInfo={this.props.topicInfo} />: console.log("No data")}
         
           <CustomVisuals topicName={this.props.topicInfo['name'] ? this.props.topicInfo['name'] : ''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : []} />
 
-          
+         <center>
+            
+        </center> 
+
+        
         </div>
        
-       { this.props.topicInfo['name'] ?  console.log("No data"): <div><TopicPalette/><center><MapViewV1/></center></div>}
+       { this.props.topicInfo['name'] ?  console.log("No data"): <div id="particles">
+         <center>
+         <ParticlesBackground/> 
+         <H2> A sentiment analyzer for Tweets, analyzing and presenting the World's true opinions on people, places and things. </H2>
+         
+            <SimpleGlobe id="globe"/ >
+            
+
+            
+        
+         </center>
+         
+         </div>}
+         
        
 
-         
+         <center><H2>By Team TBD</H2> </center>
 
       </article>
       

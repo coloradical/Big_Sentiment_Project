@@ -4,28 +4,64 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     width: 100%;
-  }
-
-  body {
+    
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
+
   body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   #app {
-    background-color: White;
+    background-image: linear-gradient( 360deg, #FAB2FF 10%, #00004d 80%);
+    position: absolute;
     background-size: 100% 100%;
+    z-index: 0;
     min-height: 100%;
     min-width: 100%;
   }
 
-  p,
-  label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
+  p {
     line-height: 1.5em;
+    color: white;
   }
+
+   #particles canvas {
+    position: absolute; 
+    left:0;
+    top:0;
+    width:10%;
+    height:10%;
+    z-index: -1;
+  } 
+
+  #outlined-full-width {
+    position: relative;
+    background-color: none;
+    z-index: 1;
+  }
+
+  #globe {
+    position: absolute;
+    z-index: 2;
+  }
+
+  #outlined-full-width {
+    color: white;
+    background-color: 'rgba(1, 4, 76, 0)';
+    
+   
+    
+  }
+
+  .hJDqki {
+    margin: 3em auto;
+    text-align: center;
+    width: 100%;
+}
+ 
 `;
 
 export default GlobalStyle;
+

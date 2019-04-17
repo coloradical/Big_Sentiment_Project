@@ -106,7 +106,7 @@ class Search extends Component {
           class="TextField"
           id="outlined-full-width"
           label="Search"
-          style={{ margin: 8 }}
+          style={{ margin: 8}}
           placeholder="Search your favourite hashtags"
           helperText="Press any key to search"
           fullWidth
