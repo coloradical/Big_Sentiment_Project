@@ -26,6 +26,7 @@ import PersonCard from '../../components/PersonCard';
 import TopTweet from '../../components/TopTweet';
 import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
+import PhotoGrid from '../../components/PhotoGrid';
 import Typography from '@material-ui/core/Typography';
 /* eslint-disable react/prefer-stateless-function */
 export class PersonDashboard extends React.PureComponent {
@@ -95,6 +96,20 @@ export class PersonDashboard extends React.PureComponent {
         <div className="row">
           <br /> <br /><br /><br />
         </div>
+        <div className="row" >
+          <div className="col" />
+          <div className="col">
+            <PhotoGrid />
+          </div>
+          <div className="col" />
+
+        </div>
+
+
+        <div className="row">
+          <br /> <br /><br /><br />
+        </div>
+
 
         {/* <div className="row">
           <Card className="col">

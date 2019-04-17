@@ -44,7 +44,9 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "fg-loadcss": "npm install fg-loadcss --save",
-    "recharts": "npm install recharts"
+    "recharts": "npm install recharts",
+    "material-ui-icons": "npm install @material-ui/icons",
+    "material-ui/core": "npm install @material-ui/core"
   },
   "lint-staged": {
     "*.js": [
@@ -85,6 +87,7 @@
     "ip": "1.1.5",
     "loadable-components": "2.2.3",
     "lodash": "4.17.11",
+    "material-ui-icons": "^1.0.0-beta.36",
     "minimist": "1.2.0",
     "prop-types": "15.6.2",
     "react": "16.6.0",
