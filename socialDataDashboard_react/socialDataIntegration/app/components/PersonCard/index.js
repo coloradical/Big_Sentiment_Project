@@ -91,8 +91,7 @@ function PersonCard(props) {
           alt="Contemplative Reptile"
           className={classes.media}
           height="140"
-          image={props.topicInfo.image.contentUrl}
-          title="Contemplative Reptile"
+          image={props.topicInfo.image ? props.topicInfo.image.contentUrl:console.log("No image data")}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
