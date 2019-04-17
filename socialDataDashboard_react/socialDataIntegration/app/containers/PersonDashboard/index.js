@@ -35,6 +35,7 @@ export class PersonDashboard extends React.PureComponent {
   render() {
     let entryMap = {};
     let tempEntry = {};
+    console.log(this.props.topicInfo);
     console.log(this.props.topicAggregate);
     for (let i = 0; i < this.props.topicAggregate.length; i++) {
       for (

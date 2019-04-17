@@ -72,9 +72,10 @@ const styles = {
 
 function PersonCard(props) {
   const { classes } = props;
-
+  console.log(props.topicInfo);
   return (
     <div className={classes.root}>
+
       <Card className={classes.card}>
         <CardActionArea>
           <CardMedia
@@ -101,6 +102,7 @@ function PersonCard(props) {
           </Button>
         </CardActions> */}
       </Card>
+
     </div>
   );
 }

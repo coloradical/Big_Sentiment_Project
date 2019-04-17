@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for TopicPalette
+ * Asynchronously loads the component for ParticlesBackground
  *
  */
 

@@ -2,9 +2,9 @@
 // import { mount } from 'enzyme';
 // import { enzymeFind } from 'styled-components/test-utils';
 
-// import TopicPalette from '../index';
+// import SimpleGlobe from '../index';
 
-describe('<TopicPalette />', () => {
+describe('<SimpleGlobe />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });
