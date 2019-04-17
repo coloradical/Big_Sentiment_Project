@@ -149,7 +149,7 @@ export class HomePage extends React.PureComponent {
           </center>
 
         </div>}
-        <center><H2>By Team TBD</H2> </center>
+        {/* <center><H2>By Team TBD</H2> </center> */}
       </article>
     );
   }
