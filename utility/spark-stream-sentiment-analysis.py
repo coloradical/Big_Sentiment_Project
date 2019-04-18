@@ -23,7 +23,7 @@ def assign_sentiment(x):
 	print(x['sentiment'])
 	return x;
 
-lines = KafkaUtils.createDirectStream(ssc, ['test1'], {"metadata.broker.list": "35.232.117.118:9092"})
+lines = KafkaUtils.createDirectStream(ssc, ['trending'], {"metadata.broker.list": "35.232.117.118:9092"})
 lines.pprint()
 sentiments = lines.map(lambda j: assign_sentiment(json.loads(j[1])))
 
@@ -37,7 +37,7 @@ final_rdd.foreachRDD(lambda j: j.saveAsNewAPIHadoopFile(
     conf={
         "es.nodes" : "elastic-2",
         "es.port" : "9200",
-        "es.resource" : "test1/_doc",
+        "es.resource" : "trending-sentiment/_doc",
         "es.input.json": "true",
         "es.mapping.id": "id"
     }
