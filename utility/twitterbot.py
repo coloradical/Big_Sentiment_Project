@@ -9,6 +9,7 @@ import sys
 import pprint
 import publisher
 from datetime import datetime
+import os
 
 PUBLISH_TO_PUBSUB = True
 key = sys.argv[1]
@@ -86,9 +87,7 @@ def gettrends(loc):
     print("Using API Creds:"+str(n))
     auth = getauth(n)
     for i in range(len(loc)):
-        url = "https://api.twitter.com/1.1/trends/place.json?id={}&lang=en".format(str(loc[i]))
-        str(loc[i])
-
+        url = "https://api.twitter.com/1.1/trends/place.json?lang=en&id="+str(loc[i])
         print("Trying: " + url)
         r = requests.Response()
         try:
@@ -114,10 +113,11 @@ def gettrends(loc):
                 auth = getauth(0)
                 n=0
         for j in range(len(r.json()[0]['trends'])):
-            tags.append(r.json()[0]['trends'][j]['name'])
-    print("Received {} responses for location: {}".format(len(r.json()[0]['trends']), loc[i]))
-    tags = list(set(tags))
-
+            tags.append(r.json()[0]['trends'][j]['name'].replace('#',''))
+        print("Received {} responses for location: {}".format(len(r.json()[0]['trends']), loc[i]))
+    stags = set(tags)
+    tags = list(stags)
+    
     #converting tags to a dictonary to send to redditbot
     tagsexport = {'trends':tags}
     print("Got {} hashtags".format(str(len(tags))))
@@ -205,6 +205,15 @@ def gettweets(tags):
 
 def main():
     print("Statrting Service at: " + str(datetime.now()))
+    
+    try:
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS']
+        
+    except KeyError:
+        print("GOOGLE_APPLICATION_CREDENTIALS is not set")
+        print("Quiting Application")
+        sys.exit()
+    
     print("Getting Cities")
     locations = getcities()
     print("Got "+str(len(locations))+" cities")
