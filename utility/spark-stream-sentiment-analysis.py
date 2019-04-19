@@ -1,11 +1,14 @@
-from pyspark import SparkContext
+from pyspark import SparkContext, SparkConf
 from pyspark.streaming import StreamingContext
 from pyspark.streaming.kafka import KafkaUtils
 import json
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-ssc = StreamingContext(sc, 1)
+appName = "Spark-Kafka-Sentiment-Stream"
+conf = SparkConf().setAppName(appName)
+sc = SparkContext(conf=conf)
+ssc = StreamingContext(sc, 5)
 
 es_write_conf = {
         "es.nodes" : "elastic-2",
@@ -16,7 +19,6 @@ es_write_conf = {
     }
 
 sent_analyzer = SentimentIntensityAnalyzer()
-    
 def assign_sentiment(x):
 	print(x)
 	x['sentiment'] = sent_analyzer.polarity_scores(x['title']);
