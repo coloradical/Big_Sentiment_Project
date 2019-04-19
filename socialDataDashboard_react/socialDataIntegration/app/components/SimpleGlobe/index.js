@@ -49,7 +49,8 @@ const SimpleGlobe = () => (
       projectionConfig={{ scale: 220 }}
       style={mapStyles}
     >
-      <ZoomableGlobe>
+      <ZoomableGlobe center={[-54,20]}>
+        
         <circle cx={250} cy={250} r={220} fill="transparent" stroke="#CFD8DC" />
         
         <Geographies
