@@ -22,16 +22,16 @@ class ParticlesBackground extends React.PureComponent {
                         "value": 260,
                         "density": {
                             "enable": true,
-                            "value_area": 2000
+                            "value_area": 1000
                         }
                     },
                     "line_linked": {
                         "enable": true,
-                        "opacity": 0.1
+                        "opacity": 0.05
                     },
                     "move": {
                         "direction": "center",
-                        "speed": 3
+                        "speed": 1
                     },
                     "size": {
                         "value": 1

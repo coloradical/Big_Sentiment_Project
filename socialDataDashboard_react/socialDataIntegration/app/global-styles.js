@@ -27,6 +27,8 @@ const GlobalStyle = createGlobalStyle`
     color: white;
   }
 
+  
+
    #particles canvas {
     position: absolute; 
     left:0;
@@ -40,11 +42,18 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
     background-color: none;
     z-index: 1;
+    // text-align: center;
+    padding: 1.3em;
+    border-color: white;
   }
 
   #globe {
     position: absolute;
     z-index: 2;
+  }
+
+  #id {
+    padding-top: 12em;
   }
 
   #outlined-full-width {
