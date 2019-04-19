@@ -20,6 +20,8 @@ import {
   Markers,
   Marker
 } from "react-simple-maps"
+import twitterImg from "images/Twitter_Bird.png";
+
 
 const mapStyles = {
   width: "90%",
@@ -27,6 +29,8 @@ const mapStyles = {
   display: "block",
   height: "auto"
 }
+
+
 
 const markers = [
   { coordinates: [3.3792, 6.5244] },
@@ -45,7 +49,8 @@ const SimpleGlobe = () => (
       projectionConfig={{ scale: 220 }}
       style={mapStyles}
     >
-      <ZoomableGlobe>
+      <ZoomableGlobe center={[-54,20]}>
+        
         <circle cx={250} cy={250} r={220} fill="transparent" stroke="#CFD8DC" />
         
         <Geographies
@@ -75,7 +80,8 @@ const SimpleGlobe = () => (
                 hidden: { display: "none" }
               }}
             >
-              <circle cx={0} cy={0} r={6} fill="#FF5722" stroke="#FFF" />
+              
+              <image href={twitterImg} width={'3%'} height={'3%'}/>
             </Marker>
           ))}
         </Markers>

@@ -28,12 +28,14 @@ import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
 import PhotoGrid from '../../components/PhotoGrid';
 import Typography from '@material-ui/core/Typography';
+import worldlogo from "images/world_logo.png";
 /* eslint-disable react/prefer-stateless-function */
 export class PersonDashboard extends React.PureComponent {
   componentDidMount() {
     this.props.fetchTopicInfo(this.props.topicInfo['name']);
   }
   render() {
+    
     let entryMap = {};
     let tempEntry = {};
     console.log(this.props.topicInfo);
@@ -54,8 +56,13 @@ export class PersonDashboard extends React.PureComponent {
     }
     console.log(entryMap);
     return (
+    <article>
+      
       <div className="container-fluid" style={{ marginTop: '2em' }}>
+          
+
         <div className="row">
+        
           <div className="col">
             <TopTweet />
           </div>
@@ -125,6 +132,7 @@ export class PersonDashboard extends React.PureComponent {
           </Card>
         </div> */}
       </div >
+    </article>
     );
   }
 }

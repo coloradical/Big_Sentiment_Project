@@ -41,7 +41,8 @@ import MapViewV1 from '../../components/MapViewV1';
 import PersonCard from '../../components/PersonCard';
 import ParticlesBackground from '../../components/ParticlesBackground';
 import SimpleGlobe from '../../components/SimpleGlobe';
-
+import worldlogo from "images/world_logo.png";
+import github from "images/github.png";
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
   /**
@@ -97,17 +98,20 @@ export class HomePage extends React.PureComponent {
 
         <div className="container-fluid" >
           <div className="row" >
-            <Button color="primary" onClick={this.props.resetProps}><FontAwesome /></Button>
+            {/* <Button color="primary" onClick={this.props.resetProps}><FontAwesome /></Button> */}
 
           </div>
           <div className="row">
 
 
             <CenteredSection >
-              {/* <center><H1> Global Sentiment </H1></center> */}
+              <br></br><br></br>
+               <center><a href=""><img src={worldlogo} alt="Logo" style={{width: '20%'}}/></a></center>
 
               <label htmlFor="topic" style={{ width: '70%' }}>
-
+              <br></br>
+              <center><H2> A sentiment analyzer for Tweets, analyzing and presenting the World's true opinions on people, places and things. </H2></center>
+              <br></br>
                 <TextField
                   id="outlined-full-width"
                   style={{ margin: 8, backgroundColor: '#151960' }}
@@ -140,13 +144,17 @@ export class HomePage extends React.PureComponent {
 
         </div>
 
-        {this.props.topicInfo['name'] ? console.log("No data") : <div id="particles">
-          <center>
-            <ParticlesBackground />
-            <H2> A sentiment analyzer for Tweets, analyzing and presenting the World's true opinions on people, places and things. </H2>
+        {this.props.topicInfo['name'] ? console.log("No data") : 
+          <div id="particles">
+          
+            <center>
+              <ParticlesBackground />
+              {/* <H2> A sentiment analyzer for Tweets, analyzing and presenting the World's true opinions on people, places and things. </H2> */}
 
-            <SimpleGlobe id="globe" />
-          </center>
+              <SimpleGlobe id="globe" />
+            </center>
+
+          <center><H2> Created by Kamal Charturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{width: '3%'}}/></a></center>
 
         </div>}
         {/* <center><H2>By Team TBD</H2> </center> */}
