@@ -39,6 +39,7 @@ const data = [
   {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
+    id: 1,
     author: 'author',
     cols: 2,
   },
@@ -46,28 +47,33 @@ const data = [
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 2,
     cols: 2,
   },
   {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 3,
     cols: 2,
   }, {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 4,
     cols: 2,
   }, {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 5,
     cols: 2,
   },
   {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 6,
     cols: 2,
   },
 ];
@@ -85,7 +91,7 @@ function PhotoGrid(props) {
           <div className={classes.root}>
             <GridList cellHeight={200} spacing={1} className={classes.gridList}>
               {data.map(tile => (
-                <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
+                <GridListTile key={tile.id} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
                   <img src={tile.img} alt={tile.title} />
                   <GridListTileBar
                     title={tile.title}

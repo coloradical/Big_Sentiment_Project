@@ -35,10 +35,12 @@ function homeReducer(state = initialState, action) {
     case SEARCH_TOPIC:
       return state
         .set('loading', true)
-        .set('error', false);
+        .set('error', false)
+        .set('fuzzySearchResults', []);
     case RESET_STATE:
       return state
       .set('topicInfo', topicInfoInitialState)
+      .set('fuzzySearchResults', [])
       .set('topic','');
     case LOAD_REPOS_SUCCESS:
       return state
