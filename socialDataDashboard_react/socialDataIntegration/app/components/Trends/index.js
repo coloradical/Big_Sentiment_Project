@@ -57,6 +57,8 @@ export default class Trends extends PureComponent {
           <LineChart width={1600} height={100} data={this.props.topicAggregate}>
             <Line type="monotone" dataKey="doc_count" stroke="#8884d8" strokeWidth={2} />
             <Tooltip />
+            <Legend />
+            <XAxis dataKey="key_as_string" />
           </LineChart>
         </center>
       </div>

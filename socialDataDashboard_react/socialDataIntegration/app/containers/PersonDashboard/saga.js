@@ -10,7 +10,7 @@ export function* getTopicData(action) {
   const topic = action.name;
   console.log(topic);
   const requestURL = `http://34.73.60.209:9200/trending/_search?pretty=true`;
-  const twittURL = `https://untitled-szbxtgt3g9t2.runkit.sh/?endpoint=users/search.json/searchParam=%7B%22q%22:%22${topic}%22%7D`
+  const twittURL = `https://untitled-szbxtgt3g9t2.runkit.sh/?endpoint=users/search.json&searchParam=%7B%22q%22:%22${topic}%22%7D`
   let requestBody = {
     "query": {
       "bool": {
@@ -67,14 +67,14 @@ export function* getTopicData(action) {
     });
 
     const twitterData = yield call(request, twittURL, {
-      method: 'POST',
+      method: 'GET',
       headers: requestHeader
     });
     // console.log(aggregateData.aggregations.hashtags.buckets);
     // console.log(aggregateData.hits.hits);
     // // console.log(aggregateData.hits.hits[2]._source['author']);
-    // // console.log(aggregateData.aggregations.perDateTweet.buckets);
-    // console.log(imageData.hits.hits)
+    console.log(aggregateData.aggregations.perDateTweet.buckets);
+    console.log(imageData.hits.hits)
     console.log(twitterData)
     yield put(putTopicInfo(aggregateData.aggregations.perDateTweet.buckets));
     yield put(putTweetInfo(aggregateData.hits.hits));
