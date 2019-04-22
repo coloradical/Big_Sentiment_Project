@@ -41,6 +41,7 @@ const data = [
   {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
+    id: 1,
     author: 'author',
     cols: 2,
   },
@@ -48,28 +49,33 @@ const data = [
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 2,
     cols: 2,
   },
   {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 3,
     cols: 2,
   }, {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 4,
     cols: 2,
   }, {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 5,
     cols: 2,
   },
   {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
     title: 'Image',
     author: 'author',
+    id: 6,
     cols: 2,
   },
 ];

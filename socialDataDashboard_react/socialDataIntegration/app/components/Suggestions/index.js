@@ -12,9 +12,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 function Suggestions(props) {
   const options = props.results.map(r => (
-    <MenuItem key={r} style={{ fontWeight: 500, background: 'lightgrey', width: '100%' }} onClick={() => props.onSuggestionSelection(r)}>{r}</MenuItem>
+    <MenuItem key={r} style={{ fontWeight: 500,  background: 'oldlace', borderBottom: 'black', width: '100%' }} onClick={() => props.onSuggestionSelection(r)}>{r}</MenuItem>
 ));
-  return <div><MenuList style={{ position: 'fixed' }}>{options}</MenuList></div>;
+  return <div><MenuList style={{ }}>{options}</MenuList></div>;
 }
 Suggestions.propTypes = {
   results: PropTypes.array,

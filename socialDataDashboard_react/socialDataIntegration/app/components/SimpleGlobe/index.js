@@ -33,10 +33,10 @@ const mapStyles = {
 
 
 const markers = [
-  { coordinates: [3.3792, 6.5244] },
-  { coordinates: [139.6917, 35.6895] },
-  { coordinates: [-74.0721, 4.711] },
-  { coordinates: [-118.2437, 34.0522] }
+  { coordinates: [3.3792, 6.5244], id : 1 },
+  { coordinates: [139.6917, 35.6895], id : 2 },
+  { coordinates: [-74.0721, 4.711], id : 3 },
+  { coordinates: [-118.2437, 34.0522], id : 4 }
 ]
 // Heres where we can put the markers from the tweets latitude and longitude 
 
@@ -60,7 +60,7 @@ const SimpleGlobe = () => (
           {(geos, proj) =>
             geos.map((geo, i) => (
               <Geography
-                key={geo.id + i}
+                key={i}
                 geography={geo}
                 projection={proj}
                 style={{
@@ -75,6 +75,7 @@ const SimpleGlobe = () => (
         <Markers>
           {markers.map(marker => (
             <Marker
+              key={marker.id}
               marker={marker}
               style={{
                 hidden: { display: "none" }
