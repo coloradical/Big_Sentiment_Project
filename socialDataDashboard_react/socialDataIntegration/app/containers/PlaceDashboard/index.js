@@ -17,34 +17,59 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectPlaceDashboard from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
-import H1 from '../PersonDashboard/H1';
-import PieChart from '../../components/PieChart';
+import PersonCard from '../../components/PersonCard';
+import PhotoGrid from '../../components/PhotoGrid';
+import Trends from '../../components/Trends';
 
 /* eslint-disable react/prefer-stateless-function */
 export class PlaceDashboard extends React.PureComponent {
   render() {
     return (
-      <div className="container-fluid" style={{marginTop: '2em'}}>
-        <Helmet>
-          <title>PlaceDashboard</title>
-          <meta name="description" content="Description of PlaceDashboard" />
-        </Helmet>
+      <article>
+      
+      <div className="container-fluid" style={{ marginTop: '2em' }}>
+
         <div className="row">
           <div className="col">
-            <H1>Dashboard for Place</H1>
+            <PersonCard topicInfo={this.props.topicInfo} />
           </div>
-          {/* <div className="col">
-          <PieChart/>
-          </div> */}
+
+          <div className="col">
+            <PhotoGrid />
+          </div>
+
         </div>
-      </div>
+
+        <div className="row">
+          <br /> <br /><br /><br />
+        </div>
+
+
+        <div className="row" >
+
+          <Trends />
+
+        </div>
+        <div className="row" >
+          <div className="col" />
+          
+          <div className="col" />
+
+        </div>
+
+
+        <div className="row">
+          <br /> <br /><br /><br />
+        </div>
+      </div >
+    </article>
     );
   }
 }
 
 PlaceDashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  topicInfo: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

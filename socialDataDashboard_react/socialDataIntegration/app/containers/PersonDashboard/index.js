@@ -39,22 +39,22 @@ export class PersonDashboard extends React.PureComponent {
     let entryMap = {};
     let tempEntry = {};
     console.log(this.props.topicInfo);
-    console.log(this.props.topicAggregate);
-    for (let i = 0; i < this.props.topicAggregate.length; i++) {
-      for (
-        let j = 0;
-        j < this.props.topicAggregate[i].delayCount.buckets.length;
-        j++
-      ) {
-        tempEntry = this.props.topicAggregate[i].delayCount.buckets[j];
-        if (entryMap[tempEntry.key_as_string]) {
-          entryMap[tempEntry.key_as_string] += tempEntry.doc_count;
-        } else {
-          entryMap[tempEntry.key_as_string] = tempEntry.doc_count;
-        }
-      }
-    }
-    console.log(entryMap);
+    // console.log(this.props.topicAggregate);
+    // for (let i = 0; i < this.props.topicAggregate.length; i++) {
+    //   for (
+    //     let j = 0;
+    //     j < this.props.topicAggregate[i].delayCount.buckets.length;
+    //     j++
+    //   ) {
+    //     tempEntry = this.props.topicAggregate[i].delayCount.buckets[j];
+    //     if (entryMap[tempEntry.key_as_string]) {
+    //       entryMap[tempEntry.key_as_string] += tempEntry.doc_count;
+    //     } else {
+    //       entryMap[tempEntry.key_as_string] = tempEntry.doc_count;
+    //     }
+    //   }
+    // }
+    // console.log(entryMap);
     return (
     <article>
       

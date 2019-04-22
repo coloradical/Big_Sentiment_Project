@@ -30,10 +30,12 @@ export class CustomVisuals extends React.PureComponent {
       var typeArray = this.props.topicType;
       for (var i = 0; i < typeArray.length; i++) {
         if (typeArray[i] == EVENT) {
-          return <EventDashboard />;
+          return <EventDashboard topicInfo={this.props.topicInfo}/>;
         } else if (typeArray[i] == PLACE) {
-          return <PlaceDashboard />;
+          return <PlaceDashboard topicInfo={this.props.topicInfo} />;
         } else if (typeArray[i] == PERSON) {
+          return <PersonDashboard topicInfo={this.props.topicInfo} />;
+        } else {
           return <PersonDashboard topicInfo={this.props.topicInfo} />;
         }
       }
