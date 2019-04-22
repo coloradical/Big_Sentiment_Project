@@ -35,6 +35,8 @@ const styles = theme => ({
   },
 });
 
+
+
 const data = [
   {
     img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
@@ -89,13 +91,13 @@ function PhotoGrid(props) {
             </Typography>
         <Card className={classes.card}>
           <div className={classes.root}>
-            <GridList cellHeight={200} spacing={1} className={classes.gridList}>
-              {data.map(tile => (
-                <GridListTile key={tile.id} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
-                  <img src={tile.img} alt={tile.title} />
+            <GridList cellHeight={500} spacing={2} className={classes.gridList} cols={2}>
+              {props.topicImage.length > 0 ? props.topicImage.map(tile => (
+                <GridListTile key={tile._source.media_url} >
+                  <a href={tile._source.media_url}><img src={tile._source.media_url} alt={tile._source.media_url} /></a>
                   <GridListTileBar
-                    title={tile.title}
-                    titlePosition="top"
+                    title={`Upvotes ⬆ ️: ${tile._source.upvotes}`}
+                    titlePosition="bottom"
                     // actionIcon={
                     //   <IconButton className={classes.icon}>
                     //     <StarBorderIcon />
@@ -105,17 +107,18 @@ function PhotoGrid(props) {
                     className={classes.titleBar}
                   />
                 </GridListTile>
-              ))}
+              )) : console.log('No info to display')}
             </GridList>
           </div>
         </Card>
       </center>
-    </div>
+    </div >
   );
 }
 
 PhotoGrid.propTypes = {
   classes: PropTypes.object.isRequired,
+  topicImage: PropTypes.array,
 };
 
 export default withStyles(styles)(PhotoGrid);

@@ -15,6 +15,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography';
 import NotFoundImage from 'images/404.jpg';
 
+
 <link
   rel="stylesheet"
   href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -38,6 +39,8 @@ const styles = {
 };
 
 function PersonCard(props) {
+
+
   const { classes } = props;
   console.log(props.topicInfo);
   return (
