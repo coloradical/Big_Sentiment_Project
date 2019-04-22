@@ -4,7 +4,7 @@
  *
  */
 
-import { DEFAULT_ACTION, GET_TOPIC_INFO, PUT_TOPIC_INFO, PUT_TWEET_INFO, PUT_IMAGE_INFO } from './constants';
+import { DEFAULT_ACTION, GET_TOPIC_INFO, PUT_TOPIC_INFO, PUT_TWEET_INFO, PUT_IMAGE_INFO, PUT_TWITTER_INFO } from './constants';
 
 export function defaultAction() {
   return {
@@ -33,5 +33,11 @@ export function putImageInfo(topicImage) {
   return {
     type: PUT_IMAGE_INFO,
     topicImage
+  };
+}
+export function putTwitterInfo(twitterInfo) {
+  return {
+    type: PUT_TWITTER_INFO,
+    twitterInfo
   };
 }

@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
-import { putTopicInfo, putTweetInfo, putImageInfo } from './actions';
+import { putTopicInfo, putTweetInfo, putImageInfo, putTwitterInfo } from './actions';
 import { GET_TOPIC_INFO } from './constants';
 /**
  * ElasticSearch API request/response handler
@@ -10,7 +10,7 @@ export function* getTopicData(action) {
   const topic = action.name;
   console.log(topic);
   const requestURL = `http://34.73.60.209:9200/trending/_search?pretty=true`;
-  const twittURL = `https://untitled-szbxtgt3g9t2.runkit.sh/?endpoint=users/search.json&searchParam=%7B%22q%22:%22${topic}%22%7D`
+  // const twittURL = `https://untitled-szbxtgt3g9t2.runkit.sh/?endpoint=users/search.json&searchParam=%7B%22q%22:%22${topic}%22%7D`
   let requestBody = {
     "query": {
       "bool": {
@@ -29,7 +29,7 @@ export function* getTopicData(action) {
       }
     },
     "aggs": {
-      "perDateTweet": { "date_histogram": { "field": "post_date", "interval": "day" } }
+      "perDateTweet": { "date_histogram": { "field": "post_date", "interval": "day", "format": "MMM-dd" } }
     }
   }
   let requestBody1 = {
@@ -66,19 +66,15 @@ export function* getTopicData(action) {
       headers: requestHeader
     });
 
-    const twitterData = yield call(request, twittURL, {
-      method: 'GET',
-      headers: requestHeader
-    });
-    // console.log(aggregateData.aggregations.hashtags.buckets);
-    // console.log(aggregateData.hits.hits);
-    // // console.log(aggregateData.hits.hits[2]._source['author']);
-    console.log(aggregateData.aggregations.perDateTweet.buckets);
-    console.log(imageData.hits.hits)
-    console.log(twitterData)
+    // const twitterData = yield call(request, twittURL, {
+    //   method: 'GET',
+    //   headers: requestHeader
+    // });
+
     yield put(putTopicInfo(aggregateData.aggregations.perDateTweet.buckets));
     yield put(putTweetInfo(aggregateData.hits.hits));
     yield put(putImageInfo(imageData.hits.hits));
+    // yield put(putTwitterInfo(twitterData.status[0]));
 
   } catch (err) {
     console.error(err);
@@ -86,10 +82,33 @@ export function* getTopicData(action) {
   }
 }
 
+export function* getTwitterData(action) {
+  const topic = action.name;
+  const twittURL = `https://untitled-szbxtgt3g9t2.runkit.sh/?endpoint=users/search.json&searchParam=%7B%22q%22:%22${topic}%22%7D`
+  let requestHeader = {
+    'Content-Type': 'application/json',
+  }
+
+  try {
+    const twitterData = yield call(request, twittURL, {
+      method: 'GET',
+      headers: requestHeader
+    });
+
+    yield put(putTwitterInfo(twitterData.status[0]));
+
+  } catch (err) {
+    console.error(err);
+    //yield put(repoLoadingError(err));
+  }
+
+
+}
 export default function* personDashboardSaga() {
   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
   yield takeLatest(GET_TOPIC_INFO, getTopicData);
+  yield takeLatest(GET_TOPIC_INFO, getTwitterData);
 }

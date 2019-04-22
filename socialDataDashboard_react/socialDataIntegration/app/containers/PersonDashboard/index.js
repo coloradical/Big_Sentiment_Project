@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectPersonDashboard, {
-  makeSelectTopicAggregate, makeSelectTopicTweet, makeSelectTopicImage
+  makeSelectTopicAggregate, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo
 } from './selectors';
 import { getTopicInfo } from './actions';
 import reducer from './reducer';
@@ -36,27 +36,6 @@ export class PersonDashboard extends React.PureComponent {
   }
   render() {
 
-    let entryMap = {};
-    let tempEntry = {};
-    console.log(this.props.topicInfo);
-    console.log(this.props.topicAggregate);
-    console.log(this.props.topicTweet);
-    console.log(this.props.topicImage);
-    // for (let i = 0; i < this.props.topicAggregate.length; i++) {
-    //   for (
-    //     let j = 0;
-    //     j < this.props.topicAggregate[i].delayCount.buckets.length;
-    //     j++
-    //   ) {
-    //     tempEntry = this.props.topicAggregate[i].delayCount.buckets[j];
-    //     if (entryMap[tempEntry.key_as_string]) {
-    //       entryMap[tempEntry.key_as_string] += tempEntry.doc_count;
-    //     } else {
-    //       entryMap[tempEntry.key_as_string] = tempEntry.doc_count;
-    //     }
-    //   }
-    // }
-    // console.log(entryMap);
     return (
       <article>
 
@@ -76,7 +55,7 @@ export class PersonDashboard extends React.PureComponent {
 
           <div className="row">
             <div className="col">
-              <PersonCard topicInfo={this.props.topicInfo} />
+              <PersonCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} />
             </div>
 
             <div className="col">
@@ -117,21 +96,6 @@ export class PersonDashboard extends React.PureComponent {
           <div className="row">
             <br /> <br /><br /><br />
           </div>
-
-
-          {/* <div className="row">
-          <Card className="col">
-            {this.props.topicAggregate.length > 0 ? (
-              <BarGraph
-                data={entryMap}
-                ytitleText={'Flight Delays'}
-                xtitleText={'Delay Count'}
-              />
-            ) : (
-                console.log('No data')
-              )}
-          </Card>
-        </div> */}
         </div >
       </article>
     );
@@ -143,6 +107,7 @@ PersonDashboard.propTypes = {
   topicAggregate: PropTypes.object,
   topicTweet: PropTypes.array,
   topicImage: PropTypes.array,
+  twitterInfo: PropTypes.object,
   fetchTopicInfo: PropTypes.func.isRequired,
 };
 
@@ -151,6 +116,7 @@ const mapStateToProps = createStructuredSelector({
   topicAggregate: makeSelectTopicAggregate(),
   topicTweet: makeSelectTopicTweet(),
   topicImage: makeSelectTopicImage(),
+  twitterInfo: makeSelectTwitterInfo(),
 });
 
 function mapDispatchToProps(dispatch) {

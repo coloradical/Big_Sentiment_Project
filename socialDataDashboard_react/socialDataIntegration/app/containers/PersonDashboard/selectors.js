@@ -19,6 +19,9 @@ const makeSelectTopicTweet = () =>
 
 const makeSelectTopicImage = () =>
   createSelector(selectPersonDashboardDomain, substate => substate.get('topicImage'));
+
+const makeSelectTwitterInfo = () =>
+  createSelector(selectPersonDashboardDomain, substate => substate.get('twitterInfo'));
 /**
  * Default selector used by PersonDashboard
  */
@@ -27,4 +30,4 @@ const makeSelectPersonDashboard = () =>
   createSelector(selectPersonDashboardDomain, substate => substate.toJS());
 
 export default makeSelectPersonDashboard;
-export { selectPersonDashboardDomain, makeSelectTopicAggregate, makeSelectTopicTweet, makeSelectTopicImage };
+export { selectPersonDashboardDomain, makeSelectTopicAggregate, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo };
