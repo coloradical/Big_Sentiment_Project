@@ -13,6 +13,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography';
+import NotFoundImage from 'images/404.jpg';
 
 
 <link
@@ -37,40 +38,6 @@ const styles = {
   },
 };
 
-// function PersonCard(props) {
-//   const { classes } = props;
-//   return (
-//     <Card className={classes.card}>
-//       <CardActionArea>
-//         <CardMedia
-//           component="img"
-//           alt="Contemplative Reptile"
-//           className={classes.media}
-//           height="140"
-//           image={props.topicInfo.image.contentUrl}
-//           title="Contemplative Reptile"
-//         />
-//         <CardContent>
-//           <Typography gutterBottom variant="h5" component="h2">
-//             {props.topicInfo.name}
-//           </Typography>
-//           <Typography component="p">
-//             {props.topicInfo.description}
-//           </Typography>
-//         </CardContent>
-//       </CardActionArea>
-//       <CardActions>
-//         <Button size="small" color="primary">
-//           Share
-//         </Button>
-//         <Button size="small" color="primary">
-//           Learn More
-//         </Button>
-//       </CardActions>
-//     </Card>
-//   );
-// }
-
 function PersonCard(props) {
 
 
@@ -85,7 +52,7 @@ function PersonCard(props) {
             component="img"
             alt="Person"
             className={classes.media}
-            image={props.topicInfo.image.contentUrl}
+            image={props.topicInfo.image ? props.topicInfo.image.contentUrl : NotFoundImage}
             title="Person"
           />
           <CardContent>

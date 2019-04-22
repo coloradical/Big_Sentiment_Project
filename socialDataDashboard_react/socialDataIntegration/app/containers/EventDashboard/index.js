@@ -18,24 +18,59 @@ import makeSelectEventDashboard from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import PersonCard from '../../components/PersonCard';
+import PhotoGrid from '../../components/PhotoGrid';
+import Trends from '../../components/Trends';
 
 /* eslint-disable react/prefer-stateless-function */
 export class EventDashboard extends React.PureComponent {
   render() {
     return (
-      <div>
-        <Helmet>
-          <title>EventDashboard</title>
-          <meta name="description" content="Description of EventDashboard" />
-        </Helmet>
-        <FormattedMessage {...messages.header} />
-      </div>
+      <article>
+      
+      <div className="container-fluid" style={{ marginTop: '2em' }}>
+
+        <div className="row">
+          <div className="col">
+            <PersonCard topicInfo={this.props.topicInfo} />
+          </div>
+
+          <div className="col">
+            <PhotoGrid />
+          </div>
+
+        </div>
+
+        <div className="row">
+          <br /> <br /><br /><br />
+        </div>
+
+
+        <div className="row" >
+
+          <Trends />
+
+        </div>
+        <div className="row" >
+          <div className="col" />
+          
+          <div className="col" />
+
+        </div>
+
+
+        <div className="row">
+          <br /> <br /><br /><br />
+        </div>
+      </div >
+    </article>
     );
   }
 }
 
 EventDashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  topicInfo: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
