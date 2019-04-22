@@ -89,7 +89,7 @@ export class HomePage extends React.PureComponent {
       <article >
         {/* <center><H1>Global Opinions</H1></center> */}
         <Helmet>
-          <title>Twitter Sentiment Processor</title>
+          <title>World in a Hashtag</title>
           <meta
             name="Tweet Sentiment Processor"
             content="Disillusion: Social Media Sentiment Processor"

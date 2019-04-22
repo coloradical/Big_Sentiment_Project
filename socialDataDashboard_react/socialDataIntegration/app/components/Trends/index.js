@@ -5,6 +5,7 @@
  */
 import React, { PureComponent } from 'react';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
@@ -41,8 +42,9 @@ const data = [
   },
 ];
 
+
 export default class Trends extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/exh283uh/';
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/exh283uh/'
 
   render() {
     return (
@@ -52,8 +54,8 @@ export default class Trends extends PureComponent {
             How is this trending
             </Typography>
 
-          <LineChart width={1600} height={100} data={data}>
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
+          <LineChart width={1600} height={100} data={this.props.topicAggregate}>
+            <Line type="monotone" dataKey="doc_count" stroke="#8884d8" strokeWidth={2} />
             <Tooltip />
           </LineChart>
         </center>
@@ -61,3 +63,7 @@ export default class Trends extends PureComponent {
     );
   }
 }
+
+Trends.propTypes = {
+  topicAggregate: PropTypes.object,
+};
