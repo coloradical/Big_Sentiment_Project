@@ -26,6 +26,8 @@ import { changeTopicType } from './actions';
 /* eslint-disable react/prefer-stateless-function */
 export class CustomVisuals extends React.PureComponent {
   loadRespectiveDashboard() {
+    console.log('...........new dashboard ..........');
+    console.log(this.props.topicType);
     if (this.props.topicType.length > 0) {
       var typeArray = this.props.topicType;
       for (var i = 0; i < typeArray.length; i++) {
@@ -35,10 +37,9 @@ export class CustomVisuals extends React.PureComponent {
           return <PlaceDashboard topicInfo={this.props.topicInfo} />;
         } else if (typeArray[i] == PERSON) {
           return <PersonDashboard topicInfo={this.props.topicInfo} />;
-        } else {
-          return <PersonDashboard topicInfo={this.props.topicInfo} />;
         }
       }
+      return <PersonDashboard topicInfo={this.props.topicInfo} />;
     }
     return <WorldMap />;
   }

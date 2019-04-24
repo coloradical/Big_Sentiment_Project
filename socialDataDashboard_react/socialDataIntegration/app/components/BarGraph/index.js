@@ -29,7 +29,6 @@ class BarGraph extends React.PureComponent {
       <div>
         <svg className="chart" viewBox='-25 -25 200 200'>
           {valueArray.map((d, i) => {
-            console.log(d,i);
               return (
             <g key={i} transform={`translate(0, ${i * barHeight})`}>
               <rect width={x(d)} height={barHeight - 1}>

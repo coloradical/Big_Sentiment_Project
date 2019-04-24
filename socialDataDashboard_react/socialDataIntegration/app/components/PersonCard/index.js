@@ -46,7 +46,6 @@ function PersonCard(props) {
 
 
   const { classes } = props;
-  console.log(props.twitterInfo);
   return (
     <div className={classes.root}>
 

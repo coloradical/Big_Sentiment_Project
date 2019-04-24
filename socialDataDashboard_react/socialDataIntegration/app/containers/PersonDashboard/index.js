@@ -34,6 +34,12 @@ export class PersonDashboard extends React.PureComponent {
   componentDidMount() {
     this.props.fetchTopicInfo(this.props.topicInfo['name']);
   }
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.topicInfo !== prevProps.topicInfo) {
+      this.props.fetchTopicInfo(this.props.topicInfo['name']);
+    }
+  }
   render() {
 
     return (

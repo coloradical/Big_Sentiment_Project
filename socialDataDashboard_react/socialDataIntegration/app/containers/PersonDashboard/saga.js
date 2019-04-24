@@ -8,7 +8,6 @@ import { GET_TOPIC_INFO } from './constants';
 export function* getTopicData(action) {
   // Select topic
   const topic = action.name;
-  console.log(topic);
   const requestURL = `http://34.73.60.209:9200/trending/_search?pretty=true`;
   // const twittURL = `https://untitled-szbxtgt3g9t2.runkit.sh/?endpoint=users/search.json&searchParam=%7B%22q%22:%22${topic}%22%7D`
   let requestBody = {

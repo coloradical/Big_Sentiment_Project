@@ -40,42 +40,6 @@ class PieChart extends React.PureComponent {
     let pie = d3.pie()(this.props.data);
 
     return (
-      // <div>
-      //   <svg width="100%" height="100%" viewBox="-25 -25 150 150">
-      //     {/* <Pie x={x} y={y} radius={radius} data={this.props.data} /> */}
-      //     <g transform={`translate(${x}, ${y})`}>
-      //       {/* Render a slice for each data point */}
-      //       {piePlot(this.props.data).map((value, i) => {
-      //         return (
-      //           <g>
-      //             <path
-      //               key={i}
-      //               d={arcPlot(value)}
-      //               fill={this.colorScale(i)}
-      //               onClick={() => console.log(value.data.key)}
-      //             >
-      //               <title font-size="0.5em">{value.data.key}</title>
-      //             </path>
-      //             <text
-      //               transform={`translate(${arcPlot.centroid(value)})`}
-      //               dy=".35em"
-      //               textAnchor="middle"
-      //               font-size="0.5em"
-      //             >
-      //               {value.data.key ? (
-      //                 <title>{value.data.key}</title>
-      //               ) : (
-      //                 console.log('No data')
-      //               )}
-      //               {value.data.doc_count}
-      //             </text>
-      //           </g>
-      //         );
-      //       })}
-      //     </g>
-      //   </svg>
-      // </div>
-
       <svg height={height} width={width}>
         <g transform={`translate(${width / 2},${height / 2})`}>
           <Slice pie={pie} />

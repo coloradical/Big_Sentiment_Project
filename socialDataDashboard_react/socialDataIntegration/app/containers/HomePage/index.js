@@ -131,10 +131,6 @@ export class HomePage extends React.PureComponent {
               </label>
             </CenteredSection>
           </div>
-
-          {/* { this.props.topicInfo['name'] ? <TopicInfo topicInfo={this.props.topicInfo} />: console.log("No data")} */}
-          {/* {this.props.topicInfo['name'] ? <PersonCard topicInfo={this.props.topicInfo} /> : console.log("No data")} */}
-
           <CustomVisuals topicInfo={this.props.topicInfo} topicName={this.props.topicInfo['name'] ? this.props.topicInfo['name'] : ''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : []} />
 
           <center>
