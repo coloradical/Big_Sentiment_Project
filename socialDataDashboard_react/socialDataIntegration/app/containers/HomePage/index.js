@@ -29,16 +29,9 @@ import {
   makeSelectFuzzyResults,
 } from './selectors';
 import reducer from './reducer';
-import { CustomVisuals } from '../CustomVisuals';
+import CustomVisuals from '../CustomVisuals';
 import saga from './saga';
-import TopicInfo from '../../components/TopicInfo';
-import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import WorldCard from '../../components/WorldCard';
-import FontAwesome from '../../components/Homebutton';
-import MapViewV1 from '../../components/MapViewV1';
-import PersonCard from '../../components/PersonCard';
 import ParticlesBackground from '../../components/ParticlesBackground';
 import SimpleGlobe from '../../components/SimpleGlobe';
 import worldlogo from "images/world_logo.png";
@@ -131,8 +124,8 @@ export class HomePage extends React.PureComponent {
               </label>
             </CenteredSection>
           </div>
-          <CustomVisuals topicInfo={this.props.topicInfo} topicName={this.props.topicInfo['name'] ? this.props.topicInfo['name'] : ''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : []} />
-
+          <CustomVisuals topicInfo={this.props.topicInfo} />
+          {/* topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : [] */}
           <center>
 
           </center>

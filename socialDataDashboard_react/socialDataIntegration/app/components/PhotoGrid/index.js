@@ -91,7 +91,7 @@ function PhotoGrid(props) {
         <Card className={classes.card}>
           <div className={classes.root}>
             <GridList cellHeight={500} spacing={2} className={classes.gridList} cols={2}>
-              {props.topicImage.length > 0 ? props.topicImage.map(tile => (
+              {props.topicImage && props.topicImage.length > 0 ? props.topicImage.map(tile => (
                 <GridListTile key={tile._id} >
                   <a href={tile._source.media_url}><img src={tile._source.media_url} alt={tile._source.media_url} /></a>
                   <GridListTileBar

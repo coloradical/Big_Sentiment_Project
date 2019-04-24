@@ -19,6 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 import PersonCard from '../../components/PersonCard';
 import PhotoGrid from '../../components/PhotoGrid';
+import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -31,11 +32,11 @@ export class PlaceDashboard extends React.PureComponent {
 
         <div className="row">
           <div className="col">
-            <PersonCard topicInfo={this.props.topicInfo} />
+            <PersonCard topicInfo={this.props.topicInfo}  twitterInfo={this.props.twitterInfo}/>
           </div>
 
           <div className="col">
-            <PhotoGrid />
+            <PhotoGrid topicImage={this.props.topicImage}/>
           </div>
 
         </div>
@@ -44,17 +45,10 @@ export class PlaceDashboard extends React.PureComponent {
           <br /> <br /><br /><br />
         </div>
 
-
         <div className="row" >
-
-          <Trends />
-
-        </div>
-        <div className="row" >
-          <div className="col" />
-          
-          <div className="col" />
-
+          <div className="col-12" >
+            <TweetList topicTweet={this.props.topicTweet} />
+          </div>
         </div>
 
 
@@ -70,6 +64,9 @@ export class PlaceDashboard extends React.PureComponent {
 PlaceDashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
   topicInfo: PropTypes.object,
+  topicTweet: PropTypes.array,
+  topicImage: PropTypes.array,
+  twitterInfo: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

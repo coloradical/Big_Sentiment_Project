@@ -37,7 +37,7 @@ function TweetList(props) {
       <Card className={classes.card}>
 
         <List className={classes.root}>
-          {props.topicTweet.length > 0 ? props.topicTweet.map((info) =>
+          {props.topicTweet && props.topicTweet.length > 0 ? props.topicTweet.map((info) =>
             (<ListItem key={info._id}>
 
               {info._source.source == "twitter" ? <img src={twitterimg} height="25" width="25" /> : <img src={redditimg} height="25" width="25" />}
