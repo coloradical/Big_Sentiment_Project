@@ -31,4 +31,8 @@ const makeSelectTopicImage = () =>
 const makeSelectTwitterInfo = () =>
   createSelector(selectCustomVisualsDomain, substate => substate.get('twitterInfo'));
 
-export { makeSelectCustomVisuals, selectCustomVisualsDomain, makeSelectTopicType , makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo};
+const makeSelectSentimentInfo = () =>
+  createSelector(selectCustomVisualsDomain, substate => substate.get('sentimentInfo')); //third
+
+export { makeSelectCustomVisuals, selectCustomVisualsDomain, makeSelectTopicType , makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo,makeSelectSentimentInfo}; //fourth
+//export the const from above 

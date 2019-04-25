@@ -30,16 +30,23 @@ import PhotoGrid from '../../components/PhotoGrid';
 import Typography from '@material-ui/core/Typography';
 import worldlogo from "images/world_logo.png";
 /* eslint-disable react/prefer-stateless-function */
+
+
+
 export class PersonDashboard extends React.PureComponent {
   componentDidMount() {
     this.props.fetchTopicInfo(this.props.topicInfo['name']);
+    
+   
   }
   componentDidUpdate(prevProps) {
+    console.log(sentimentInfo)
     // Typical usage (don't forget to compare props):
     if (this.props.topicInfo !== prevProps.topicInfo) {
       this.props.fetchTopicInfo(this.props.topicInfo['name']);
     }
   }
+  
   render() {
 
     return (
@@ -66,12 +73,14 @@ export class PersonDashboard extends React.PureComponent {
 
             <div className="col">
               <center>
-                <SentimentChart />
+                <SentimentChart /> 
+                {/* twentieth  */}
                 {/* <Sentiment /> */}
               </center>
             </div>
             <div className="col-6" >
-              <TweetList topicTweet={this.props.topicTweet} />
+              <TweetList topicTweet={this.props.topicTweet} /> 
+              {/* this is where it accepts the query name */}
             </div>
 
           </div>
@@ -107,14 +116,15 @@ export class PersonDashboard extends React.PureComponent {
     );
   }
 }
-
-PersonDashboard.propTypes = {
+// define property here 
+PersonDashboard.propTypes = { 
   topicInfo: PropTypes.object,
   topicAggregate: PropTypes.object,
-  topicTweet: PropTypes.array,
+  topicTweet: PropTypes.array, 
   topicImage: PropTypes.array,
   twitterInfo: PropTypes.object,
   fetchTopicInfo: PropTypes.func.isRequired,
+  sentimentInfo: PropTypes.object, //ninteenth
 };
 
 const mapStateToProps = createStructuredSelector({

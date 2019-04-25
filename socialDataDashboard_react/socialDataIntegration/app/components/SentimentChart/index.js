@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types';
+
 import {
   ResponsiveContainer,
   PieChart,
@@ -12,6 +14,8 @@ const data = [
   { name: 'Positive', value: 1000 },
   { name: 'Negative', value: 400 },
 ];
+
+console.log(sentimentInfo)
 
 const COLORS = ['#27ae60', '#e74c3c'];
 
@@ -78,3 +82,8 @@ export default class SentimentChart extends PureComponent {
     );
   }
 }
+
+Trends.propTypes = {
+  sentimentInfo: PropTypes.object, 
+};
+//twenty first 

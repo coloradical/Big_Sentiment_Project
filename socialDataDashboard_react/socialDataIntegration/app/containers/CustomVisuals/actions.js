@@ -3,8 +3,8 @@
  * CustomVisuals actions
  *
  */
-
-import { DEFAULT_ACTION, CHANGE_TOPICTYPE, PULL_RELATED_DATA, PUT_TWEET_INFO, PUT_IMAGE_INFO, PUT_TWITTER_INFO } from './constants';
+//fourteenth, import the constant
+import { DEFAULT_ACTION, CHANGE_TOPICTYPE, PULL_RELATED_DATA, PUT_TWEET_INFO, PUT_IMAGE_INFO, PUT_TWITTER_INFO, SENTIMENT_INFO } from './constants';
 
 export function defaultAction() {
   return {
@@ -41,5 +41,12 @@ export function putTwitterInfo(twitterInfo) {
   return {
     type: PUT_TWITTER_INFO,
     twitterInfo
+  };
+}
+
+export function putSentimentInfo(rating) { //twelvth change the name (rating)
+  return {
+    type: SENTIMENT_INFO, //fifteenth change to the constant name 
+    rating,
   };
 }

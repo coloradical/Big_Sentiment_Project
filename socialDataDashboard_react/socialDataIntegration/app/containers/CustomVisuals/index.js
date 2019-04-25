@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import { EVENT, PERSON, PLACE } from './topicTypeDefinition';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectCustomVisuals, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo } from './selectors';
+import { makeSelectCustomVisuals, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo, makeSelectSentimentInfo } from './selectors'; //fifth
 import reducer from './reducer';
 import saga from './saga';
 import EventDashboard from '../EventDashboard';
@@ -27,6 +27,7 @@ export class CustomVisuals extends React.PureComponent {
     // Typical usage (don't forget to compare props):
     console.log('PROPS UPDATED ____________________');
     console.log(this.props.topicInfo);
+    console.log(this.props.sentimentInfo);
     if (this.props.topicInfo !== prevProps.topicInfo) {
       console.log('CUSTOM API CALLED ____________________');
       this.props.fetchTopicInfo(this.props.topicInfo['name']);
@@ -41,10 +42,10 @@ export class CustomVisuals extends React.PureComponent {
         } else if (typeArray[i] == PLACE) {
           return <PlaceDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo}/>;
         } else if (typeArray[i] == PERSON) {
-          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} />;
+          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo}   />;
         }
       }
-      return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} />;
+      return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo}/>;
     }
     return <WorldMap />;
   }
@@ -68,6 +69,7 @@ CustomVisuals.propTypes = {
   topicTweet: PropTypes.array,
   topicImage: PropTypes.array,
   twitterInfo: PropTypes.object,
+  sentimentInfo: PropTypes.object, //first
   fetchTopicInfo: PropTypes.func.isRequired,
 };
 const mapStateToProps = createStructuredSelector({
@@ -75,6 +77,7 @@ const mapStateToProps = createStructuredSelector({
   topicTweet: makeSelectTopicTweet(),
   topicImage: makeSelectTopicImage(),
   twitterInfo: makeSelectTwitterInfo(),
+  sentimentInfo: makeSelectSentimentInfo(), //second
 });
 function mapDispatchToProps(dispatch) {
   return {
