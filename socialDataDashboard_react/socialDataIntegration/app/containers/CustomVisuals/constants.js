@@ -10,3 +10,4 @@ export const PULL_RELATED_DATA = 'app/CustomVisuals/PULL_RELATED_DATA';
 export const PUT_TWEET_INFO = 'app/CustomVisuals/PUT_TWEET_INFO';
 export const PUT_IMAGE_INFO = 'app/CustomVisuals/PUT_IMAGE_INFO';
 export const PUT_TWITTER_INFO = 'app/CustomVisuals/PUT_TWITTER_INFO';
+export const PUT_SENTIMENT_INFO = 'app/CustomVisuals/PUT_SENTIMENT_INFO';

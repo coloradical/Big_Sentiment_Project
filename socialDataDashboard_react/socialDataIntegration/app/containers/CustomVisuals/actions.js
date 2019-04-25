@@ -4,7 +4,7 @@
  *
  */
 
-import { DEFAULT_ACTION, CHANGE_TOPICTYPE, PULL_RELATED_DATA, PUT_TWEET_INFO, PUT_IMAGE_INFO, PUT_TWITTER_INFO } from './constants';
+import { DEFAULT_ACTION, CHANGE_TOPICTYPE, PULL_RELATED_DATA, PUT_TWEET_INFO, PUT_IMAGE_INFO, PUT_TWITTER_INFO, PUT_SENTIMENT_INFO } from './constants';
 
 export function defaultAction() {
   return {
@@ -41,5 +41,11 @@ export function putTwitterInfo(twitterInfo) {
   return {
     type: PUT_TWITTER_INFO,
     twitterInfo
+  };
+}
+export function putSentimentInfo(data) {
+  return {
+    type: PUT_SENTIMENT_INFO,
+    data
   };
 }

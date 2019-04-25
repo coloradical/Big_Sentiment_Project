@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import {
   ResponsiveContainer,
@@ -42,10 +43,10 @@ const renderCustomizedLabel = ({
   );
 };
 
-export default class SentimentChart extends PureComponent {
+export class SentimentChart extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/c9pL8k61/';
-
   render() {
+    console.log(this.props.sentimentInfo);
     return (
       <div style={{ width: '100%', height: 370 }} align="center">
          <Typography variant="overline" gutterBottom>
@@ -78,3 +79,7 @@ export default class SentimentChart extends PureComponent {
     );
   }
 }
+SentimentChart.propTypes = {
+  sentimentInfo: PropTypes.array,
+}
+export default SentimentChart;

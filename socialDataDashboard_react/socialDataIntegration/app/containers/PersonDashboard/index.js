@@ -41,7 +41,7 @@ export class PersonDashboard extends React.PureComponent {
     }
   }
   render() {
-
+    console.log(this.props.sentimentInfo);
     return (
       <article>
 
@@ -66,7 +66,7 @@ export class PersonDashboard extends React.PureComponent {
 
             <div className="col">
               <center>
-                <SentimentChart />
+                <SentimentChart sentimentInfo={this.props.sentimentInfo}/>
                 {/* <Sentiment /> */}
               </center>
             </div>
@@ -115,6 +115,7 @@ PersonDashboard.propTypes = {
   topicImage: PropTypes.array,
   twitterInfo: PropTypes.object,
   fetchTopicInfo: PropTypes.func.isRequired,
+  sentimentInfo: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({

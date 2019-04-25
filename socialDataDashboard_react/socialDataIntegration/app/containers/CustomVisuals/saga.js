@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
-import { putTweetInfo, putImageInfo, putTwitterInfo } from './actions';
+import { putTweetInfo, putImageInfo, putTwitterInfo, putSentimentInfo } from './actions';
 import { PULL_RELATED_DATA } from './constants';
 // Individual exports for testing
 export function* getTopicData(action) {
@@ -92,8 +92,84 @@ export function* getTwitterData(action) {
     console.error(err);
   }
 }
+export function* getSentimentData(action) { //sixth
+  // Select topic
+  const topic = action.name;
+  const requestURL = `http://34.73.60.209:9200/trending-sentiment/_search?pretty=true`; //seventh
+  let requestBody = {
+    "aggs": {
+      "rating": {
+        "terms": {
+          "field": "sentiment.compound",
+          "size": 3,
+          "order": {
+            "_count": "desc"
+          }
+        }
+      }
+    },
+    "size": 0,
+    "_source": {
+      "excludes": []
+    },
+    "stored_fields": [
+      "*"
+    ],
+    "script_fields": {},
+    "docvalue_fields": [
+      {
+        "field": "post_date",
+        "format": "date_time"
+      }
+    ],
+    "query": {
+      "bool": {
+        "must": [
+          {
+            "query_string": {
+              "query": `${topic}`,
+              "analyze_wildcard": true,
+              "default_field": "*"
+            }
+          }
+        ],
+        "filter": [],
+        "should": [],
+        "must_not": []
+      }
+    }
+  }
+
+
+  //eigth change the body 
+
+  let requestHeader = {
+    'Content-Type': 'application/json',
+  }
+
+  //ninth
+  {
+    try {
+      // Call our request helper (see 'utils/request')
+      const sentimentData = yield call(request, requestURL, { //change const name 
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: requestHeader
+      });
+
+      console.log(sentimentData.aggregations) //test console log
+      yield put(putSentimentInfo(sentimentData.aggregations.rating.buckets)); //tenth - change sentiment DATA and add fields (aggregations)
+      //eleventh define the action (putSentimentInfo)
+    } catch (err) {
+      console.error(err);
+      //yield put(repoLoadingError(err));
+    }
+  }
+
+}
 export default function* customVisualsSaga() {
   // See example in containers/HomePage/saga.js
   yield takeLatest(PULL_RELATED_DATA, getTopicData);
   yield takeLatest(PULL_RELATED_DATA, getTwitterData);
+  yield takeLatest(PULL_RELATED_DATA, getSentimentData);
 }
