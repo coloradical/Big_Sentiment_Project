@@ -99,12 +99,14 @@ const grayStyle =
 
 class GoogleMaps extends Component {
   static defaultProps = {
+      //Here is where we put the JSON data for a place or events location
     center: {
-      lat: 8.7832,
-      lng: 34.5085
+      lat: 56.1304,
+      lng: -86.3468
     },
-    zoom: 1,
-    //mapStyles: grayStyle
+    zoom: 4,
+    mapStyle: grayStyle
+    
     
   };
  
@@ -117,18 +119,15 @@ class GoogleMaps extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-        {/* Here is where we put the JSON data for a place or events location */}
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text="My Marker"
-          />
+          {/* <AnyReactComponent
+            lat={56.1304}
+            lng={106.3468}
+            //text="My Marker"
+          /> */}
         </GoogleMapReact>
       </div>
     );
   }
 }
-
-
  
 export default GoogleMaps;
