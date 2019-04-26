@@ -15,7 +15,7 @@ const data = [
   { name: 'Negative', value: 400 },
 ];
 
-const COLORS = ['#27ae60', '#e74c3c'];
+const COLORS = ['#27ae60', '#e74c3c', '#7f8c8d'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -50,20 +50,20 @@ export default class SentimentChart extends PureComponent {
     console.log(this.props.sentimentInfo);
     return (
       <div style={{ width: '100%', height: 370 }} align="center">
-         <Typography variant="overline" gutterBottom>
+        <Typography variant="overline" gutterBottom>
           How people feel
             </Typography>
         <ResponsiveContainer>
           <PieChart width={1200} height={500}>
             <Pie
-              data={data}
+              data={this.props.sentimentInfo}
               // cx={200}
               // cy={200}
               labelLine={false}
               label={renderCustomizedLabel}
               // outerRadius={120}
-              fill="#8884d8"
-              dataKey="value"
+              // fill="#8884d8"
+              dataKey="doc_count"
             >
               {data.map((entry, index) => (
                 <Cell
@@ -75,7 +75,7 @@ export default class SentimentChart extends PureComponent {
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>
-     
+
       </div>
     );
   }

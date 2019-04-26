@@ -26,8 +26,6 @@ export class CustomVisuals extends React.PureComponent {
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     console.log('PROPS UPDATED ____________________');
-    console.log(this.props.topicInfo);
-    console.log(this.props.sentimentInfo);
     if (this.props.topicInfo !== prevProps.topicInfo) {
       console.log('CUSTOM API CALLED ____________________');
       this.props.fetchTopicInfo(this.props.topicInfo['name']);
@@ -38,14 +36,14 @@ export class CustomVisuals extends React.PureComponent {
       var typeArray = this.props.topicInfo['@type'];
       for (var i = 0; i < typeArray.length; i++) {
         if (typeArray[i] == EVENT) {
-          return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo}/>;
+          return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} />;
         } else if (typeArray[i] == PLACE) {
-          return <PlaceDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo}/>;
+          return <PlaceDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} />;
         } else if (typeArray[i] == PERSON) {
-          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo}/>;
+          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} />;
         }
       }
-      return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo}  sentimentInfo={this.props.sentimentInfo}/>;
+      return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} />;
     }
     return <WorldMap />;
   }

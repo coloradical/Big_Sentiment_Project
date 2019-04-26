@@ -36,19 +36,17 @@ import worldlogo from "images/world_logo.png";
 export class PersonDashboard extends React.PureComponent {
   componentDidMount() {
     this.props.fetchTopicInfo(this.props.topicInfo['name']);
-    
-   
+
+
   }
   componentDidUpdate(prevProps) {
-    console.log(this.props.sentimentInfo);
     // Typical usage (don't forget to compare props):
     if (this.props.topicInfo !== prevProps.topicInfo) {
       this.props.fetchTopicInfo(this.props.topicInfo['name']);
     }
   }
-  
+
   render() {
-    console.log(this.props.sentimentInfo);
     return (
       <article>
 
@@ -73,12 +71,12 @@ export class PersonDashboard extends React.PureComponent {
 
             <div className="col">
               <center>
-                <SentimentChart sentimentInfo={this.props.sentimentInfo}/>
+                <SentimentChart sentimentInfo={this.props.sentimentInfo} />
                 {/* <Sentiment /> */}
               </center>
             </div>
             <div className="col-6" >
-              <TweetList topicTweet={this.props.topicTweet} /> 
+              <TweetList topicTweet={this.props.topicTweet} />
               {/* this is where it accepts the query name */}
             </div>
 
@@ -119,7 +117,7 @@ export class PersonDashboard extends React.PureComponent {
 PersonDashboard.propTypes = {
   topicInfo: PropTypes.object,
   topicAggregate: PropTypes.array,
-  topicTweet: PropTypes.array, 
+  topicTweet: PropTypes.array,
   topicImage: PropTypes.array,
   twitterInfo: PropTypes.object,
   fetchTopicInfo: PropTypes.func.isRequired,
