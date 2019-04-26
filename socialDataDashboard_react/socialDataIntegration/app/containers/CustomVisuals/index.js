@@ -27,6 +27,7 @@ export class CustomVisuals extends React.PureComponent {
     // Typical usage (don't forget to compare props):
     console.log('PROPS UPDATED ____________________');
     console.log(this.props.topicInfo);
+    console.log(this.props.sentimentInfo);
     if (this.props.topicInfo !== prevProps.topicInfo) {
       console.log('CUSTOM API CALLED ____________________');
       this.props.fetchTopicInfo(this.props.topicInfo['name']);
@@ -68,6 +69,7 @@ CustomVisuals.propTypes = {
   topicTweet: PropTypes.array,
   topicImage: PropTypes.array,
   twitterInfo: PropTypes.object,
+  sentimentInfo: PropTypes.object, //first
   fetchTopicInfo: PropTypes.func.isRequired,
   sentimentInfo: PropTypes.array,
 };

@@ -2,7 +2,9 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
 import { putTweetInfo, putImageInfo, putTwitterInfo, putSentimentInfo } from './actions';
 import { PULL_RELATED_DATA } from './constants';
+
 // Individual exports for testing
+//start
 export function* getTopicData(action) {
   // Select topic
   const topic = action.name;
@@ -56,11 +58,18 @@ export function* getTopicData(action) {
       headers: requestHeader
     });
 
+    
+
+
+
+
     const imageData = yield call(request, requestURL, {
       method: 'POST',
       body: JSON.stringify(requestBody1),
       headers: requestHeader
     });
+
+    
 
     // const twitterData = yield call(request, twittURL, {
     //   method: 'GET',
@@ -75,7 +84,6 @@ export function* getTopicData(action) {
     //yield put(repoLoadingError(err));
   }
 }
-
 export function* getTwitterData(action) {
   const topic = action.name;
   const twittURL = `https://untitled-szbxtgt3g9t2.runkit.sh/?endpoint=users/search.json&searchParam=%7B%22q%22:%22${topic}%22%7D`
@@ -165,7 +173,6 @@ export function* getSentimentData(action) { //sixth
       //yield put(repoLoadingError(err));
     }
   }
-
 }
 export default function* customVisualsSaga() {
   // See example in containers/HomePage/saga.js
@@ -173,3 +180,4 @@ export default function* customVisualsSaga() {
   yield takeLatest(PULL_RELATED_DATA, getTwitterData);
   yield takeLatest(PULL_RELATED_DATA, getSentimentData);
 }
+

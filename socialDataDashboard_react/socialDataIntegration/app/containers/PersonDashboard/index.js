@@ -30,16 +30,23 @@ import PhotoGrid from '../../components/PhotoGrid';
 import Typography from '@material-ui/core/Typography';
 import worldlogo from "images/world_logo.png";
 /* eslint-disable react/prefer-stateless-function */
+
+
+
 export class PersonDashboard extends React.PureComponent {
   componentDidMount() {
     this.props.fetchTopicInfo(this.props.topicInfo['name']);
+    
+   
   }
   componentDidUpdate(prevProps) {
+    console.log(this.props.sentimentInfo);
     // Typical usage (don't forget to compare props):
     if (this.props.topicInfo !== prevProps.topicInfo) {
       this.props.fetchTopicInfo(this.props.topicInfo['name']);
     }
   }
+  
   render() {
     console.log(this.props.sentimentInfo);
     return (
@@ -71,7 +78,8 @@ export class PersonDashboard extends React.PureComponent {
               </center>
             </div>
             <div className="col-6" >
-              <TweetList topicTweet={this.props.topicTweet} />
+              <TweetList topicTweet={this.props.topicTweet} /> 
+              {/* this is where it accepts the query name */}
             </div>
 
           </div>
@@ -107,11 +115,11 @@ export class PersonDashboard extends React.PureComponent {
     );
   }
 }
-
+// define property here 
 PersonDashboard.propTypes = {
   topicInfo: PropTypes.object,
-  topicAggregate: PropTypes.object,
-  topicTweet: PropTypes.array,
+  topicAggregate: PropTypes.array,
+  topicTweet: PropTypes.array, 
   topicImage: PropTypes.array,
   twitterInfo: PropTypes.object,
   fetchTopicInfo: PropTypes.func.isRequired,
