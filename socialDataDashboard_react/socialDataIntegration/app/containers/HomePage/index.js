@@ -80,36 +80,29 @@ export class HomePage extends React.PureComponent {
     return (
 
       <article >
-        {/* <center><H1>Global Opinions</H1></center> */}
         <Helmet>
           <title>World in a Hashtag</title>
           <meta
-            name="Tweet Sentiment Processor"
-            content="Disillusion: Social Media Sentiment Processor"
+            name="Sentiment Analyzer"
+            content="Sentiment analysis based on Twitter and Reddit info"
           />
         </Helmet>
 
         <div className="container-fluid" >
-          <div className="row" >
-            {/* <Button color="primary" onClick={this.props.resetProps}><FontAwesome /></Button> */}
-
-          </div>
           <div className="row">
-
-
+          
             <CenteredSection >
               <br></br><br></br>
                <center><a href=""><img src={worldlogo} alt="Logo" style={{width: '20%'}}/></a></center>
 
               <label htmlFor="topic" style={{ width: '70%' }}>
               <br></br>
-              <center><H2> A sentiment analyzer for Tweets, analyzing and presenting the World's true opinions on people, places and things. </H2></center>
+              <center><H2> A Twitter and Reddit sentiment analyzer presenting the World's opinions on people, places and events. </H2></center>
               <br></br>
                 <TextField
                   id="outlined-full-width"
                   style={{ margin: 8, backgroundColor: '#151960' }}
                   placeholder="Search your favorite hashtags"
-                  // helperText="Press any key to search"
                   fullWidth
                   margin="normal"
                   variant="filled"
@@ -125,12 +118,6 @@ export class HomePage extends React.PureComponent {
             </CenteredSection>
           </div>
           <CustomVisuals topicInfo={this.props.topicInfo} />
-          {/* topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type'] : [] */}
-          <center>
-
-          </center>
-
-
         </div>
 
         {this.props.topicInfo['name'] ? console.log("No data") : 
@@ -138,15 +125,12 @@ export class HomePage extends React.PureComponent {
           
             <center>
               <ParticlesBackground />
-              {/* <H2> A sentiment analyzer for Tweets, analyzing and presenting the World's true opinions on people, places and things. </H2> */}
-
               <SimpleGlobe id="globe" />
+              <br></br><br></br>
+              <H2> Created by Kamal Charturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{width: '3%'}}/></a>
             </center>
 
-          <center><H2> Created by Kamal Charturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{width: '3%'}}/></a></center>
-
         </div>}
-        {/* <center><H2>By Team TBD</H2> </center> */}
       </article>
     );
   }
@@ -171,10 +155,6 @@ export function mapDispatchToProps(dispatch) {
     onSelectFuzzyTopic: topic => dispatch(selectTopic(topic)),
     onChangeTopic: evt => dispatch(changeTopic(evt.target.value)),
     resetProps: val => dispatch(resetHomePageState()),
-    // onSubmitForm: evt => {
-    //   if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-    //   dispatch(loadRepos());
-    // },
   };
 }
 

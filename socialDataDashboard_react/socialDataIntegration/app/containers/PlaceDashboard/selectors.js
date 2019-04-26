@@ -11,7 +11,8 @@ const selectPlaceDashboardDomain = state =>
 /**
  * Other specific selectors
  */
-
+const makeSelectTopicAggregate = () =>
+  createSelector(selectPlaceDashboardDomain, substate => substate.get('topicAggregate'));
 /**
  * Default selector used by PlaceDashboard
  */
@@ -20,4 +21,4 @@ const makeSelectPlaceDashboard = () =>
   createSelector(selectPlaceDashboardDomain, substate => substate.toJS());
 
 export default makeSelectPlaceDashboard;
-export { selectPlaceDashboardDomain };
+export { selectPlaceDashboardDomain, makeSelectTopicAggregate };

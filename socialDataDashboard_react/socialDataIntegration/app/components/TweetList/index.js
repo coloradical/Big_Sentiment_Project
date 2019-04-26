@@ -16,8 +16,9 @@ import twitterimg from './twitter.png';
 import redditimg from './reddit.png';
 const styles = theme => ({
   root: {
-    width: '100%',
-    maxHeight: 300,
+    width: 800,
+    maxHeight: 480,
+    padding:10,
     backgroundColor: theme.palette.background.paper,
     overflow: "scroll"
   },
@@ -31,8 +32,8 @@ function TweetList(props) {
     <div>
       <center>
         <Typography variant="overline" gutterBottom>
-          What's the world talking about
-            </Typography>
+          What the world is talking about
+        </Typography>
       </center>
       <Card className={classes.card}>
 

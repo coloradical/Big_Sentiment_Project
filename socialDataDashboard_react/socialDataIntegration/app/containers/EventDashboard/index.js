@@ -11,7 +11,6 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectEventDashboard from './selectors';
@@ -22,6 +21,7 @@ import PersonCard from '../../components/PersonCard';
 import PhotoGrid from '../../components/PhotoGrid';
 import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
+import GoogleMaps from '../../components/GoogleMaps';
 
 /* eslint-disable react/prefer-stateless-function */
 export class EventDashboard extends React.PureComponent {

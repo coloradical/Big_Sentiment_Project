@@ -56,16 +56,17 @@ export class PersonDashboard extends React.PureComponent {
           <div className="row">
 
             <div className="col">
-              <TopTweet />
+              {/* <TopTweet /> */}
             </div>
           </div>
           <div className="row">
-            <br /> <br /><br /><br />
+            <br></br>
           </div>
 
 
           <div className="row">
             <div className="col">
+            <br></br>
               <PersonCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} />
             </div>
 
@@ -83,7 +84,7 @@ export class PersonDashboard extends React.PureComponent {
           </div>
 
           <div className="row">
-            <br /> <br /><br /><br />
+            
           </div>
 
 

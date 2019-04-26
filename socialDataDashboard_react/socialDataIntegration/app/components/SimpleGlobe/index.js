@@ -67,6 +67,10 @@ const SimpleGlobe = () => (
                   default: {
                     fill: "#CFD8DC",
                   },
+                  pressed: {
+                    stroke: '#FFFFFF'
+                  },
+
                 }}
               />
             ))

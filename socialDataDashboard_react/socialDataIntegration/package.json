@@ -82,6 +82,7 @@
     "express": "4.16.4",
     "fg-loadcss": "^2.1.0",
     "fontfaceobserver": "2.0.13",
+    "google-map-react": "^1.1.4",
     "google-trends-api": "^4.9.0",
     "history": "4.7.2",
     "hoist-non-react-statics": "3.0.1",

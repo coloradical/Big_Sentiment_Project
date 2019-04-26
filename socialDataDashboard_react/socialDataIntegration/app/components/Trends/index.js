@@ -19,17 +19,18 @@ export default class Trends extends PureComponent {
     return (
       <div>
         <center>
+          <br></br><br></br>
           <Typography variant="overline" gutterBottom>
-            How is this trending
-            </Typography>
+            How this topic is trending over time
+          </Typography>
 
-          <LineChart width={1600} height={300} data={this.props.topicAggregate}>
-            <Line type="monotone" dataKey="doc_count" name={'count'} stroke="#2980b9" strokeWidth={3} />
+          <LineChart width={1500} height={300} data={this.props.topicAggregate}>
+            <Line type="monotone" dataKey="doc_count" name={'count'} stroke="#38A1F3" strokeWidth={3} />
             <Tooltip cursor={{ stroke: 'red', strokeWidth: 2 }} />
-            <CartesianGrid strokeDasharray="3 3" />
+            {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <Legend />
             <XAxis dataKey="key_as_string" />
-            <YAxis />
+            {/* <YAxis /> */}
           </LineChart>
         </center>
       </div>
