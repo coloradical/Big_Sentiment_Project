@@ -22,6 +22,7 @@ import PhotoGrid from '../../components/PhotoGrid';
 import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
 import GoogleMaps from '../../components/GoogleMaps';
+import SentimentChart from '../../components/SentimentChart';
 
 /* eslint-disable react/prefer-stateless-function */
 export class EventDashboard extends React.PureComponent {
@@ -32,23 +33,32 @@ export class EventDashboard extends React.PureComponent {
       <div className="container-fluid" style={{ marginTop: '2em' }}>
 
         <div className="row">
+        
           <div className="col">
-            <PersonCard topicInfo={this.props.topicInfo}  twitterInfo={this.props.twitterInfo}/>
+            <br></br><br></br>
+              <PersonCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} />
+          </div>
+          <div className="col">
+            <TweetList topicTweet={this.props.topicTweet} />
+          </div>
+
+          <div className='col'>
+            {/* <SentimentChart sentimentInfo={this.props.sentimentInfo} />  */}
+            {/* TO DO: Needs data  */}
+            <SentimentChart sentimentInfo={this.props.sentimentInfo} />
           </div>
 
           <div className="col">
-            <PhotoGrid topicImage={this.props.topicImage}/>
+            <Trends topicTweet={this.props.topicTweet} /> 
+            <GoogleMaps/>
           </div>
 
-        </div>
-
-        <div className="row">
-          <br /> <br /><br /><br />
         </div>
 
         <div className="row" >
-          <div className="col-6" >
-            <TweetList topicTweet={this.props.topicTweet} />
+          <div className="col-12" >
+            
+            
           </div>
         </div>
 

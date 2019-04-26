@@ -33,7 +33,7 @@ const mapStyles = {
 
 
 // Heres where we can put the markers from the tweets latitude and longitude 
-const markers = [
+var markers = [
   { name: "Buenos Aires", coordinates: [-58.3816, -34.6037] },
   { name: "La Paz", coordinates: [-68.1193, -16.4897] },
   { name: "Brasilia", coordinates: [-47.8825, -15.7942] },
@@ -47,7 +47,6 @@ const markers = [
   { name: "Caracas", coordinates: [-66.9036, 10.4806] },
   {name:"Cabo de Santo Agostinho", coordinates:[-60.75811, 133.11883]},
   {name:"Hastings",coordinates:[-21.38065, -121.37871]},
-  {name:"Tavier",coordinates:[-80.37207, 92.33213]},
   {name:"Bridlington",coordinates:[2.58894, 42.87223]},
   {name:"Civo",coordinates:[-5.18993, -115.52727]},
   {name:"Assiniboia",coordinates:[-25.8236, -126.99991]},
@@ -76,7 +75,6 @@ const markers = [
 	{name: "Heusden-Zolder", coordinates: [30.83505, 55.84936]},
 	{name: "Los Angeles", coordinates: [3.0217, -55.93705]},
 	{name: "Merbes-le-Chateau", coordinates: [-60.19702, 131.10536]},
-	{name: "San Leucio del Sannio", coordinates: [36.65769, 86.4314]},
 	{name: "Merrickville-Wolford", coordinates: [22.22518, -38.4868]},
 	{name: "Fresno", coordinates: [-30.0094, 8.45195]},
 	{name: "Rudiano", coordinates: [-14.72208, -15.10994]},
@@ -86,13 +84,21 @@ const markers = [
 	{name: "Malartic", coordinates: [14.71757, -61.95089]},
 	{name: "Casanova Elvo", coordinates: [25.98729, -150.62737]},
 	{name: "Bloomington", coordinates: [44.13301, 102.98678]},
-	{name: "Schagen", coordinates: [-76.46726, 87.0569]},
 	{name: "Bernburg", coordinates: [-77.32715, 12.45551]},
-
+  {name: "Denver", coordinates: [-39.7392, 104.9903]},
   
 ]
+//positive latitude is north of the equator 
+//negative latitude is south of the equator 
+//var [lat, long] = marker.coordinates;
+const shiftY = [120]
+const shiftX = [-10]
 
-
+// if (markers.coordinates[0]>0) {shiftY == [15]};
+// else shiftY == [-35];
+// var markers, lat, long;
+// lat = markers.coordinates[0];
+// long = markers.coordinates[1];
 
 const SimpleGlobe = () => (
   <div style={{ width: "100%" }}>
@@ -103,7 +109,7 @@ const SimpleGlobe = () => (
       projectionConfig={{ scale: 220 }}
       style={mapStyles}
     >
-      <ZoomableGlobe center={[-54,20]}>
+      <ZoomableGlobe center={[-94,20]}>
         
         <circle cx={250} cy={250} r={220} fill="transparent" stroke="white" />
         
@@ -131,7 +137,6 @@ const SimpleGlobe = () => (
                     stroke: "38A1F3",
                     strokeWidth: 0.5,
                     outline: "none",
-                    color: "red",
                   },
 
                 }}
@@ -140,17 +145,19 @@ const SimpleGlobe = () => (
           }
         </Geographies>
         <Markers>
-          {markers.map(marker => (
+          {markers.map((marker, i) => (
             <Marker
-              key={marker.id}
+              key={i}
               marker={marker}
               style={{
                 hidden: { display: "none" }
               }}
             >
+            
               <text
                   textAnchor="middle"
-                  
+                  y = {shiftY}
+                  x = {shiftX}
                   style={{
                     fontSize: 5,
                     fontFamily: "Helvetica",
@@ -161,8 +168,9 @@ const SimpleGlobe = () => (
                   {/* TO DO: trending hashtag name goes here */}
                   {marker.name} 
               </text>
-              <image href={twitterImg} width={'3%'} height={'3%'}y={0} x={-6}/>
+              <image href={twitterImg} width={'3%'} height={'3%'} y={shiftY} x={shiftX}/>
             </Marker>
+           // 
           ))}
         </Markers>
       </ZoomableGlobe>
