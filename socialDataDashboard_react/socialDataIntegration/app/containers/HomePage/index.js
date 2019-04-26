@@ -36,6 +36,8 @@ import ParticlesBackground from '../../components/ParticlesBackground';
 import SimpleGlobe from '../../components/SimpleGlobe';
 import worldlogo from "images/world_logo.png";
 import github from "images/github.png";
+
+
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
   /**
@@ -101,7 +103,7 @@ export class HomePage extends React.PureComponent {
               <br></br>
                 <TextField
                   id="outlined-full-width"
-                  style={{ margin: 8, backgroundColor: '#151960' }}
+                  style={{ margin: 8, backgroundColor: '#151960'}}
                   placeholder="Search your favorite hashtags"
                   fullWidth
                   margin="normal"
