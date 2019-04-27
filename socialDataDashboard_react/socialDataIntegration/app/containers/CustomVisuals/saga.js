@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
-import { putTweetInfo, putTwitterInfo, putSentimentInfo, putgoogleSearch, putimageSearch, putTopicAggregate } from './actions';
+import { putTweetInfo, putTwitterInfo, putSentimentInfo, putgoogleSearch, putimageSearch, putTopicAggregate, putImageInfo } from './actions';
 import { PULL_RELATED_DATA } from './constants';
 
 // Individual exports for testing
@@ -76,7 +76,7 @@ export function* getTopicData(action) {
     //   headers: requestHeader
     // });
     yield put(putTweetInfo(aggregateData.hits.hits));
-    yield put(putTweetInfo(aggregateData.hits.hits));
+    yield put(putImageInfo(imageData.hits.hits));
     yield put(putTopicAggregate(aggregateData.aggregations.perDateTweet.buckets));
     // yield put(putTwitterInfo(twitterData.status[0]));
 
