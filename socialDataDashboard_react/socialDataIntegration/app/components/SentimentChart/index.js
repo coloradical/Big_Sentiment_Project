@@ -15,8 +15,8 @@ const data = [
   { name: 'Negative', value: 400 },
 ];
 
-const COLORS = ['#27ae60', '#e74c3c', '#7f8c8d'];
-
+const COLORS = ['#e74c3c', '#7f8c8d', '#27ae60'];
+const NAME = ['Negative', 'Neutral', 'Positive'];
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
   cx,
@@ -62,17 +62,17 @@ export default class SentimentChart extends PureComponent {
               labelLine={false}
               label={renderCustomizedLabel}
               // outerRadius={120}
-              // fill="#8884d8"
+              fill="#27ae60"
               dataKey="doc_count"
             >
               {data.map((entry, index) => (
                 <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
+                  key={NAME[index]}
+                  fill={COLORS[index]}
                 />
               ))}
             </Pie>
-            <Tooltip />
+
           </PieChart>
         </ResponsiveContainer>
 

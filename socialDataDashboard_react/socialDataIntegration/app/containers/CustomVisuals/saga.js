@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
-import { putTweetInfo, putImageInfo, putTwitterInfo, putSentimentInfo } from './actions';
+import { putTweetInfo, putTwitterInfo, putSentimentInfo, putgoogleSearch, putimageSearch, putTopicAggregate } from './actions';
 import { PULL_RELATED_DATA } from './constants';
 
 // Individual exports for testing
@@ -58,7 +58,7 @@ export function* getTopicData(action) {
       headers: requestHeader
     });
 
-    
+
 
 
 
@@ -69,14 +69,15 @@ export function* getTopicData(action) {
       headers: requestHeader
     });
 
-    
+
 
     // const twitterData = yield call(request, twittURL, {
     //   method: 'GET',
     //   headers: requestHeader
     // });
     yield put(putTweetInfo(aggregateData.hits.hits));
-    yield put(putImageInfo(imageData.hits.hits));
+    yield put(putTweetInfo(aggregateData.hits.hits));
+    yield put(putTopicAggregate(aggregateData.aggregations.perDateTweet.buckets));
     // yield put(putTwitterInfo(twitterData.status[0]));
 
   } catch (err) {
@@ -103,12 +104,12 @@ export function* getTwitterData(action) {
 export function* getSentimentData(action) { //sixth
   // Select topic
   const topic = action.name;
-  const requestURL = `http://34.73.60.209:9200/trending-sentiment/_search?pretty=true`; //seventh
+  const requestURL = `http://34.73.60.209:9200/trending-sentiment2.0/_search?pretty=true`; //seventh
   let requestBody = {
     "aggs": {
       "rating": {
         "terms": {
-          "field": "sentiment.compound",
+          "field": "sentiment",
           "size": 3,
           "order": {
             "_count": "desc"
@@ -174,10 +175,46 @@ export function* getSentimentData(action) { //sixth
     }
   }
 }
+
+export function* getGoogleData(action) {
+
+  const topic = action.name;
+  const requestURL = `https://www.googleapis.com/customsearch/v1?q=${topic}&cx=009233688017481420188:cdvn7zhbuho&key=AIzaSyBuxaEj9rvg2g5H-yGa24lefsOVUE-hPfM`;
+  const requestURL1 = `https://www.googleapis.com/customsearch/v1?q=${topic}&cx=009233688017481420188%3Acdvn7zhbuho&searchType=image&key=AIzaSyBuxaEj9rvg2g5H-yGa24lefsOVUE-hPfM`;
+
+
+  let requestHeader = {
+    'Content-Type': 'application/json',
+  }
+
+
+  {
+    try {
+
+      const googleSearch = yield call(request, requestURL, {
+        method: 'GET',
+        headers: requestHeader
+      });
+
+      const imageSearch = yield call(request, requestURL1, {
+        method: 'GET',
+        headers: requestHeader
+      });
+
+      yield put(putgoogleSearch(googleSearch.items));
+      yield put(putimageSearch(imageSearch.items));
+
+    } catch (err) {
+      console.error(err);
+      //yield put(repoLoadingError(err));
+    }
+  }
+}
 export default function* customVisualsSaga() {
   // See example in containers/HomePage/saga.js
   yield takeLatest(PULL_RELATED_DATA, getTopicData);
   yield takeLatest(PULL_RELATED_DATA, getTwitterData);
   yield takeLatest(PULL_RELATED_DATA, getSentimentData);
+  yield takeLatest(PULL_RELATED_DATA, getGoogleData);
 }
 

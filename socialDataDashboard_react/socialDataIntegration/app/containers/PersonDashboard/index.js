@@ -25,6 +25,7 @@ import SentimentChart from '../../components/SentimentChart';
 import PersonCard from '../../components/PersonCard';
 import TopTweet from '../../components/TopTweet';
 import TweetList from '../../components/TweetList';
+import GoogleSearch from '../../components/GoogleSearch';
 import Trends from '../../components/Trends';
 import PhotoGrid from '../../components/PhotoGrid';
 import Typography from '@material-ui/core/Typography';
@@ -66,7 +67,7 @@ export class PersonDashboard extends React.PureComponent {
 
           <div className="row">
             <div className="col">
-            <br></br>
+              <br></br>
               <PersonCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} />
             </div>
 
@@ -84,7 +85,7 @@ export class PersonDashboard extends React.PureComponent {
           </div>
 
           <div className="row">
-            
+
           </div>
 
 
@@ -97,11 +98,12 @@ export class PersonDashboard extends React.PureComponent {
             <br /> <br /><br /><br />
           </div>
           <div className="row" >
-            <div className="col" />
             <div className="col">
               <PhotoGrid topicImage={this.props.topicImage} />
             </div>
-            <div className="col" />
+            <div className="col-6" >
+              <GoogleSearch googleSearch={this.props.googleSearch} />
+            </div>
 
           </div>
 
@@ -109,6 +111,7 @@ export class PersonDashboard extends React.PureComponent {
           <div className="row">
             <br /> <br /><br /><br />
           </div>
+
         </div >
       </article>
     );
@@ -123,6 +126,8 @@ PersonDashboard.propTypes = {
   twitterInfo: PropTypes.object,
   fetchTopicInfo: PropTypes.func.isRequired,
   sentimentInfo: PropTypes.array,
+  googleSearch: PropTypes.array,
+  imageSearch: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({

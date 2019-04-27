@@ -22,52 +22,56 @@ import PhotoGrid from '../../components/PhotoGrid';
 import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
 import GoogleMaps from '../../components/GoogleMaps';
+import GoogleSearch from '../../components/GoogleSearch';
+import EventCard from '../../components/EventCard';
 import SentimentChart from '../../components/SentimentChart';
 
 /* eslint-disable react/prefer-stateless-function */
 export class EventDashboard extends React.PureComponent {
   render() {
+    console.log(this.props.imageSearch)
     return (
       <article>
-      
-      <div className="container-fluid" style={{ marginTop: '2em' }}>
 
-        <div className="row">
-        
-          <div className="col">
-            <br></br><br></br>
-              <PersonCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} />
+        <div className="container-fluid" style={{ marginTop: '2em' }}>
+
+          <div className="row">
+
+            <div className="col">
+              <br></br><br></br>
+              <EventCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} imageSearch={this.props.imageSearch} />
+            </div>
+            <div className="col">
+              <GoogleSearch googleSearch={this.props.googleSearch} />
+              {/* <TweetList topicTweet={this.props.topicTweet} /> */}
+            </div>
+
+            <div className='col'>
+              {/* <SentimentChart sentimentInfo={this.props.sentimentInfo} />  */}
+              {/* TO DO: Needs data  */}
+              <SentimentChart sentimentInfo={this.props.sentimentInfo} />
+            </div>
+
+            <div className="col">
+              <Trends topicAggregate={this.props.topicAggregate} />
+              <GoogleMaps />
+            </div>
+
           </div>
-          <div className="col">
-            <TweetList topicTweet={this.props.topicTweet} />
+
+          <div className="row" >
+            <div className="col" >
+
+
+            </div>
           </div>
 
-          <div className='col'>
-            {/* <SentimentChart sentimentInfo={this.props.sentimentInfo} />  */}
-            {/* TO DO: Needs data  */}
-            <SentimentChart sentimentInfo={this.props.sentimentInfo} />
+
+          <div className="row">
+            <br /> <br /><br /><br />
           </div>
-
-          <div className="col">
-            <Trends topicTweet={this.props.topicTweet} /> 
-            <GoogleMaps/>
-          </div>
-
-        </div>
-
-        <div className="row" >
-          <div className="col-12" >
-            
-            
-          </div>
-        </div>
-
-
-        <div className="row">
-          <br /> <br /><br /><br />
-        </div>
-      </div >
-    </article>
+        </div >
+      </article>
     );
   }
 }
@@ -78,6 +82,10 @@ EventDashboard.propTypes = {
   topicTweet: PropTypes.array,
   topicImage: PropTypes.array,
   twitterInfo: PropTypes.object,
+  imageSearch: PropTypes.array,
+  sentimentInfo: PropTypes.array,
+  googleSearch: PropTypes.array,
+  topicAggregate: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -4,7 +4,7 @@
  *
  */
 
-import { DEFAULT_ACTION, CHANGE_TOPICTYPE, PULL_RELATED_DATA, PUT_TWEET_INFO, PUT_IMAGE_INFO, PUT_TWITTER_INFO, PUT_SENTIMENT_INFO } from './constants';
+import { DEFAULT_ACTION, CHANGE_TOPICTYPE, PULL_RELATED_DATA, PUT_TWEET_INFO, PUT_IMAGE_INFO, PUT_TWITTER_INFO, PUT_SENTIMENT_INFO, PUT_GOOGLE_SEARCH, PUT_IMAGE_SEARCH, PUT_TOPIC_AGGREGATE } from './constants';
 
 export function defaultAction() {
   return {
@@ -47,5 +47,26 @@ export function putSentimentInfo(data) {
   return {
     type: PUT_SENTIMENT_INFO,
     data
+  };
+}
+
+export function putgoogleSearch(googlesearch) {
+  return {
+    type: PUT_GOOGLE_SEARCH,
+    googlesearch
+  };
+}
+
+export function putimageSearch(imagesearch) {
+  return {
+    type: PUT_IMAGE_SEARCH,
+    imagesearch
+  };
+}
+
+export function putTopicAggregate(topicAgg) {
+  return {
+    type: PUT_TOPIC_AGGREGATE,
+    topicAgg
   };
 }

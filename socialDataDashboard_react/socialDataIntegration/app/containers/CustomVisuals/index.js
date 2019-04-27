@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import { EVENT, PERSON, PLACE } from './topicTypeDefinition';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { makeSelectCustomVisuals, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo, makeSelectSentimentInfo } from './selectors';
+import { makeSelectCustomVisuals, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo, makeSelectSentimentInfo, makeSelectgoogleSearch, makeSelectimageSearch, makeSelectTopicAggregate } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import EventDashboard from '../EventDashboard';
@@ -26,6 +26,9 @@ export class CustomVisuals extends React.PureComponent {
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     console.log('PROPS UPDATED ____________________');
+    // console.log(this.props.googleSearch);
+
+
     if (this.props.topicInfo !== prevProps.topicInfo) {
       console.log('CUSTOM API CALLED ____________________');
       this.props.fetchTopicInfo(this.props.topicInfo['name']);
@@ -36,14 +39,14 @@ export class CustomVisuals extends React.PureComponent {
       var typeArray = this.props.topicInfo['@type'];
       for (var i = 0; i < typeArray.length; i++) {
         if (typeArray[i] == EVENT) {
-          return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} />;
+          return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} topicAggregate={this.props.topicAggregate} />;
         } else if (typeArray[i] == PLACE) {
-          return <PlaceDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} />;
+          return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} topicAggregate={this.props.topicAggregate} />;
         } else if (typeArray[i] == PERSON) {
-          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} />;
+          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} />;
         }
       }
-      return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} />;
+      return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} />;
     }
     return <WorldMap />;
   }
@@ -70,6 +73,9 @@ CustomVisuals.propTypes = {
   sentimentInfo: PropTypes.object, //first
   fetchTopicInfo: PropTypes.func.isRequired,
   sentimentInfo: PropTypes.array,
+  googleSearch: PropTypes.array,
+  imageSearch: PropTypes.array,
+  topicAggregate: PropTypes.array,
 };
 const mapStateToProps = createStructuredSelector({
   customVisuals: makeSelectCustomVisuals(),
@@ -77,6 +83,9 @@ const mapStateToProps = createStructuredSelector({
   topicImage: makeSelectTopicImage(),
   twitterInfo: makeSelectTwitterInfo(),
   sentimentInfo: makeSelectSentimentInfo(),
+  googleSearch: makeSelectgoogleSearch(),
+  imageSearch: makeSelectimageSearch(),
+  topicAggregate: makeSelectTopicAggregate(),
 });
 function mapDispatchToProps(dispatch) {
   return {
