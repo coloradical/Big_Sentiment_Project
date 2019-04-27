@@ -18,8 +18,12 @@ const makeSelectError = () =>
 
 const makeSelectTopicInfo = () =>
   createSelector(selectHome, homeState => homeState.get('topicInfo'));
+
+const makeSelectFuzzyResults = () =>
+  createSelector(selectHome, homeState => homeState.get('fuzzySearchResults'));
 export {
   selectHome, makeSelectTopic, makeSelectLoading,
   makeSelectError,
   makeSelectTopicInfo,
+  makeSelectFuzzyResults
 };

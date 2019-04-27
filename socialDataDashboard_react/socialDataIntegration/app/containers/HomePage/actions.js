@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_TOPIC,SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR} from './constants';
+import { CHANGE_TOPIC,SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, RESET_STATE,SEARCH_TWITTER, PUT_FUZZY_RESULTS, SELECT_TOPIC} from './constants';
 
 /**
  * Changes the input field of the form
@@ -30,6 +30,12 @@ export function changeTopic(name) {
     name,
   };
 }
+export function selectTopic(name) {
+  return {
+    type: SELECT_TOPIC,
+    name,
+  };
+}
 export function searchTopic(topic) {
   return {
     type: SEARCH_TOPIC,
@@ -37,6 +43,23 @@ export function searchTopic(topic) {
   }
 }
 
+export function TwittProfile(topic) {
+  return {
+    type: SEARCH_TWITTER,
+    topic,
+  }
+}
+export function resetHomePageState(){
+  return {
+    type: RESET_STATE,
+  }
+}
+export function putFuzzyResults(fuzzyResults) {
+  return {
+    type: PUT_FUZZY_RESULTS,
+    fuzzyResults,
+  };
+}
 /**
  * Dispatched when the repositories are loaded by the request saga
  *

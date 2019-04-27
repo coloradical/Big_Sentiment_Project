@@ -11,23 +11,32 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
+import logo from '../../images/map.jpg';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import H1 from 'components/H1';
+import H2 from 'components/H2';
 import CenteredSection from './CenteredSection';
-import Input from './Input';
+// import Input from './Input';
 import messages from './messages';
-import { changeTopic, searchTopic } from './actions';
+import Suggestions from '../../components/Suggestions';
+import { changeTopic, searchTopic, resetHomePageState, selectTopic } from './actions';
 import {
-  makeSelectTopic, makeSelectTopicInfo,
+  makeSelectTopic,
+  makeSelectTopicInfo,
   makeSelectLoading,
   makeSelectError,
+  makeSelectFuzzyResults,
 } from './selectors';
 import reducer from './reducer';
-import { CustomVisuals } from '../CustomVisuals';
+import CustomVisuals from '../CustomVisuals';
 import saga from './saga';
-import TopicInfo from '../../components/TopicInfo';
+import TextField from '@material-ui/core/TextField';
+import ParticlesBackground from '../../components/ParticlesBackground';
+import SimpleGlobe from '../../components/SimpleGlobe';
+import worldlogo from "images/world_logo.png";
+import github from "images/github.png";
+
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
@@ -42,49 +51,88 @@ export class HomePage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.keyPress = this.keyPress.bind(this);
+    this.onSelectFuzzySearchTopic = this.onSelectFuzzySearchTopic.bind(this);
   }
   keyPress(e) {
     if (e.keyCode == 13) {
       this.props.onSearchTopic(this.props.topic);
     }
   }
+  onSelectFuzzySearchTopic(topic) {
+    this.props.onSelectFuzzyTopic(topic);
+    this.props.onSearchTopic(topic);
+  }
   render() {
-    // const { loading, error, topicInfo } = this.props;
-    // const reposListProps = {
-    //   loading,
-    //   error,
-    // };
+    const { loading, error, topicInfo } = this.props;
+    const reposListProps = {
+      loading,
+      error,
+    };
+
+    const styles = {
+      card: {
+        maxWidth: 345,
+      },
+      media: {
+        // ⚠️ object-fit is not supported by IE 11.
+        objectFit: 'cover',
+      },
+    };
 
     return (
-      <article>
+
+      <article >
         <Helmet>
-          <title>Dashboard</title>
+          <title>World in a Hashtag</title>
           <meta
-            name="description"
-            content="Social Data Integration Dashboard"
+            name="Sentiment Analyzer"
+            content="Sentiment analysis based on Twitter and Reddit info"
           />
         </Helmet>
-        <div className="container-fluid">
+
+        <div className="container-fluid" >
           <div className="row">
-            <CenteredSection>
-              <H1>
-                <FormattedMessage {...messages.startProjectHeader} />
-              </H1>
-              <label htmlFor="topic" style={{width: '60%'}}>
-                <Input
-                  id="topic"
-                  type="text"
-                  placeholder={messages.startProjectMessage.defaultMessage}
-                  value={this.props.topic}
+          
+            <CenteredSection >
+              <br></br><br></br>
+               <center><a href=""><img src={worldlogo} alt="Logo" style={{width: '20%'}}/></a></center>
+
+              <label htmlFor="topic" style={{ width: '70%' }}>
+              <br></br>
+              <center><H2> A Twitter and Reddit sentiment analyzer presenting the World's opinions on people, places and events. </H2></center>
+              <br></br>
+                <TextField
+                  id="outlined-full-width"
+                  style={{ margin: 8, backgroundColor: '#151960'}}
+                  placeholder="Search your favorite hashtags"
+                  fullWidth
+                  margin="normal"
+                  variant="filled"
+                  autoComplete="Off"
                   onKeyDown={this.keyPress}
+                  value={this.props.topic}
                   onChange={this.props.onChangeTopic}
-                />
+                  InputLabelProps={{
+                    shrink: true,
+                  }} />
+                <Suggestions onSuggestionSelection={this.onSelectFuzzySearchTopic} results={this.props.fuzzySearchResults} />
               </label>
             </CenteredSection>
           </div>
-          <TopicInfo topicInfo={this.props.topicInfo}/>
-          <CustomVisuals topicName={this.props.topicInfo['name']?this.props.topicInfo['name']:''} topicType={this.props.topicInfo['@type'] ? this.props.topicInfo['@type']: []}/>
+          <CustomVisuals topicInfo={this.props.topicInfo} />
         </div>
+
+        {this.props.topicInfo['name'] ? console.log("No data") : 
+          <div id="particles">
+          
+            <center>
+              <ParticlesBackground />
+              <SimpleGlobe id="globe" />
+              <br></br><br></br>
+              <H2> Created by Kamal Charturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{width: '3%'}}/></a>
+            </center>
+
+        </div>}
       </article>
     );
   }
@@ -98,16 +146,17 @@ HomePage.propTypes = {
   topic: PropTypes.string,
   onChangeTopic: PropTypes.func,
   onSearchTopic: PropTypes.func,
+  resetProps: PropTypes.func,
+  fuzzySearchResults: PropTypes.array,
+  onSelectFuzzyTopic: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     onSearchTopic: topic => dispatch(searchTopic(topic)),
+    onSelectFuzzyTopic: topic => dispatch(selectTopic(topic)),
     onChangeTopic: evt => dispatch(changeTopic(evt.target.value)),
-    // onSubmitForm: evt => {
-    //   if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-    //   dispatch(loadRepos());
-    // },
+    resetProps: val => dispatch(resetHomePageState()),
   };
 }
 
@@ -116,6 +165,7 @@ const mapStateToProps = createStructuredSelector({
   topic: makeSelectTopic(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  fuzzySearchResults: makeSelectFuzzyResults(),
 });
 
 const withConnect = connect(

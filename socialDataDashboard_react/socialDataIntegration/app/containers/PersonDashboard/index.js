@@ -7,64 +7,122 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectPersonDashboard, { makeSelectTopicAggregate } from './selectors';
+import makeSelectPersonDashboard, {
+  makeSelectTopicAggregate, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo
+} from './selectors';
 import { getTopicInfo } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import H1 from './H1';
 import BarGraph from '../../components/BarGraph';
 import PieChart from '../../components/PieChart';
-import Card from './Card';
+import SentimentChart from '../../components/SentimentChart';
+
+import PersonCard from '../../components/PersonCard';
+import TopTweet from '../../components/TopTweet';
+import TweetList from '../../components/TweetList';
+import Trends from '../../components/Trends';
+import PhotoGrid from '../../components/PhotoGrid';
+import Typography from '@material-ui/core/Typography';
+import worldlogo from "images/world_logo.png";
 /* eslint-disable react/prefer-stateless-function */
+
+
+
 export class PersonDashboard extends React.PureComponent {
-  componentDidMount(){
-    this.props.fetchTopicInfo(this.props.name);
+  componentDidMount() {
+    this.props.fetchTopicInfo(this.props.topicInfo['name']);
+
+
   }
-  render() {
-    let entryMap = {};
-    let tempEntry = {};
-    console.log(this.props.topicAggregate);
-    for(let i=0;i<this.props.topicAggregate.length;i++){
-      for(let j=0;j<this.props.topicAggregate[i].delayCount.buckets.length;j++){
-        tempEntry = this.props.topicAggregate[i].delayCount.buckets[j];
-        if(entryMap[tempEntry.key_as_string]){
-          entryMap[tempEntry.key_as_string] += tempEntry.doc_count;
-        } else {
-          entryMap[tempEntry.key_as_string] = tempEntry.doc_count;
-        }
-      }
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.topicInfo !== prevProps.topicInfo) {
+      this.props.fetchTopicInfo(this.props.topicInfo['name']);
     }
-    console.log(entryMap);
+  }
+
+  render() {
     return (
-      <div className="container-fluid" style={{ marginTop: '2em' }}>
-        <Helmet>
-          <title>PersonDashboard</title>
-          <meta name="description" content="Description of PersonDashboard" />
-        </Helmet>
-        <div className="row">
-          <Card className="col">
-            {(this.props.topicAggregate.length > 0)?<PieChart data = {this.props.topicAggregate}/>:console.log('No data')}
-          </Card>
-          <Card className="col">
-            {(this.props.topicAggregate.length > 0)?<BarGraph data = {entryMap} ytitleText = {'Flight Delays'} xtitleText = {'Delay Count'}/>:console.log('No data')}
-          </Card>
-        </div>
-      </div>
+      <article>
+
+        <div className="container-fluid" style={{ marginTop: '2em' }}>
+
+
+          <div className="row">
+
+            <div className="col">
+              {/* <TopTweet /> */}
+            </div>
+          </div>
+          <div className="row">
+            <br></br>
+          </div>
+
+
+          <div className="row">
+            <div className="col">
+            <br></br>
+              <PersonCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} />
+            </div>
+
+            <div className="col">
+              <center>
+                <SentimentChart sentimentInfo={this.props.sentimentInfo} />
+                {/* <Sentiment /> */}
+              </center>
+            </div>
+            <div className="col-6" >
+              <TweetList topicTweet={this.props.topicTweet} />
+              {/* this is where it accepts the query name */}
+            </div>
+
+          </div>
+
+          <div className="row">
+            
+          </div>
+
+
+          <div className="row" >
+            <Trends topicAggregate={this.props.topicAggregate} />
+
+          </div>
+
+          <div className="row">
+            <br /> <br /><br /><br />
+          </div>
+          <div className="row" >
+            <div className="col" />
+            <div className="col">
+              <PhotoGrid topicImage={this.props.topicImage} />
+            </div>
+            <div className="col" />
+
+          </div>
+
+
+          <div className="row">
+            <br /> <br /><br /><br />
+          </div>
+        </div >
+      </article>
     );
   }
 }
-
+// define property here 
 PersonDashboard.propTypes = {
-  name: PropTypes.string,
+  topicInfo: PropTypes.object,
   topicAggregate: PropTypes.array,
+  topicTweet: PropTypes.array,
+  topicImage: PropTypes.array,
+  twitterInfo: PropTypes.object,
   fetchTopicInfo: PropTypes.func.isRequired,
+  sentimentInfo: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({

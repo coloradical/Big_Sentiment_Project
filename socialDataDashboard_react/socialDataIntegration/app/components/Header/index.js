@@ -16,10 +16,10 @@ class Header extends React.Component {
         {/* <A href="https://twitter.com/mxstbr">
           <Img src={Banner} alt="react-boilerplate - Logo" />
         </A> */}
-        <NavBar>
-          <HeaderLink to="/">
+        <NavBar >
+          {/* <HeaderLink to="/">
             <FormattedMessage {...messages.home} />
-          </HeaderLink>
+          </HeaderLink> */}
           {/* <HeaderLink to="/features">
             <FormattedMessage {...messages.features} />
           </HeaderLink> */}

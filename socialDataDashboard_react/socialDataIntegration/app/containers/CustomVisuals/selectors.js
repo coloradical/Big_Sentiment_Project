@@ -22,4 +22,16 @@ const makeSelectCustomVisuals = () =>
 const makeSelectTopicType = () =>
   createSelector(selectCustomVisualsDomain, substate => substate.get('topicType'));
 
-export { makeSelectCustomVisuals, selectCustomVisualsDomain, makeSelectTopicType };
+  const makeSelectTopicTweet = () =>
+  createSelector(selectCustomVisualsDomain, substate => substate.get('topicTweet'));
+
+const makeSelectTopicImage = () =>
+  createSelector(selectCustomVisualsDomain, substate => substate.get('topicImage'));
+
+const makeSelectTwitterInfo = () =>
+  createSelector(selectCustomVisualsDomain, substate => substate.get('twitterInfo'));
+
+const makeSelectSentimentInfo = () =>
+  createSelector(selectCustomVisualsDomain, substate => substate.get('sentimentInfo'));
+
+export { makeSelectCustomVisuals, selectCustomVisualsDomain, makeSelectTopicType , makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo, makeSelectSentimentInfo};

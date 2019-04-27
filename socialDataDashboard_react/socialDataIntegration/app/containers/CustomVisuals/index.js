@@ -7,63 +7,80 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { EVENT, PERSON, PLACE } from './topicTypeDefinition';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import {makeSelectCustomVisuals,makeSelectTopicType} from './selectors';
+import { makeSelectCustomVisuals, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo, makeSelectSentimentInfo } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import EventDashboard from '../EventDashboard';
 import PersonDashboard from '../PersonDashboard';
 import PlaceDashboard from '../PlaceDashboard';
 import WorldMap from '../../components/WorldMap';
-import { changeTopicType } from './actions';
+import { pullRelatedData } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class CustomVisuals extends React.PureComponent {
-  loadRespectiveDashboard(){
-    if(this.props.topicType.length > 0){
-      var typeArray = this.props.topicType;
-      for(var i=0;i<typeArray.length;i++){
-        if(typeArray[i] == EVENT){
-          return <EventDashboard />;
-        } else if(typeArray[i] == PLACE){
-          return <PlaceDashboard />;
-        } else if(typeArray[i] == PERSON){
-          return <PersonDashboard name={this.props.topicName}/>;
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    console.log('PROPS UPDATED ____________________');
+    if (this.props.topicInfo !== prevProps.topicInfo) {
+      console.log('CUSTOM API CALLED ____________________');
+      this.props.fetchTopicInfo(this.props.topicInfo['name']);
+    }
+  }
+  loadRespectiveDashboard() {
+    if (this.props.topicInfo['@type'] && this.props.topicInfo['@type'].length > 0) {
+      var typeArray = this.props.topicInfo['@type'];
+      for (var i = 0; i < typeArray.length; i++) {
+        if (typeArray[i] == EVENT) {
+          return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} />;
+        } else if (typeArray[i] == PLACE) {
+          return <PlaceDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} />;
+        } else if (typeArray[i] == PERSON) {
+          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} />;
         }
       }
+      return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} />;
     }
     return <WorldMap />;
   }
   render() {
-    console.log(this.props.topicType);
+    console.log(this.props.topicInfo);
     return (
-      <div className="row" style={{ marginTop: '2em',backgroundColor: 'white'}}>
+
+      <div
+        className="row"
+        style={{ marginTop: '2em', backgroundColor: 'white' }}
+      >
+
         {/* <p>{this.props.topicType.length > 0 ? this.props.topicType: ''}</p> */}
         {this.loadRespectiveDashboard()}
       </div>
     );
   }
 }
-
 CustomVisuals.propTypes = {
-  topicType: PropTypes.array,
-  topicName: PropTypes.string,
+  topicInfo: PropTypes.object,
+  topicTweet: PropTypes.array,
+  topicImage: PropTypes.array,
+  twitterInfo: PropTypes.object,
+  sentimentInfo: PropTypes.object, //first
+  fetchTopicInfo: PropTypes.func.isRequired,
+  sentimentInfo: PropTypes.array,
 };
-
 const mapStateToProps = createStructuredSelector({
   customVisuals: makeSelectCustomVisuals(),
-  // topicType: makeSelectTopicType(),
+  topicTweet: makeSelectTopicTweet(),
+  topicImage: makeSelectTopicImage(),
+  twitterInfo: makeSelectTwitterInfo(),
+  sentimentInfo: makeSelectSentimentInfo(),
 });
-
 function mapDispatchToProps(dispatch) {
   return {
-    // updateTopicType: topicType => dispatch(changeTopicType(topicType)),
+    fetchTopicInfo: name => dispatch(pullRelatedData(name)),
   };
 }
 

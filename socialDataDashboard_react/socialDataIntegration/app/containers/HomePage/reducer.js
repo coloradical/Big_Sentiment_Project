@@ -11,19 +11,21 @@
  */
 import { fromJS } from 'immutable';
 
-import { CHANGE_TOPIC, SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
+import { CHANGE_TOPIC, SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, RESET_STATE, PUT_FUZZY_RESULTS, SELECT_TOPIC } from './constants';
 
+var topicInfoInitialState = {
+  image: null,
+  description: '',
+  detailedDescription: null,
+  name: '',
+};
 // The initial state of the App
 export const initialState = fromJS({
   topic: '',
   loading: false,
   error: false,
-  topicInfo: {
-    image: null,
-    description: '',
-    detailedDescription: null,
-    name: ''
-  },
+  topicInfo: topicInfoInitialState,
+  fuzzySearchResults: [],
 });
 
 function homeReducer(state = initialState, action) {
@@ -34,10 +36,23 @@ function homeReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
+        .set('fuzzySearchResults', []);
+    case RESET_STATE:
+      return state
+      .set('topicInfo', topicInfoInitialState)
+      .set('fuzzySearchResults', [])
+      .set('topic','');
     case LOAD_REPOS_SUCCESS:
       return state
         .set('loading', false)
         .set('topicInfo', action.topicInfo);
+    case PUT_FUZZY_RESULTS:
+      return state
+        .set('fuzzySearchResults', action.fuzzyResults);
+    case SELECT_TOPIC:
+      return state
+        .set('topic', action.name)
+        .set('fuzzySearchResults', []);
     case LOAD_REPOS_ERROR:
       return state.set('error', action.error).set('loading', false);
     default:
