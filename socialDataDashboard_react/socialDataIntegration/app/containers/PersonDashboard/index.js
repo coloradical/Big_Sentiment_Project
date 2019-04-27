@@ -17,20 +17,14 @@ import makeSelectPersonDashboard, {
 import { getTopicInfo } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
-import BarGraph from '../../components/BarGraph';
-import PieChart from '../../components/PieChart';
 import SentimentChart from '../../components/SentimentChart';
-
 import PersonCard from '../../components/PersonCard';
-import TopTweet from '../../components/TopTweet';
 import TweetList from '../../components/TweetList';
 import GoogleSearch from '../../components/GoogleSearch';
 import Trends from '../../components/Trends';
 import PhotoGrid from '../../components/PhotoGrid';
-import Typography from '@material-ui/core/Typography';
-import worldlogo from "images/world_logo.png";
-/* eslint-disable react/prefer-stateless-function */
+
+
 
 
 
