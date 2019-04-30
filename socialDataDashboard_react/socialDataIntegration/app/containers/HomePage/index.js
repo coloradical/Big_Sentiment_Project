@@ -20,13 +20,14 @@ import CenteredSection from './CenteredSection';
 // import Input from './Input';
 import messages from './messages';
 import Suggestions from '../../components/Suggestions';
-import { changeTopic, searchTopic, resetHomePageState, selectTopic } from './actions';
+import { changeTopic, searchTopic, resetHomePageState, selectTopic, getGlobeTags } from './actions';
 import {
   makeSelectTopic,
   makeSelectTopicInfo,
   makeSelectLoading,
   makeSelectError,
   makeSelectFuzzyResults,
+  makeSelectglobeTags,
 } from './selectors';
 import reducer from './reducer';
 import CustomVisuals from '../CustomVisuals';
@@ -47,6 +48,8 @@ export class HomePage extends React.PureComponent {
     // if (this.props.username && this.props.username.trim().length > 0) {
     //   this.props.onSubmitForm();
     // }
+    console.log('Homepage mounted');
+    this.props.triggerGetGlobeTags();
   }
   constructor(props) {
     super(props);
@@ -78,7 +81,7 @@ export class HomePage extends React.PureComponent {
         objectFit: 'cover',
       },
     };
-
+    console.log(this.props.globeTags);
     return (
 
       <article >
@@ -92,18 +95,18 @@ export class HomePage extends React.PureComponent {
 
         <div className="container-fluid" >
           <div className="row">
-          
+
             <CenteredSection >
               <br></br><br></br>
-               <center><a href=""><img src={worldlogo} alt="Logo" style={{width: '20%'}}/></a></center>
+              <center><a href=""><img src={worldlogo} alt="Logo" style={{ width: '20%' }} /></a></center>
 
               <label htmlFor="topic" style={{ width: '70%' }}>
-              <br></br>
-              <center><H2> A Twitter and Reddit sentiment analyzer presenting the World's opinions on people, places and events. </H2></center>
-              <br></br>
+                <br></br>
+                <center><H2> A Twitter and Reddit sentiment analyzer presenting the World's opinions on people, places and events. </H2></center>
+                <br></br>
                 <TextField
                   id="outlined-full-width"
-                  style={{ margin: 8, backgroundColor: '#151960'}}
+                  style={{ margin: 8, backgroundColor: '#151960' }}
                   placeholder="Search your favorite hashtags"
                   fullWidth
                   margin="normal"
@@ -122,17 +125,17 @@ export class HomePage extends React.PureComponent {
           <CustomVisuals topicInfo={this.props.topicInfo} />
         </div>
 
-        {this.props.topicInfo['name'] ? console.log("No data") : 
+        {this.props.topicInfo['name'] ? console.log("No data") :
           <div id="particles">
-          
+
             <center>
               <ParticlesBackground />
               <SimpleGlobe id="globe" />
               <br></br><br></br>
-              <H2> Created by Kamal Chaturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{width: '3%'}}/></a>
+              <H2> Created by Kamal Chaturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{ width: '3%' }} /></a>
             </center>
 
-        </div>}
+          </div>}
       </article>
     );
   }
@@ -149,6 +152,8 @@ HomePage.propTypes = {
   resetProps: PropTypes.func,
   fuzzySearchResults: PropTypes.array,
   onSelectFuzzyTopic: PropTypes.func,
+  triggerGetGlobeTags: PropTypes.func,
+  globeTags: PropTypes.array,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -156,6 +161,7 @@ export function mapDispatchToProps(dispatch) {
     onSearchTopic: topic => dispatch(searchTopic(topic)),
     onSelectFuzzyTopic: topic => dispatch(selectTopic(topic)),
     onChangeTopic: evt => dispatch(changeTopic(evt.target.value)),
+    triggerGetGlobeTags: val => dispatch(getGlobeTags()),
     resetProps: val => dispatch(resetHomePageState()),
   };
 }
@@ -166,6 +172,7 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   fuzzySearchResults: makeSelectFuzzyResults(),
+  globeTags: makeSelectglobeTags(),
 });
 
 const withConnect = connect(

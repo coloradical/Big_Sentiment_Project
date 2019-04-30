@@ -3,8 +3,8 @@
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { SEARCH_TOPIC, SEARCH_TWITTER, CHANGE_TOPIC } from './constants';
-import { reposLoaded, repoLoadingError, putFuzzyResults } from './actions';
+import { SEARCH_TOPIC, SEARCH_TWITTER, CHANGE_TOPIC, GET_GLOBE_TAGS } from './constants';
+import { reposLoaded, repoLoadingError, putFuzzyResults, putGlobeTags } from './actions';
 
 import request from 'utils/request';
 import { makeSelectTopic } from './selectors';
@@ -32,11 +32,11 @@ export function* getFuzzySearchResults(action) {
   const requestURL = `http://34.73.60.209:9200/trending_suggestion/_search?pretty`;
   let requestBody = {
     "suggest": {
-      "hashtag" : {
-        "regex" : `.*${topic.replace(' ', '.*')}.*`,
-        "completion" : { 
-          "field" : "suggest", 
-          "size":10, 
+      "hashtag": {
+        "regex": `.*${topic.replace(' ', '.*')}.*`,
+        "completion": {
+          "field": "suggest",
+          "size": 10,
           "skip_duplicates": true
         }
       }
@@ -47,18 +47,57 @@ export function* getFuzzySearchResults(action) {
   }
   try {
     // Call our request helper (see 'utils/request')
-    const response = yield call(request, requestURL,{
+    const response = yield call(request, requestURL, {
       method: 'POST',
       body: JSON.stringify(requestBody),
       headers: requestHeader
     });
     // console.log(response.suggest.hashtag[0].options);
-    if(response.suggest.hashtag[0].options.length > 0){
+    if (response.suggest.hashtag[0].options.length > 0) {
       let fuzzyResults = response.suggest.hashtag[0].options;
       fuzzyResults = fuzzyResults.map((item) => item.text);
       // console.log(fuzzyResults);
       yield put(putFuzzyResults(fuzzyResults));
     }
+  } catch (err) {
+    console.error(err);
+    //yield put(repoLoadingError(err));
+  }
+}
+
+export function* getGlobeTags(action) {
+  // const topic = action.name;
+  // console.log(topic);
+  const requestURL = `http://34.73.60.209:9200/trending_locations/_search?pretty=true`;
+  let requestBody =
+  {
+    "query": {
+      "bool": {
+        "must": [
+          {
+            "match_all": {}
+          }
+        ],
+        "filter": [],
+        "should": [],
+        "must_not": []
+      }
+    }
+
+  };
+  let requestHeader = {
+    'Content-Type': 'application/json',
+  }
+  try {
+    // Call our request helper (see 'utils/request')
+    const tags = yield call(request, requestURL, {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: requestHeader
+    });
+    console.log(tags);
+    yield put(putGlobeTags(tags['hits'] ? tags['hits']['hits']: []));
+
   } catch (err) {
     console.error(err);
     //yield put(repoLoadingError(err));
@@ -75,4 +114,5 @@ export default function* homePageSaga() {
   // It will be cancelled automatically on component unmount
   yield takeLatest(SEARCH_TOPIC, getRepos);
   yield takeLatest(CHANGE_TOPIC, getFuzzySearchResults);
+  yield takeLatest(GET_GLOBE_TAGS, getGlobeTags);
 }
