@@ -69,21 +69,33 @@ export function* getGlobeTags(action) {
   // const topic = action.name;
   // console.log(topic);
   const requestURL = `http://34.73.60.209:9200/trending_locations/_search?pretty=true`;
-  let requestBody =
-  {
-    "query": {
-      "bool": {
-        "must": [
-          {
-            "match_all": {}
+  let requestBody ={
+    "size": 0,
+      "aggs": {
+          "top_tags": {
+              "terms": {
+                  "field": "country._content.keyword",
+                  "size": 10
+              },
+              "aggs": {
+                  "by_top_hits": {
+                      "top_hits": {
+                          "sort": [
+                              {
+                                  "timestamp": {
+                                      "order": "desc"
+                                  }
+                              }
+                          ],
+                          "_source": {
+                              "includes": [ "trends", "woeid","country" ]
+                          },
+                          "size" : 1
+                      }
+                  }
+              }
           }
-        ],
-        "filter": [],
-        "should": [],
-        "must_not": []
       }
-    }
-
   };
   let requestHeader = {
     'Content-Type': 'application/json',
@@ -96,7 +108,7 @@ export function* getGlobeTags(action) {
       headers: requestHeader
     });
     console.log(tags);
-    yield put(putGlobeTags(tags['hits'] ? tags['hits']['hits']: []));
+    yield put(putGlobeTags(tags['aggregations'] ? tags['aggregations']['top_tags']['buckets']: []));
 
   } catch (err) {
     console.error(err);

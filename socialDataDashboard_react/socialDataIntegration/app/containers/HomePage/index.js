@@ -81,7 +81,6 @@ export class HomePage extends React.PureComponent {
         objectFit: 'cover',
       },
     };
-    console.log(this.props.globeTags);
     return (
 
       <article >
@@ -130,7 +129,7 @@ export class HomePage extends React.PureComponent {
 
             <center>
               <ParticlesBackground />
-              <SimpleGlobe id="globe" />
+              <SimpleGlobe id="globe" globeTags={this.props.globeTags} selectHashtag={this.onSelectFuzzySearchTopic}/>
               <br></br><br></br>
               <H2> Created by Kamal Chaturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{ width: '3%' }} /></a>
             </center>
