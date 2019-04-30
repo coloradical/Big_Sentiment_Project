@@ -20,52 +20,55 @@ import PersonCard from '../../components/PersonCard';
 import PhotoGrid from '../../components/PhotoGrid';
 import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
-import GoogleMaps from '../../components/GoogleMaps';
+import PlaceCard from '../../components/PlaceCard';
+
 
 /* eslint-disable react/prefer-stateless-function */
 export class PlaceDashboard extends React.PureComponent {
   render() {
+    console.log("TOPIC AGG:")
+    console.log(this.props.topicAggregate)
     return (
       <article>
-      
-      <div className="container-fluid" style={{ marginTop: '2em' }}>
 
-        <div className="row">
-        
-          <div className="col">
-            <br></br><br></br>
-              <PersonCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} />
+        <div className="container-fluid" style={{ marginTop: '2em' }}>
+
+          <div className="row">
+
+            <div className="col">
+              <br></br><br></br>
+              <PlaceCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} imageSearch={this.props.imageSearch} />
+            </div>
+            <div className="col">
+              <TweetList topicTweet={this.props.topicTweet} />
+            </div>
+
+            <div className='col'>
+              {/* <SentimentChart sentimentInfo={this.props.sentimentInfo} />  */}
+              {/* TO DO: Needs data  */}
+              <SentimentChart sentimentInfo={this.props.sentimentInfo} />
+            </div>
+
+            <div className="col">
+              <Trends topicAggregate={this.props.topicAggregate} />
+              {/* <GoogleMaps /> */}
+            </div>
+
           </div>
-          <div className="col">
-            <TweetList topicTweet={this.props.topicTweet} />
+
+          <div className="row" >
+            <div className="col-12" >
+
+
+            </div>
           </div>
 
-          <div className='col'>
-            {/* <SentimentChart sentimentInfo={this.props.sentimentInfo} />  */}
-            {/* TO DO: Needs data  */}
-            <SentimentChart sentimentInfo={this.props.sentimentInfo} />
+
+          <div className="row">
+            <br /> <br /><br /><br />
           </div>
-
-          <div className="col">
-            <Trends topicTweet={this.props.topicTweet} /> 
-            <GoogleMaps/>
-          </div>
-
-        </div>
-
-        <div className="row" >
-          <div className="col-12" >
-            
-            
-          </div>
-        </div>
-
-
-        <div className="row">
-          <br /> <br /><br /><br />
-        </div>
-      </div >
-    </article>
+        </div >
+      </article>
     );
   }
 }
@@ -79,12 +82,13 @@ PlaceDashboard.propTypes = {
   topicAggregate: PropTypes.array,
   sentimentInfo: PropTypes.array,
   fetchTopicInfo: PropTypes.func.isRequired,
+  imageSearch: PropTypes.array,
+  googleSearch: PropTypes.array,
 
 };
 
 const mapStateToProps = createStructuredSelector({
   placeDashboard: makeSelectPlaceDashboard(),
-  topicAggregate: makeSelectTopicAggregate(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -27,6 +27,8 @@ export class CustomVisuals extends React.PureComponent {
     // Typical usage (don't forget to compare props):
     console.log('PROPS UPDATED ____________________');
     // console.log(this.props.googleSearch);
+    console.log("TOPIC AGG CUSTOM:")
+    console.log(this.props.topicAggregate)
 
 
     if (this.props.topicInfo !== prevProps.topicInfo) {
@@ -41,7 +43,7 @@ export class CustomVisuals extends React.PureComponent {
         if (typeArray[i] == EVENT) {
           return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} topicAggregate={this.props.topicAggregate} />;
         } else if (typeArray[i] == PLACE) {
-          return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} topicAggregate={this.props.topicAggregate} />;
+          return <PlaceDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} topicAggregate={this.props.topicAggregate} />;
         } else if (typeArray[i] == PERSON) {
           return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} />;
         }

@@ -30,7 +30,11 @@ import SentimentChart from '../../components/SentimentChart';
 export class EventDashboard extends React.PureComponent {
   render() {
     console.log(this.props.imageSearch)
+    console.log("TOPIC INFO:")
+    console.log(this.props.topicInfo)
     return (
+
+
       <article>
 
         <div className="container-fluid" style={{ marginTop: '2em' }}>
@@ -54,7 +58,9 @@ export class EventDashboard extends React.PureComponent {
 
             <div className="col">
               <Trends topicAggregate={this.props.topicAggregate} />
-              <GoogleMaps />
+              <center>
+
+              </center>
             </div>
 
           </div>
