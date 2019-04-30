@@ -23,6 +23,7 @@ import TweetList from '../../components/TweetList';
 import GoogleSearch from '../../components/GoogleSearch';
 import Trends from '../../components/Trends';
 import PhotoGrid from '../../components/PhotoGrid';
+import TweetListWithSentiment from '../../components/TweetListWithSentiment';
 
 
 
@@ -73,7 +74,7 @@ export class PersonDashboard extends React.PureComponent {
               </center>
             </div>
             <div className="col-6" >
-              <TweetList topicTweet={this.props.topicTweet} />
+              <TweetListWithSentiment topicTweet={this.props.topicTweet} />
               {/* this is where it accepts the query name */}
             </div>
 

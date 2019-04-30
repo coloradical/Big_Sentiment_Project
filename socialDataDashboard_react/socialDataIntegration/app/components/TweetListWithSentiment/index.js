@@ -21,8 +21,7 @@ const styles = theme => ({
     padding:10,
     backgroundColor: theme.palette.background.paper,
     overflow: "scroll"
-  },
-
+  }
 });
 
 
@@ -40,12 +39,14 @@ function TweetListWithSentiment(props) {
 
         <List className={classes.root}>
           {props.topicTweet && props.topicTweet.length > 0 ? props.topicTweet.map((info) =>
-            (<ListItem key={info._id}>
-
+            {
+              console.log(info._source.sentiment);
+              return ((<ListItem key={info._id} style={{ backgroundColor: ((info._source.sentiment === -1) ? '#ff7a7a': ((info._source.sentiment === 0) ? '#d7e3f7': '#a4ff79'))}}>
               {info._source.source == "twitter" ? <img src={twitterimg} height="25" width="25" /> : <img src={redditimg} height="25" width="25" />}
               <ListItemText primary={`${info._source.title}`} secondary={`@${info._source.author}`} />
             </ListItem>
-            )) : console.log('No info to display')}
+            ));
+            }) : console.log('No info to display')}
         </List>
       </Card>
     </div>

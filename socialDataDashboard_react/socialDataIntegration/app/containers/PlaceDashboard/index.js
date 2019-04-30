@@ -22,6 +22,7 @@ import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
 import PlaceCard from '../../components/PlaceCard';
 import GooglePhotos from '../../components/GooglePhotos';
+import TweetListWithSentiment from '../../components/TweetListWithSentiment';
 
 /* eslint-disable react/prefer-stateless-function */
 export class PlaceDashboard extends React.PureComponent {
@@ -40,12 +41,12 @@ export class PlaceDashboard extends React.PureComponent {
               <PlaceCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} imageSearch={this.props.imageSearch} />
             </div>
             <div className="col">
-              <TweetList topicTweet={this.props.topicTweet} />
+              <GooglePhotos imageSearch={this.props.imageSearch} />
             </div>
           </div>
           <div className="row">
             <div className="col">
-              <GooglePhotos imageSearch={this.props.imageSearch} />
+              <TweetListWithSentiment topicTweet={this.props.topicTweet} />
             </div>
             <div className="col">
               {/* <SentimentChart sentimentInfo={this.props.sentimentInfo} />  */}

@@ -17,8 +17,8 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 650,
-    height: 350,
+    width: 700,
+    height: 300,
     flexWrap: 'nowrap',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
@@ -36,7 +36,7 @@ function GooglePhotos(props) {
   const { classes } = props;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{ marginTop: '8%'}}>
       <Card className={classes.card}>
         <GridList cellHeight={280} cellWidth={280} className={classes.gridList} cols={1}>
           {props.imageSearch.map(tile => (

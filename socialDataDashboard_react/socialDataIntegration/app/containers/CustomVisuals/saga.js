@@ -10,6 +10,7 @@ export function* getTopicData(action) {
   const topic = action.name;
   const requestURL = `http://34.73.60.209:9200/trending-sentiment2.0/_search?pretty=true`;
   let requestBody = {
+    "size" : 20,
     "query": {
       "bool": {
         "must": [
