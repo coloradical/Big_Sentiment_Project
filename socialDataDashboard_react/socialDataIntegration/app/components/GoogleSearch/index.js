@@ -39,7 +39,7 @@ function GoogleSearch(props) {
 
         <List className={classes.root}>
           {props.googleSearch && props.googleSearch.length > 0 ? props.googleSearch.map((info) =>
-            (<ListItem key={info.title}>
+            (<ListItem key={info.link}>
 
               <a href={info.link} target='_blank'> <ListItemText primary={`${info.title}`} secondary={info.snippet} /></a>
             </ListItem>

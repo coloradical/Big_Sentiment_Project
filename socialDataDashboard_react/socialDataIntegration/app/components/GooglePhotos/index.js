@@ -40,7 +40,7 @@ function GooglePhotos(props) {
       <Card className={classes.card}>
         <GridList cellHeight={280} cellWidth={280} className={classes.gridList} cols={1}>
           {props.imageSearch.map(tile => (
-            <GridListTile key={tile.title}>
+            <GridListTile key={tile.link}>
               <img src={tile.link} alt={tile.title} />
               <GridListTileBar
 
