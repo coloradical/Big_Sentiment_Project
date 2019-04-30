@@ -129,7 +129,7 @@ export class HomePage extends React.PureComponent {
               <ParticlesBackground />
               <SimpleGlobe id="globe" />
               <br></br><br></br>
-              <H2> Created by Kamal Charturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{width: '3%'}}/></a>
+              <H2> Created by Kamal Chaturvedi, Megan Byers, Michael Chifala, Nishank Sharma, and Yash Sapra </H2><a href="https://github.com/CUBigDataClass/Big_Sentiment"><img src={github} alt="github logo" style={{width: '3%'}}/></a>
             </center>
 
         </div>}
