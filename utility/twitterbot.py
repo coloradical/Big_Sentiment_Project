@@ -83,10 +83,12 @@ def getcities():
 
 def gettrends(loc):
     tags=[]
+    
     n=0
     print("Using API Creds:"+str(n))
     auth = getauth(n)
     for i in range(len(loc)):
+        trendingByLocation = []
         url = "https://api.twitter.com/1.1/trends/place.json?lang=en&id="+str(loc[i])
         print("Trying: " + url)
         r = requests.Response()
@@ -114,7 +116,10 @@ def gettrends(loc):
                 n=0
         for j in range(len(r.json()[0]['trends'])):
             tags.append(r.json()[0]['trends'][j]['name'].replace('#',''))
+            trendingByLocation.append(r.json()[0]['trends'][j]['name'].replace('#',''))
         print("Received {} responses for location: {}".format(len(r.json()[0]['trends']), loc[i]))
+        print("Sending responses to location service")
+        publisher.publish_message_to_pubsub_topic({loc[i]:trendingByLocation}, "location")
     stags = set(tags)
     tags = list(stags)
     

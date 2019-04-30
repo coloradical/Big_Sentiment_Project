@@ -8,7 +8,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 appName = "Spark-Kafka-Sentiment-Stream"
 conf = SparkConf().setAppName(appName)
 sc = SparkContext(conf=conf)
-ssc = StreamingContext(sc, 5)
+ssc = StreamingContext(sc, 20)
 
 es_write_conf = {
         "es.nodes" : "elastic-2",
@@ -20,10 +20,16 @@ es_write_conf = {
 
 sent_analyzer = SentimentIntensityAnalyzer()
 def assign_sentiment(x):
-	print(x)
-	x['sentiment'] = sent_analyzer.polarity_scores(x['title']);
-	print(x['sentiment'])
-	return x;
+    print(x)
+    score = sent_analyzer.polarity_scores(x['title'])['compound'];
+    if score < -0.1:
+        x['sentiment'] = -1
+    elif score > 0.1:
+        x['sentiment'] = 1
+    else:
+        x['sentiment'] = 0
+    print(x['sentiment'])
+    return x;
 
 lines = KafkaUtils.createDirectStream(ssc, ['trending'], {"metadata.broker.list": "35.232.117.118:9092"})
 lines.pprint()
@@ -39,7 +45,7 @@ final_rdd.foreachRDD(lambda j: j.saveAsNewAPIHadoopFile(
     conf={
         "es.nodes" : "elastic-2",
         "es.port" : "9200",
-        "es.resource" : "trending-sentiment/_doc",
+        "es.resource" : "trending-sentiment2.0/_doc",
         "es.input.json": "true",
         "es.mapping.id": "id"
     }

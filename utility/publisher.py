@@ -2,10 +2,9 @@ from google.cloud import pubsub_v1
 import json
 
 PROJECT_ID = "bigdataarchitecture-michael"
-TOPIC_NAME = "twitter_trends"
+DEFAULT_TOPIC_NAME = "twitter_trends"
 
 publisher = pubsub_v1.PublisherClient()
-topic_path = publisher.topic_path(PROJECT_ID, TOPIC_NAME)
 
 def callback(message_future):
     # When timeout is unspecified, the exception method waits indefinitely.
@@ -15,8 +14,13 @@ def callback(message_future):
     else:
         print(message_future.result())
 
-def publish_message_to_pubsub_topic(data):
+def publish_message_to_pubsub_topic(data, topic_name=None):
     # Data must be a bytestring
+    if topic_name is None:
+        topic_path = publisher.topic_path(PROJECT_ID, DEFAULT_TOPIC_NAME)
+    else:
+        topic_path = publisher.topic_path(PROJECT_ID, topic_name)
+    
     data = json.dumps(data).encode('utf-8')
     # When you publish a message, the client returns a Future.
     message_future = publisher.publish(topic_path, data=data)
