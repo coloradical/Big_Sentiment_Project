@@ -8,7 +8,7 @@ import { PULL_RELATED_DATA } from './constants';
 export function* getTopicData(action) {
   // Select topic
   const topic = action.name;
-  const requestURL = `http://34.73.60.209:9200/trending/_search?pretty=true`;
+  const requestURL = `http://34.73.60.209:9200/trending-sentiment2.0/_search?pretty=true`;
   let requestBody = {
     "query": {
       "bool": {

@@ -127,7 +127,7 @@ PersonDashboard.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   personDashboard: makeSelectPersonDashboard(),
-  topicAggregate: makeSelectTopicAggregate(),
+  // topicAggregate: makeSelectTopicAggregate(),
 });
 
 function mapDispatchToProps(dispatch) {

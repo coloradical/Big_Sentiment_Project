@@ -43,7 +43,7 @@ export class CustomVisuals extends React.PureComponent {
         } else if (typeArray[i] == PLACE) {
           return <EventDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} topicAggregate={this.props.topicAggregate} />;
         } else if (typeArray[i] == PERSON) {
-          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} />;
+          return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} topicAggregate={this.props.topicAggregate}/>;
         }
       }
       return <PersonDashboard topicInfo={this.props.topicInfo} topicTweet={this.props.topicTweet} topicImage={this.props.topicImage} twitterInfo={this.props.twitterInfo} sentimentInfo={this.props.sentimentInfo} googleSearch={this.props.googleSearch} imageSearch={this.props.imageSearch} />;

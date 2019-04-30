@@ -26,14 +26,14 @@ const styles = theme => ({
 });
 
 
-function TweetList(props) {
+function TweetListWithSentiment(props) {
   const { classes } = props;
   console.log(props.topicTweet);
   return (
     <div>
       <center>
         <Typography variant="overline" gutterBottom>
-          What the world is talking about
+          How the world sees it
         </Typography>
       </center>
       <Card className={classes.card}>
@@ -52,12 +52,10 @@ function TweetList(props) {
   );
 }
 
-TweetList.propTypes = {
+TweetListWithSentiment.propTypes = {
   classes: PropTypes.object.isRequired,
   topicTweet: PropTypes.array,
 
 };
 
-export default withStyles(styles)(TweetList);
-
-
+export default withStyles(styles)(TweetListWithSentiment);

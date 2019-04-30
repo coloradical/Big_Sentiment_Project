@@ -84,7 +84,7 @@ PlaceDashboard.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   placeDashboard: makeSelectPlaceDashboard(),
-  topicAggregate: makeSelectTopicAggregate(),
+  // topicAggregate: makeSelectTopicAggregate(),
 });
 
 function mapDispatchToProps(dispatch) {
