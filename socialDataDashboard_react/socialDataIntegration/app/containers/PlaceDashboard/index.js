@@ -21,7 +21,7 @@ import PhotoGrid from '../../components/PhotoGrid';
 import TweetList from '../../components/TweetList';
 import Trends from '../../components/Trends';
 import PlaceCard from '../../components/PlaceCard';
-
+import GooglePhotos from '../../components/GooglePhotos';
 
 /* eslint-disable react/prefer-stateless-function */
 export class PlaceDashboard extends React.PureComponent {
@@ -42,13 +42,18 @@ export class PlaceDashboard extends React.PureComponent {
             <div className="col">
               <TweetList topicTweet={this.props.topicTweet} />
             </div>
-
-            <div className='col'>
+          </div>
+          <div className="row">
+            <div className="col">
+              <GooglePhotos imageSearch={this.props.imageSearch} />
+            </div>
+            <div className="col">
               {/* <SentimentChart sentimentInfo={this.props.sentimentInfo} />  */}
               {/* TO DO: Needs data  */}
               <SentimentChart sentimentInfo={this.props.sentimentInfo} />
             </div>
-
+          </div>
+          <div className="row">
             <div className="col">
               <Trends topicAggregate={this.props.topicAggregate} />
               {/* <GoogleMaps /> */}
