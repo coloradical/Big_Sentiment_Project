@@ -16,18 +16,19 @@ def callback(message_future):
 
 def publish_message_to_pubsub_topic(data, topic_name=None):
     # Data must be a bytestring
+
     if topic_name is None:
         topic_path = publisher.topic_path(PROJECT_ID, DEFAULT_TOPIC_NAME)
     else:
-        topic_path = publisher.topic_path(PROJECT_ID, topic_name)
-    
+        topic_path = publisher.topic_path(PROJECT_ID, topic_name)  
+
     data = json.dumps(data).encode('utf-8')
     # When you publish a message, the client returns a Future.
     message_future = publisher.publish(topic_path, data=data)
     message_future.add_done_callback(callback)
 
 def main():
-     publish_message_to_pubsub_topic({'trends':['Ethiopian Airlines', 'Boeing', 'DancingOnIce', 'Scotland', 'Liverpool']})
+     publish_message_to_pubsub_topic({'trends':['America', 'Clinton']})
 
 if __name__ == "__main__":
     # execute only if run as a script

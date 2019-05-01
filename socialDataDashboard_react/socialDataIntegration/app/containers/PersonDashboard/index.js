@@ -12,140 +12,122 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectPersonDashboard, {
-  makeSelectTopicAggregate,
+  makeSelectTopicAggregate, makeSelectTopicTweet, makeSelectTopicImage, makeSelectTwitterInfo
 } from './selectors';
 import { getTopicInfo } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
-import BarGraph from '../../components/BarGraph';
-import PieChart from '../../components/PieChart';
 import SentimentChart from '../../components/SentimentChart';
-
 import PersonCard from '../../components/PersonCard';
-import TopTweet from '../../components/TopTweet';
 import TweetList from '../../components/TweetList';
+import GoogleSearch from '../../components/GoogleSearch';
 import Trends from '../../components/Trends';
 import PhotoGrid from '../../components/PhotoGrid';
-import Typography from '@material-ui/core/Typography';
-import worldlogo from "images/world_logo.png";
-/* eslint-disable react/prefer-stateless-function */
+
+
+
+
+
 export class PersonDashboard extends React.PureComponent {
   componentDidMount() {
     this.props.fetchTopicInfo(this.props.topicInfo['name']);
+
+
   }
-  render() {
-    
-    let entryMap = {};
-    let tempEntry = {};
-    console.log(this.props.topicInfo);
-    console.log(this.props.topicAggregate);
-    for (let i = 0; i < this.props.topicAggregate.length; i++) {
-      for (
-        let j = 0;
-        j < this.props.topicAggregate[i].delayCount.buckets.length;
-        j++
-      ) {
-        tempEntry = this.props.topicAggregate[i].delayCount.buckets[j];
-        if (entryMap[tempEntry.key_as_string]) {
-          entryMap[tempEntry.key_as_string] += tempEntry.doc_count;
-        } else {
-          entryMap[tempEntry.key_as_string] = tempEntry.doc_count;
-        }
-      }
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.topicInfo !== prevProps.topicInfo) {
+      this.props.fetchTopicInfo(this.props.topicInfo['name']);
     }
-    console.log(entryMap);
+  }
+
+  render() {
+    console.log(this.props.topicImage)
     return (
-    <article>
-      
-      <div className="container-fluid" style={{ marginTop: '2em' }}>
-          
+      <article>
 
-        <div className="row">
-        
-          <div className="col">
-            <TopTweet />
+        <div className="container-fluid" style={{ marginTop: '2em' }}>
+
+
+          <div className="row">
+
+            <div className="col">
+              {/* <TopTweet /> */}
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <br /> <br /><br /><br />
-        </div>
-
-
-        <div className="row">
-          <div className="col">
-            <PersonCard topicInfo={this.props.topicInfo} />
+          <div className="row">
+            <br></br>
           </div>
 
-          <div className="col">
-            <center>
-              <SentimentChart />
-              {/* <Sentiment /> */}
-            </center>
+
+          <div className="row">
+            <div className="col">
+              <br></br>
+              <PersonCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} />
+            </div>
+
+            <div className="col">
+              <center>
+                <SentimentChart sentimentInfo={this.props.sentimentInfo} />
+                {/* <Sentiment /> */}
+              </center>
+            </div>
+            <div className="col-6" >
+              <TweetList topicTweet={this.props.topicTweet} />
+              {/* this is where it accepts the query name */}
+            </div>
+
           </div>
-          <div className="col-6" >
-            <TweetList />
+
+          <div className="row">
+
           </div>
 
-        </div>
 
-        <div className="row">
-          <br /> <br /><br /><br />
-        </div>
+          <div className="row" >
+            <Trends topicAggregate={this.props.topicAggregate} />
 
-
-        <div className="row" >
-
-          <Trends />
-
-        </div>
-
-        <div className="row">
-          <br /> <br /><br /><br />
-        </div>
-        <div className="row" >
-          <div className="col" />
-          <div className="col">
-            <PhotoGrid />
           </div>
-          <div className="col" />
 
-        </div>
+          <div className="row">
+            <br /> <br /><br /><br />
+          </div>
+          <div className="row" >
+            <div className="col">
+              <PhotoGrid topicImage={this.props.topicImage} />
+            </div>
+            <div className="col-6" >
+              <GoogleSearch googleSearch={this.props.googleSearch} />
+            </div>
+
+          </div>
 
 
-        <div className="row">
-          <br /> <br /><br /><br />
-        </div>
+          <div className="row">
+            <br /> <br /><br /><br />
+          </div>
 
-
-        {/* <div className="row">
-          <Card className="col">
-            {this.props.topicAggregate.length > 0 ? (
-              <BarGraph
-                data={entryMap}
-                ytitleText={'Flight Delays'}
-                xtitleText={'Delay Count'}
-              />
-            ) : (
-                console.log('No data')
-              )}
-          </Card>
-        </div> */}
-      </div >
-    </article>
+        </div >
+      </article>
     );
   }
 }
-
+// define property here 
 PersonDashboard.propTypes = {
   topicInfo: PropTypes.object,
   topicAggregate: PropTypes.array,
+  topicTweet: PropTypes.array,
+  topicImage: PropTypes.array,
+  twitterInfo: PropTypes.object,
   fetchTopicInfo: PropTypes.func.isRequired,
+  sentimentInfo: PropTypes.array,
+  googleSearch: PropTypes.array,
+  imageSearch: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
   personDashboard: makeSelectPersonDashboard(),
-  topicAggregate: makeSelectTopicAggregate(),
+  // topicAggregate: makeSelectTopicAggregate(),
 });
 
 function mapDispatchToProps(dispatch) {

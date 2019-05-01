@@ -39,7 +39,7 @@ class ParticlesBackground extends React.PureComponent {
                     "opacity": {
                         "anim": {
                             "enable": true,
-                            "speed": 1,
+                            "speed": 8,
                             "opacity_min": 0.1
                         }
                     },

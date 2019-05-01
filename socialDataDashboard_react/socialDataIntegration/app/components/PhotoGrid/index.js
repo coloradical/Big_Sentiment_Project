@@ -20,7 +20,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 1000,
+    width: 700,
     height: 450,
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
@@ -35,81 +35,45 @@ const styles = theme => ({
   },
 });
 
-const data = [
-  {
-    img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
-    title: 'Image',
-    author: 'author',
-    cols: 2,
-  },
-  {
-    img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
-    title: 'Image',
-    author: 'author',
-    cols: 2,
-  },
-  {
-    img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
-    title: 'Image',
-    author: 'author',
-    cols: 2,
-  }, {
-    img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
-    title: 'Image',
-    author: 'author',
-    cols: 2,
-  }, {
-    img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
-    title: 'Image',
-    author: 'author',
-    cols: 2,
-  },
-  {
-    img: 'https://i.ibb.co/qx70FKH/joseph-barrientos-49318-unsplash.jpg',
-    title: 'Image',
-    author: 'author',
-    cols: 2,
-  },
-];
 
 function PhotoGrid(props) {
   const { classes } = props;
-
   return (
     <div>
-      <center>
-        <Typography variant="overline" gutterBottom>
-          Trending Images
+
+      <Typography variant="overline" gutterBottom>
+        Trending Images
             </Typography>
-        <Card className={classes.card}>
-          <div className={classes.root}>
-            <GridList cellHeight={200} spacing={1} className={classes.gridList}>
-              {data.map(tile => (
-                <GridListTile key={tile.img} cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}>
-                  <img src={tile.img} alt={tile.title} />
-                  <GridListTileBar
-                    title={tile.title}
-                    titlePosition="top"
-                    // actionIcon={
-                    //   <IconButton className={classes.icon}>
-                    //     <StarBorderIcon />
-                    //   </IconButton>
-                    // }
-                    actionPosition="left"
-                    className={classes.titleBar}
-                  />
-                </GridListTile>
-              ))}
-            </GridList>
-          </div>
-        </Card>
-      </center>
-    </div>
+      <Card className={classes.card}>
+        <div className={classes.root}>
+          <GridList cellHeight={500} spacing={2} className={classes.gridList} cols={2}>
+            {props.topicImage && props.topicImage.length > 0 ? props.topicImage.map(tile => (
+              <GridListTile key={tile._id} >
+                <a href={tile._source.media_url}><img src={tile._source.media_url} alt={tile._source.media_url} /></a>
+                <GridListTileBar
+                  title={`Upvotes ⬆ ️: ${tile._source.upvotes}`}
+                  titlePosition="bottom"
+                  // actionIcon={
+                  //   <IconButton className={classes.icon}>
+                  //     <StarBorderIcon />
+                  //   </IconButton>
+                  // }
+                  actionPosition="left"
+                  className={classes.titleBar}
+                />
+              </GridListTile>
+            )) : console.log('No info to display')}
+          </GridList>
+        </div>
+      </Card>
+
+    </div >
   );
 }
 
 PhotoGrid.propTypes = {
   classes: PropTypes.object.isRequired,
+  topicImage: PropTypes.array,
 };
 
 export default withStyles(styles)(PhotoGrid);

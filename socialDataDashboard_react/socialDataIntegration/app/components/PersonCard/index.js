@@ -13,6 +13,12 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography';
+import twitterimg from './twitter.png';
+import websiteimg from './website.png';
+import locationimg from './location.png';
+import followersimg from './followers.png';
+import NotFoundImage from 'images/404.jpg';
+
 
 <link
   rel="stylesheet"
@@ -36,43 +42,10 @@ const styles = {
   },
 };
 
-// function PersonCard(props) {
-//   const { classes } = props;
-//   return (
-//     <Card className={classes.card}>
-//       <CardActionArea>
-//         <CardMedia
-//           component="img"
-//           alt="Contemplative Reptile"
-//           className={classes.media}
-//           height="140"
-//           image={props.topicInfo.image.contentUrl}
-//           title="Contemplative Reptile"
-//         />
-//         <CardContent>
-//           <Typography gutterBottom variant="h5" component="h2">
-//             {props.topicInfo.name}
-//           </Typography>
-//           <Typography component="p">
-//             {props.topicInfo.description}
-//           </Typography>
-//         </CardContent>
-//       </CardActionArea>
-//       <CardActions>
-//         <Button size="small" color="primary">
-//           Share
-//         </Button>
-//         <Button size="small" color="primary">
-//           Learn More
-//         </Button>
-//       </CardActions>
-//     </Card>
-//   );
-// }
-
 function PersonCard(props) {
+
+
   const { classes } = props;
-  console.log(props.topicInfo);
   return (
     <div className={classes.root}>
 
@@ -82,7 +55,7 @@ function PersonCard(props) {
             component="img"
             alt="Person"
             className={classes.media}
-            image={props.topicInfo.image.contentUrl}
+            image={props.topicInfo.image ? props.topicInfo.image.contentUrl : NotFoundImage}
             title="Person"
           />
           <CardContent>
@@ -90,7 +63,14 @@ function PersonCard(props) {
               {props.topicInfo.name}
             </Typography>
             <Typography component="p">{props.topicInfo.description}</Typography>
-            {props.topicInfo.url ? <Typography component="p"><a href={props.topicInfo.url} target="_blank">Official Website</a></Typography> : console.log("No url")}
+
+            {props.twitterInfo ? <Typography component="p"> <br></br><img src={locationimg} height="20" width="20" /><a href={`https://www.google.com/maps/place/${props.twitterInfo.location}`} target="_blank"> {props.twitterInfo.location} </a></Typography> : console.log("No url")}
+            {props.topicInfo && props.topicInfo.url ? <Typography component="p"><img src={websiteimg} height="20" width="20" /><a href={props.topicInfo.url} target="_blank">  Official Website</a></Typography> : console.log("No url")}
+
+
+            {props.twitterInfo ? <Typography component="p"><img src={twitterimg} height="22" width="22" /><a href={`https://twitter.com/@${props.twitterInfo.screen_name}`} target="_blank">@{props.twitterInfo.screen_name}</a></Typography> : console.log("No url")}
+            {props.twitterInfo ? <Typography component="p"><img src={followersimg} height="20" width="20" /><a href={`https://twitter.com/@${props.twitterInfo.screen_name}`} target="_blank"> {props.twitterInfo.followers_count > 1000000 ? `${(props.twitterInfo.followers_count / 1000000).toFixed(1)}M` : props.twitterInfo.followers_count} Followers</a></Typography> : console.log("No url")}
+
           </CardContent>
         </CardActionArea>
         {/* <CardActions>
@@ -110,6 +90,7 @@ function PersonCard(props) {
 PersonCard.propTypes = {
   classes: PropTypes.object.isRequired,
   topicInfo: PropTypes.object,
+  twitterInfo: PropTypes.object,
 };
 
 export default withStyles(styles)(PersonCard);
