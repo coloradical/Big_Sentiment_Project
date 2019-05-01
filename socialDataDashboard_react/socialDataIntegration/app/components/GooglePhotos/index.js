@@ -17,9 +17,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 700,
-    height: 300,
-    flexWrap: 'nowrap',
+    width: 600,
+    height: 480,
+    flexWrap: 'wrap',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
   },
@@ -27,8 +27,8 @@ const styles = theme => ({
     color: theme.palette.primary.light,
   },
   titleBar: {
-    background:
-      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+    background: 'none',
+      // 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
 });
 
@@ -37,8 +37,9 @@ function GooglePhotos(props) {
 
   return (
     <div className={classes.root} style={{ marginTop: '8%'}}>
+    
       <Card className={classes.card}>
-        <GridList cellHeight={280} cellWidth={280} className={classes.gridList} cols={1}>
+        <GridList cellHeight={200} cellWidth={200} className={classes.gridList} cols={1}>
           {props.imageSearch.map(tile => (
             <GridListTile key={tile.link}>
               <img src={tile.link} alt={tile.title} />

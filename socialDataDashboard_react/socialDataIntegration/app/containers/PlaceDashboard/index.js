@@ -39,7 +39,9 @@ export class PlaceDashboard extends React.PureComponent {
             <div className="col">
               <br></br><br></br>
               <PlaceCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} imageSearch={this.props.imageSearch} />
+              <br></br><br></br>
             </div>
+            
             <div className="col">
               <GooglePhotos imageSearch={this.props.imageSearch} />
             </div>

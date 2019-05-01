@@ -26,13 +26,13 @@ import GooglePhotos from '../../components/GooglePhotos';
 
 const styles = {
   card: {
-    maxWidth: 700,
+    maxWidth: 1000,
   },
   media: {
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
     height: 280,
-    width: 700,
+    width: "100%",
   },
   h3: {
     padding: 500,
@@ -48,8 +48,7 @@ function PlaceCard(props) {
 
       <Card className={classes.card}>
         <CardActionArea>
-          <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${props.topicInfo.name}&size=4000x300&maptype=roadmap
-&key=AIzaSyCz844Jpfn6VIw3udOFBmpOJkkP-LR1XY4`} />
+          <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${props.topicInfo.name}&size=5000x300&maptype=hybrid&zoom=7&key=AIzaSyCz844Jpfn6VIw3udOFBmpOJkkP-LR1XY4`}/>
           {/* <GooglePhotos imageSearch={props.imageSearch} /> */}
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
@@ -59,6 +58,7 @@ function PlaceCard(props) {
 
             {props.twitterInfo ? <Typography component="p"> <br></br><img src={locationimg} height="20" width="20" /><a href={`https://www.google.com/maps/place/${props.twitterInfo.location}`} target="_blank"> {props.twitterInfo.location} </a></Typography> : console.log("No url")}
             {props.topicInfo && props.topicInfo.url ? <Typography component="p"><img src={websiteimg} height="20" width="20" /><a href={props.topicInfo.url} target="_blank">  Official Website</a></Typography> : console.log("No url")}
+
 
 
             {props.twitterInfo ? <Typography component="p"><img src={twitterimg} height="22" width="22" /><a href={`https://twitter.com/@${props.twitterInfo.screen_name}`} target="_blank">@{props.twitterInfo.screen_name}</a></Typography> : console.log("No url")}

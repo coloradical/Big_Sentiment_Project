@@ -89,17 +89,11 @@ var markers = [
   { name: "Denver", coordinates: [-39.7392, 104.9903] },
 
 ]
-//positive latitude is north of the equator 
-//negative latitude is south of the equator 
-//var [lat, long] = marker.coordinates;
+
 const shiftY = [-12]
 const shiftX = [-12]
 
-// if (markers.coordinates[0]>0) {shiftY == [15]};
-// else shiftY == [-35];
-// var markers, lat, long;
-// lat = markers.coordinates[0];
-// long = markers.coordinates[1];
+
 function transformGlobeTags(globeTags) {
   let transformedMarkers = [];
   globeTags.filter((tag) => {
@@ -110,7 +104,7 @@ function transformGlobeTags(globeTags) {
   }).map((tag) => {
     let marker = {};
     let currentTag = tag['by_top_hits']['hits']['hits'][0]['_source'];
-    marker['names'] = currentTag['trends'].slice(0, 5);
+    marker['names'] = currentTag['trends'].slice(0, 3);
     marker['coordinates'] = [parseFloat(currentTag['country']['longitude']), parseFloat(currentTag['country']['latitude'])];
     marker['id'] = currentTag['woeid'];
     transformedMarkers.push(marker);
@@ -123,7 +117,7 @@ function SimpleGlobe(props) {
   let transformedMarkers = transformGlobeTags(props.globeTags);
   console.log(transformedMarkers);
   return (
-    <div style={{ width: "70%" }}>
+    <div style={{ width: "90%" }}>
       <ComposableMap
         width={500}
         height={500}
@@ -189,12 +183,14 @@ function SimpleGlobe(props) {
                         y={shiftY - i * 8}
                         x={shiftX}
                         style={{
-                          fontSize: 10,
-                          fontFamily: "Century Gothic",
-                          fill: "#ef3469",
+                          fontSize: 6,
+                          fontFamily: "Helvetica Neue",
+                          // marginBottom: 2,
+                          fill: "#ffffff",
                           stroke: "none",
                           cursor: "pointer", 
-                          textDecoration: "underline"
+                          textDecoration: "none"
+                    
                         }}
                       >
                         {`#${name}`}
