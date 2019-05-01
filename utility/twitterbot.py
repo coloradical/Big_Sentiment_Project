@@ -10,6 +10,8 @@ import pprint
 import publisher
 from datetime import datetime
 import os
+from kafka import KafkaProducer
+from json import dumps
 
 PUBLISH_TO_PUBSUB = True
 key = sys.argv[1]
@@ -137,7 +139,9 @@ def gettrends(loc):
 
 
 def gettweets(tags):
-
+    producer = KafkaProducer(bootstrap_servers=['35.232.117.118:9092'], 
+                        value_serializer=lambda x: dumps(x).encode('utf-8'),
+                        api_version = (0,10))
     n=0
     print("Using API Creds:"+str(n))
     auth = getauth(n)
@@ -188,20 +192,21 @@ def gettweets(tags):
                 field['source']= 'twitter'
                 field['author']= response[j]['user']['screen_name']
                 field['upvotes'] = response[j]['retweet_count']
-
+                field['id'] = "t_"+ str(response[j]['id'])
                 try:
                     field['media_url']= response[j]['entities']['media'][0]['media_url']
                 except Exception as e:
                     pass
+               
+                producer.send('trending', value=field)
+                #id = "t_"+ str(response[j]['id'])
 
-                id = "t_"+ str(response[j]['id'])
-
-                re=requests.post('http://34.73.60.209:9200/' + ES_INDEX + '/_doc/'+id,  json = field)
-                if(re.status_code >= 200 and re.status_code <= 299):
-                    print("Error posting to Elastic search: "+ re.text)
-                else:
-                    ntweets+=1
-            print("Posted "+str(ntweets)+" to elastic search")
+                #re=requests.post('http://34.73.60.209:9200/' + ES_INDEX + '/_doc/'+id,  json = field)
+                #if(re.status_code >= 200 and re.status_code <= 299):
+                   # print("Error posting to Elastic search: "+ re.text)
+                #else:
+                ntweets+=1
+            print("Posted "+str(ntweets)+" to Kafka")
 
         else:  #error
             print("error in getting gettweets")
