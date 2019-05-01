@@ -46,8 +46,8 @@ export class EventDashboard extends React.PureComponent {
               <EventCard topicInfo={this.props.topicInfo} twitterInfo={this.props.twitterInfo} imageSearch={this.props.imageSearch} />
             </div>
             <div className="col">
-              <GoogleSearch googleSearch={this.props.googleSearch} />
-              {/* <TweetList topicTweet={this.props.topicTweet} /> */}
+              {/* <GoogleSearch googleSearch={this.props.googleSearch} /> */}
+               <TweetList topicTweet={this.props.topicTweet} /> 
             </div>
 
             <div className='col'>
