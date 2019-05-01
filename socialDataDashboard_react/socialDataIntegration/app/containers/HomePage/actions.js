@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_TOPIC,SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, RESET_STATE,SEARCH_TWITTER, PUT_FUZZY_RESULTS, SELECT_TOPIC} from './constants';
+import { CHANGE_TOPIC, SEARCH_TOPIC, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR, RESET_STATE, SEARCH_TWITTER, PUT_FUZZY_RESULTS, SELECT_TOPIC, PUT_GLOBE_TAGS, GET_GLOBE_TAGS } from './constants';
 
 /**
  * Changes the input field of the form
@@ -49,7 +49,7 @@ export function TwittProfile(topic) {
     topic,
   }
 }
-export function resetHomePageState(){
+export function resetHomePageState() {
   return {
     type: RESET_STATE,
   }
@@ -60,6 +60,20 @@ export function putFuzzyResults(fuzzyResults) {
     fuzzyResults,
   };
 }
+
+export function getGlobeTags() {
+  return {
+    type: GET_GLOBE_TAGS,
+  };
+}
+export function putGlobeTags(GlobeTags) {
+  return {
+    type: PUT_GLOBE_TAGS,
+    GlobeTags,
+  };
+}
+
+
 /**
  * Dispatched when the repositories are loaded by the request saga
  *
