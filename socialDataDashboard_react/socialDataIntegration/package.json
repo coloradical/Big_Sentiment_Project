@@ -92,7 +92,7 @@
     "invariant": "2.2.4",
     "ip": "1.1.5",
     "loadable-components": "2.2.3",
-    "lodash": "4.17.11",
+    "lodash": "4.17.21",
     "material-ui-icons": "^1.0.0-beta.36",
     "minimist": "1.2.0",
     "npm": "^6.9.0",
